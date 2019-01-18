@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "c-page": "./../../../components/page/page",
+        "c-header": "./../../components/header/header",
+        "c-richtext": "./../../../components/richtext/richtext"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+}

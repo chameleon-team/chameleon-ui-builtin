@@ -1,0 +1,8 @@
+{
+    "usingComponents": {
+        "c-page": "./../../../components/page/page",
+        "c-header": "./../../components/header/header",
+        "carousel": "./../../../components/carousel/carousel",
+        "carousel-item": "./../../../components/carousel-item/carousel-item"
+    }
+}

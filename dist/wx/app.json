@@ -1,0 +1,28 @@
+{
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#343434",
+        "navigationBarTitleText": "内置组件库",
+        "navigationBarTextStyle": "#fff"
+    },
+    "pages": [
+        "pages/index/index",
+        "pages/example/list/list",
+        "pages/example/scroller/scroller",
+        "pages/example/view/view",
+        "pages/example/text/text",
+        "pages/example/button/button",
+        "pages/example/input/input",
+        "pages/example/textarea/textarea",
+        "pages/example/image/image",
+        "pages/example/video/video",
+        "pages/example/richtext/richtext",
+        "pages/example/switch/switch",
+        "pages/example/radio/radio",
+        "pages/example/checkbox/checkbox",
+        "pages/example/carousel/carousel",
+        "pages/example/row/row",
+        "pages/example/layout/layout"
+    ],
+    "usingComponents": {}
+}

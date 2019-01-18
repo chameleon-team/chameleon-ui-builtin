@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "c-page": "./../../../components/page/page",
+        "c-header": "./../../components/header/header"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+}

@@ -1,0 +1,257 @@
+[
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/index/index"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/index/index"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/list/list"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/list/list"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/list/list"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/scroller/scroller"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/scroller/scroller"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/scroller/scroller"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/view/view"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/view/view"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/view/view"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/text/text"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/text/text"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/text/text"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/button/button"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/button/button"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/button/button"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/input/input"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/input/input"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/input/input"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/textarea/textarea"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/textarea/textarea"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/textarea/textarea"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/image/image"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/image/image"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/image/image"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/video/video"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/video/video"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/video/video"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/richtext/richtext"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/richtext/richtext"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/richtext/richtext"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/switch/switch"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/switch/switch"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/switch/switch"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/radio/radio"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/radio/radio"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/radio/radio"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/checkbox/checkbox"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/checkbox/checkbox"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/checkbox/checkbox"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/carousel/carousel"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/carousel/carousel"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/carousel/carousel"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/row/row"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/row/row"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/row/row"
+            }
+        }
+    },
+    {
+        "wx": {
+            "appId": "123456",
+            "path": "/pages/example/layout/layout"
+        },
+        "web": {
+            "url": "https://api.chameleon.com#/pages/example/layout/layout"
+        },
+        "weex": {
+            "url": "https://beatles-chameleon.github.io/chameleon-ui-builtin/dist/weex/open-chameleon-ui-builtin.js",
+            "query": {
+                "path": "/pages/example/layout/layout"
+            }
+        }
+    }
+]

@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "c-page": "./../../../components/page/page",
+        "c-header": "./../../components/header/header",
+        "c-radio": "./../../../components/radio/radio"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+}

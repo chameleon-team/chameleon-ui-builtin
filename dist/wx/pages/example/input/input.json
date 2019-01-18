@@ -1,0 +1,11 @@
+{
+    "usingComponents": {
+        "c-page": "./../../../components/page/page",
+        "c-header": "./../../components/header/header",
+        "c-scroller": "./../../../components/scroller/scroller",
+        "c-input": "./../../../components/input/input"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+}

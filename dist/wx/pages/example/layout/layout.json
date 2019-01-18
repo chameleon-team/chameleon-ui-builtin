@@ -1,0 +1,15 @@
+{
+    "usingComponents": {
+        "c-page": "./../../../components/page/page",
+        "c-header": "./../../components/header/header",
+        "c-container": "./../../../components/layout/container/container",
+        "c-head": "./../../../components/layout/head/head",
+        "c-foot": "./../../../components/layout/foot/foot",
+        "c-main": "./../../../components/layout/main/main",
+        "c-aside": "./../../../components/layout/aside/aside",
+        "c-scroller": "./../../../components/scroller/scroller"
+    },
+    "navigationBarTitleText": "index",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+}

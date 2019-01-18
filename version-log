@@ -1,0 +1,4 @@
+#####################version info#####################
+
+# 0.0.4 <page>、<scroller>、<carousel>组件更新
+# 0.0.5 引入chameleon-scroll，<scroller>组件代码体积瘦身
