@@ -44,7 +44,7 @@ cml.config.merge({
       hash: false
     },
     custom: {
-      publicPath: `${publicPath}/wx`,
+      publicPath: `${publicPath}/wx/`,
       apiPrefix
     }
   }
