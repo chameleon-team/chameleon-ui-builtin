@@ -321,12 +321,7 @@ export default new Demo();
   border-radius: 4cpx;
   overflow: hidden;
 }
-.kind-list-item-show:first-child {
-  margin-top: 0;
-}
-.kind-list-item:first-child {
-  margin-top: 0;
-}
+
 .kind-list-text {
   flex: 1;
 }

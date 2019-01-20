@@ -13175,7 +13175,12 @@ var render = function() {
     [
       _c(
         "div",
-        { ref: "inner", style: _vm.innerStyle, attrs: {} },
+        {
+          ref: "inner",
+          staticClass: "inner-scroll",
+          style: _vm.innerStyle,
+          attrs: {}
+        },
         [_vm._t("default", null, {})],
         2
       )
