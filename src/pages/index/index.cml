@@ -1,4 +1,5 @@
 <template>
+  <page title="cml扩展组件库">
   <view class="index-page">
     <view class="index-body" style="{{bodyComputedStyl}}">
       <c-scroller height="{{-1}}">
@@ -53,6 +54,7 @@
       </c-scroller>
     </view>
   </view>
+  <page>
 </template>
 <script>
 import cml from "chameleon-api"

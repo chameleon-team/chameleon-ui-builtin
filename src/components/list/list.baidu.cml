@@ -64,7 +64,9 @@
         this.$cmlEmit('customscroll', detail)
       },
       onBottom(e) {
-        this.$cmlEmit('scrolltobottom', e.detail)
+        this.$cmlEmit('scrolltobottom', {
+          'direction': 'bottom'
+        })
       }
     }
     mounted() {
