@@ -95,12 +95,10 @@ export default new View();
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header",
             "c-scroller": "/components/scroller/scroller"
-        }
-    },
-    "wx": {
+        },
         "navigationBarTitleText": "index",
         "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2"     
+        "backgroundColor": "#E2E2E2"
     }
 }
 </script>

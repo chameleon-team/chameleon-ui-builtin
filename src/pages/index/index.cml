@@ -1,60 +1,60 @@
 <template>
-  <page title="cml扩展组件库">
-  <view class="index-page">
-    <view class="index-body" style="{{bodyComputedStyl}}">
-      <c-scroller height="{{-1}}">
-        <view ref="index-content-wrap" class="index-content-wrap" style="{{computedStyle}}" >
-          <view class="index-item-content">
-            <view class="index-hd">
-              <image class="index-logo" src="{{comLogoSrc}}"></image>
-              <view class="index-desc">
-                <text>以下将展示chameleon自定义组件能力，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见chameleon开发文档。</text>
+  <c-page title="cml扩展组件库">
+    <view class="index-page">
+      <view class="index-body" style="{{bodyComputedStyl}}">
+        <c-scroller height="{{-1}}">
+          <view ref="index-content-wrap" class="index-content-wrap" style="{{computedStyle}}" >
+            <view class="index-item-content">
+              <view class="index-hd">
+                <image class="index-logo" src="{{comLogoSrc}}"></image>
+                <view class="index-desc">
+                  <text>以下将展示chameleon自定义组件能力，组件样式仅供参考，开发者可根据自身需求自定义组件样式，具体属性参数详见chameleon开发文档。</text>
+                </view>
               </view>
-            </view>
-            <view class="index-bd">
-              <view class="kind-list">
+              <view class="index-bd">
+                <view class="kind-list">
 
-                <view c-for="{{comList}}" c-for-item="item" c-for-index="i">
-                  <view class="{{item.open ? 'kind-list-item-show' : 'kind-list-item'}}">
-                    <view id="{{item.id}}" class="{{item.open ? 'kind-list-item-hd-show' : 'kind-list-item-hd'}}" c-bind:tap="kindToggle">
-                      <view class="kind-list-text">
-                        <text>{{item.name}}</text>
+                  <view c-for="{{comList}}" c-for-item="item" c-for-index="i">
+                    <view class="{{item.open ? 'kind-list-item-show' : 'kind-list-item'}}">
+                      <view id="{{item.id}}" class="{{item.open ? 'kind-list-item-hd-show' : 'kind-list-item-hd'}}" c-bind:tap="kindToggle">
+                        <view class="kind-list-text">
+                          <text>{{item.name}}</text>
+                        </view>
+                        <image class="kind-list-img" src="{{item.src}}"></image>
                       </view>
-                      <image class="kind-list-img" src="{{item.src}}"></image>
-                    </view>
-                    <view class="{{item.open ? 'kind-list-item-bd-show' : 'kind-list-item-bd'}}">
-                      <view class="{{item.open ? 'navigator-box-show' : 'navigator-box'}}">
-                        <view c-for="{{item.pages}}" c-for-item="page" c-for-index="j">
-                          <view data-routepath="{{page.path}}" data-routeurl="{{page.url}}" class="navigator" c-bind:tap="routeTo">
-                            <view class="navigator-text">
-                              <text>{{page.name}}</text>
+                      <view class="{{item.open ? 'kind-list-item-bd-show' : 'kind-list-item-bd'}}">
+                        <view class="{{item.open ? 'navigator-box-show' : 'navigator-box'}}">
+                          <view c-for="{{item.pages}}" c-for-item="page" c-for-index="j">
+                            <view data-routepath="{{page.path}}" data-routeurl="{{page.url}}" class="navigator" c-bind:tap="routeTo">
+                              <view class="navigator-text">
+                                <text>{{page.name}}</text>
+                              </view>
+                              <image class="navigator-arrow" src="{{arrowIcon}}"></image>
                             </view>
-                            <image class="navigator-arrow" src="{{arrowIcon}}"></image>
                           </view>
                         </view>
                       </view>
                     </view>
                   </view>
-                </view>
 
+                </view>
+              </view>
+            </view>
+            <view class="index-item-content">
+              <view class="index-hd">
+                <image class="index-logo" src="{{apiLogoSrc}}"></image>
+                <view class="index-desc">
+                  <text>以下将演示chameleon接口能力，具体属性参数详见chameleon开发文档。</text>
+                </view>
+              </view>
+              <view class="index-bd">
               </view>
             </view>
           </view>
-          <view class="index-item-content">
-            <view class="index-hd">
-              <image class="index-logo" src="{{apiLogoSrc}}"></image>
-              <view class="index-desc">
-                <text>以下将演示chameleon接口能力，具体属性参数详见chameleon开发文档。</text>
-              </view>
-            </view>
-            <view class="index-bd">
-            </view>
-          </view>
-        </view>
-      </c-scroller>
+        </c-scroller>
+      </view>
     </view>
-  </view>
-  <page>
+  </c-page>
 </template>
 <script>
 import cml from "chameleon-api"
@@ -439,13 +439,10 @@ export default new Demo();
         "usingComponents": {
           "c-page": "/components/page/page",
           "c-scroller": "/components/scroller/scroller"
-        }
-    },
-    "wx": {
+        },
         "navigationBarTitleText": "内置组件库",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
-
     }
 }
 </script>
