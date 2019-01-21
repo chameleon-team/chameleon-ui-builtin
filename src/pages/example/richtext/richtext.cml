@@ -74,14 +74,10 @@ export default new Richtext();
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header",
             "c-richtext": "/components/richtext/richtext"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "richtext",
         "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2",
-        "component": true
-       
+        "backgroundColor": "#E2E2E2"
     }
 }
 </script>

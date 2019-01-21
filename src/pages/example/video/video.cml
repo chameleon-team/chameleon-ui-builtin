@@ -91,12 +91,10 @@ export default new Video();
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header",
             "c-video": "/components/video/video"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "video",
         "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2"    
+        "backgroundColor": "#E2E2E2"
     }
 }
 </script>

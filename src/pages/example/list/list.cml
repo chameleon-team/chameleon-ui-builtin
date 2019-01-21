@@ -127,13 +127,10 @@ export default new List();
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header",
             "c-list": "/components/list/list"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "list",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
-
     }
 }
 </script>

@@ -100,13 +100,10 @@ export default new Radio();
           "c-page": "/components/page/page",
           "c-header": "../../components/header/header",
           "c-radio": "/components/radio/radio"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "radio",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
-
     }
 }
 </script>

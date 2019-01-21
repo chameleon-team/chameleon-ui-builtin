@@ -88,13 +88,6 @@ export default new Header();
     "base": {
         "usingComponents": {
         }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
-        "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2",
-        "component": true
-       
     }
 }
 </script>

@@ -130,12 +130,10 @@ export default new Button();
           "c-header": "../../components/header/header",
           "c-button": "/components/button/button",
           "c-scroller": "/components/scroller/scroller"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "button",
         "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2"     
+        "backgroundColor": "#E2E2E2"
     }
 }
 </script>

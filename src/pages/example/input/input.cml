@@ -159,13 +159,10 @@ export default new Input();
             "c-header": "../../components/header/header",
             "c-scroller": "/components/scroller/scroller",
             "c-input": "/components/input/input"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "input",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
-
     }
 }
 </script>

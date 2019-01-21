@@ -35,10 +35,8 @@ export default new Image();
         "usingComponents": {
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "image",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
     }

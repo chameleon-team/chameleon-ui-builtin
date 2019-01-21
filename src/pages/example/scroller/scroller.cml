@@ -138,13 +138,10 @@ export default new Scroller();
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header",
             "c-scroller": "/components/scroller/scroller"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "scroller",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
-
     }
 }
 </script>

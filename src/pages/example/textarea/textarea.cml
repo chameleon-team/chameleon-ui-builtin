@@ -12,12 +12,10 @@
     "base": {
         "usingComponents": {
             "textareademo": "../../components/textareademo/textareademo"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "textarea",
         "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2"       
+        "backgroundColor": "#E2E2E2"
     }
 }
 </script>

@@ -97,13 +97,10 @@ export default new Switch();
           "c-page": "/components/page/page",
           "c-header": "../../components/header/header",
           "c-switch": "/components/switch/switch"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "switch",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
-
     }
 }
 </script>

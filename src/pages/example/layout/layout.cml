@@ -220,10 +220,8 @@ export default new CLayout()
           "c-main":"/components/layout/main/main",
           "c-aside":"/components/layout/aside/aside",
           "c-scroller": "/components/scroller/scroller"
-        }
-    },
-    "wx": {
-        "navigationBarTitleText": "index",
+        },
+        "navigationBarTitleText": "layout",
         "backgroundTextStyle": "dark",
         "backgroundColor": "#E2E2E2"
     }
