@@ -1,5 +1,5 @@
 <template>
-  <c-page title="cml扩展组件库">
+  <c-page title="cml内置组件库">
     <view class="index-page">
       <view class="index-body" style="{{bodyComputedStyl}}">
         <c-scroller height="{{-1}}">
@@ -357,11 +357,6 @@ export default new Demo();
 }
 
 .index-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
 
   flex-direction: column;
@@ -372,11 +367,6 @@ export default new Demo();
 }
 
 .index-body {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   flex: 1;
 
   overflow-y: scroll;
