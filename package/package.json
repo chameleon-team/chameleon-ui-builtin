@@ -10,6 +10,6 @@
   "license": "Apache",
   "email": "ChameleonCore@didiglobal.com",
   "dependencies": {
-    "chameleon-scroll": "0.0.1"
+    "chameleon-scroll": "0.0.3"
   }
 }
