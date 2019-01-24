@@ -6,6 +6,7 @@
       checked="{{ radioValue1 }}"
       label="Option1"
       c-bind:change="valueChange1"
+      color="#fc9153"
       >
     </c-radio>
   </view>
@@ -18,6 +19,7 @@
       label="Option3"
       position="right"
       c-bind:change="valueChange2"
+      color="#fc9153"
       >
     </c-radio>
   </view>
@@ -29,6 +31,7 @@
       checked="{{ radioValue3 }}"
       label="Option2"
       disabled="{{ true }}"
+      color="green"
       >
     </c-radio>
   </view>
