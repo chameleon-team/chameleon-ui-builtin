@@ -68,16 +68,22 @@
       }
     }
     mounted() {
+      let me = this;
       setTimeout(async() => {
         if (!this.height) {
           console.error('list组件必须传递高度属性')
           return
         }
         if (this.height === -1) {
-          let rectData = await cml.getRect(this.$refs['c-list'], this)
-          let windowRect = await cml.getSystemInfo()
-          let height = windowRect.viewportHeight - rectData.top;
-          this.cmtstyle = `height:${height}cpx;`
+          let query = my.createSelectorQuery()
+            .select('#c-list').boundingClientRect();
+          let windowRect = await cml.getSystemInfo();
+          query.exec((ret) => {
+            if (ret[0]) {
+              let height = windowRect.viewportHeight - ret.top;
+              me.cmtstyle = `height:${height}cpx;`
+            }
+          });
         }
       }, 200)
     }
