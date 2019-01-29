@@ -1010,7 +1010,7 @@ export default new Carousel();
   margin: 5px 0;
 } */
 .slider-pagination-bullet-active {
-  background: #fff none repeat scroll 0 0;
+  background: #000 none repeat scroll 0 0;
   opacity: 1;
 }
 

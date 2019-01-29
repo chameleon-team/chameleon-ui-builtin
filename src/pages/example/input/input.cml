@@ -5,7 +5,7 @@
             <c-header title="input"></c-header>
             <text class="title-text" >focus聚焦 web端不支持</text>
             <view class="input-wrap">
-                <c-input placeholder="focus聚焦 web端不支持" focus="{{isfocus}}" c-bind:blur="bindblurevent"></c-input>
+                <c-input placeholder="focus聚焦 web端不支持" focus="{{isfocus}}" c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-input>
             </view>
             <text class="title-text">数据绑定,value:{{inputValue}}</text>
             <view class="input-wrap">
@@ -101,9 +101,18 @@ class Input {
     testEvent(e) {
       this.eventName = e.type
     },
-    bindblurevent()  {
-      console.log('blur')
+    bindblurevent(e)  {
+      console.log('bindblurevent value', e.detail.value)
       this.isfocus = false;
+    },
+    bindfocusevent(e)  {
+      console.log('bindfocusevent value', e.detail.value)
+    },
+    bindinputevent(e)  {
+      console.log('bindinputevent value', e.detail.value)
+    },
+    bindconfirmevent(e)  {
+      console.log('bindconfirmevent value', e.detail.value)
     },
     testMaxMinEvent (e) {
         this.testMaxMinVal = '';

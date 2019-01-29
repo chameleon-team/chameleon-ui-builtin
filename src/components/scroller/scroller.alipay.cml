@@ -5,9 +5,8 @@
     scroll-with-animation="true"
     scroll-into-view="{{toView}}"
     lower-threshold="{{bottomOffset+'rpx'}}"
-    enable-back-to-top="true"
-    bindscrolltolower="onBottom"
-    bindscroll="onScroll"
+    onScrollToLower="onBottom"
+    onScroll="onScroll"
     class="cml-scroller"
     style="{{wrapperStyle}}"
     scroll-top="{{scrollTopPx}}"
@@ -94,7 +93,10 @@
         this.$cmlEmit('customscroll', detail)
       },
       onBottom(e) {
-        this.$cmlEmit('scrolltobottom', e.detail)
+        let detail = {
+          direction: ''
+        };
+        this.$cmlEmit('scrolltobottom', detail)
       }
     }
     mounted () {
@@ -136,7 +138,6 @@
 </script>
 
 <style scoped>
- 
 </style>
 
 <script cml-type="json">
