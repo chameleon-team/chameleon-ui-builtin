@@ -67,9 +67,7 @@ export default new Switch();
 </script>
 <style scoped>
 @import "../../assets/css/var.less";
-.cml-switch {
-  display:inline-block;
-}
+
 .cml-switch-wrap {
   padding:11cpx 0;
   word-break: break-word;
