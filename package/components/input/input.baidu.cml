@@ -66,11 +66,11 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       },
       maxValue: { //type=number 最大值
         type: Number,
-        default: Infinity
+        default: 9007199254740991
       },
       minValue: { //type=number 最小值
         type: Number,
-        default: -Infinity
+        default: -9007199254740991
       }
     }
     data = {

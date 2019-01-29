@@ -17,7 +17,7 @@
       @input="inputEvent"
       @blur="blurEvent"
       @focus="focusEvent"
-      @keyup="keyupEvent"
+      @confirm="keyupEvent"
     ></inputable>
 </template>
 <script>
@@ -106,13 +106,21 @@ event: inputevent blurevent focusevent cconfirmevent
         });
       },
       focusEvent(e) {
-        this.$cmlEmit('focus');
-        this.$cmlEmit('focusevent');
+        this.$cmlEmit('focus', {
+          value: e.target.value || ''
+        });
+        this.$cmlEmit('focusevent', {
+          value: e.target.value || ''
+        });
       },
       // support enter key event
       keyupEvent (e) {
-        this.$cmlEmit('confirm')
-        this.$cmlEmit('confirmevent')
+        this.$cmlEmit('confirm', {
+          value: e.target.value || ''
+        })
+        this.$cmlEmit('confirmevent', {
+          value: e.target.value || ''
+        })
       }
     }
   }

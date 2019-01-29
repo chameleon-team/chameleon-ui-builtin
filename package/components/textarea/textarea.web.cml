@@ -14,7 +14,7 @@
       @input="inputEvent"
       @blur="blurEvent"
       @focus="focusEvent"
-      @keyup="keyupEvent"
+      @confirm="keyupEvent"
   ></inputable>
 </template>
 <script>
@@ -89,17 +89,29 @@ event: cinput cblur cfocus cconfirm
       },
       blurEvent(e) {
         window.scroll(0,0); // 键盘收起留白的bug
-        this.$cmlEmit('blur');
-        this.$cmlEmit('blurevent');
+        this.$cmlEmit('blur', {
+          value: e.target.value || ''
+        });
+        this.$cmlEmit('blurevent', {
+          value: e.target.value || ''
+        });
       },
       focusEvent(e) {
-        this.$cmlEmit('focus');
-        this.$cmlEmit('focusevent');
+        this.$cmlEmit('focus', {
+          value: e.target.value || ''
+        });
+        this.$cmlEmit('focusevent', {
+          value: e.target.value || ''
+        });
       },
       // support enter key event
       keyupEvent (e) {
-        this.$cmlEmit('confirm')
-        this.$cmlEmit('confirmevent')
+        this.$cmlEmit('confirm', {
+          value: e.target.value || ''
+        })
+        this.$cmlEmit('confirmevent', {
+          value: e.target.value || ''
+        })
       }
     }
     // mounted() {

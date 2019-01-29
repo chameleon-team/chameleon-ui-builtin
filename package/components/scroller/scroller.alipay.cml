@@ -5,9 +5,8 @@
     scroll-with-animation="true"
     scroll-into-view="{{toView}}"
     lower-threshold="{{bottomOffset+'rpx'}}"
-    enable-back-to-top="true"
-    bindscrolltolower="onBottom"
-    bindscroll="onScroll"
+    onScrollToLower="onBottom"
+    onScroll="onScroll"
     class="cml-scroller"
     style="{{wrapperStyle}}"
     scroll-top="{{scrollTopPx}}"
@@ -94,10 +93,15 @@
         this.$cmlEmit('customscroll', detail)
       },
       onBottom(e) {
-        this.$cmlEmit('scrolltobottom', e.detail)
+        let detail = {
+          direction: ''
+        };
+        this.$cmlEmit('scrolltobottom', detail)
       }
     }
     mounted () {
+      let me = this;
+
       setTimeout(async() => {
         if (this.scrollDirection === 'vertical' && !this.height) {
           console.error('纵向滚动必须传递高度属性')
@@ -108,15 +112,22 @@
           return
         }
         if (this.height === -1 || this.width === -1) {
-          let rectData = await cml.getRect('c-scroller', this)
-          let windowRect = await cml.getSystemInfo()
-          if (this.scrollDirection === 'vertical') {
-            let height = windowRect.viewportHeight - rectData.top;
-            this.cmtStyle = `height:${height}cpx;`
-          } else {
-            let width = windowRect.viewportWidth - rectData.left
-            this.cmtStyle = `width:${width}cpx;white-space:nowrap;`
-          }
+          let query = my.createSelectorQuery()
+            .select('#c-scroller').boundingClientRect();
+          let windowRect = await cml.getSystemInfo();
+
+          query.exec((ret) => {
+            let rectData = ret[0];
+            if (rectData) {
+              if (me.scrollDirection === 'vertical') {
+                let height = windowRect.viewportHeight - rectData.top;
+                me.cmtStyle = `height:${height}cpx;`
+              } else {
+                let width = windowRect.viewportWidth - rectData.left
+                me.cmtStyle = `width:${width}cpx;white-space:nowrap;`
+              }
+            }
+          });
         }
       }, 200)
     }

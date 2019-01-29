@@ -60,7 +60,7 @@ import cml from 'chameleon-api'
       let mostHeight = 0;
       setTimeout(() => {
         
-        cml.getRect(this.$refs.container, this).then((res) => {
+        cml.getRect('container', this).then((res) => {
           const arr = [];
           const len = this.$refs.slider.children.length;
           for(let i = 0; i < len; i++) {
@@ -113,7 +113,7 @@ import cml from 'chameleon-api'
 }
 
 .director-icon-selected {
-  background-color: #ffffff;
+  background-color: #000;
 }
 
 .director-not-icon {

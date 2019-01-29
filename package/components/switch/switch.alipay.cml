@@ -46,6 +46,9 @@
 
 <style scoped>
 @import "../../assets/css/var.less";
+switch {
+  align-self: flex-start;
+}
 .cml-switch-disabled {
   opacity: 0.5;
 }

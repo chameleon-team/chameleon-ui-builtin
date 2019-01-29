@@ -32,11 +32,11 @@ interface InputInterface {
   minValue: Number,
   inputevent(eventDetail: inputEventDetail): void;
   blurevent(eventDetail: inputEventDetail): void;
-  focusevent(eventDetail: void): void;
-  confirmevent(eventDetail: void): void;
+  focusevent(eventDetail: inputEventDetail): void;
+  confirmevent(eventDetail: inputEventDetail): void;
   input(eventDetail: inputEventDetail): void;
   blur(eventDetail: inputEventDetail): void;
-  focus(eventDetail: void): void;
-  confirm(eventDetail: void): void;
+  focus(eventDetail: inputEventDetail): void;
+  confirm(eventDetail: inputEventDetail): void;
 }
 </script>
