@@ -131,7 +131,7 @@
 
 <script cml-type="json">
 {
-  "wx": {
+  "base": {
     "component": true
   }
 }

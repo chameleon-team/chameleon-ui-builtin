@@ -92,16 +92,28 @@ event: cinput cblur cfocus cconfirm
         })
       },
       blurEvent(e) {
-        this.$cmlEmit('blur')
-        this.$cmlEmit('blurevent')
+        this.$cmlEmit('blur',{
+          value: e.detail.value || ''
+        })
+        this.$cmlEmit('blurevent',{
+          value: e.detail.value || ''
+        })
       },
       focusEvent(e) {
-        this.$cmlEmit('focus')
-        this.$cmlEmit('focusevent')
+        this.$cmlEmit('focus',{
+          value: e.detail.value || ''
+        })
+        this.$cmlEmit('focusevent',{
+          value: e.detail.value || ''
+        })
       },
       confirmEvent(e) {
-        this.$cmlEmit('confirm')
-        this.$cmlEmit('confirmevent')
+        this.$cmlEmit('confirm',{
+          value: e.detail.value || ''
+        })
+        this.$cmlEmit('confirmevent',{
+          value: e.detail.value || ''
+        })
       }
     }
   }

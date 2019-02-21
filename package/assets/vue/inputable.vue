@@ -135,24 +135,21 @@ export default {
   },
   methods: {
     inputEvent(e) {
-      let value = e.target.value;
-      if (this.isInputNumber) {
-        e.target.value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
-      }
+      this.handleDetail(e)
       this.$emit('input',e);
     },
     blurEvent(e) {
-      let value = e.target.value;
-      if (this.isInputNumber) {
-        e.target.value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
-      }
+      this.handleDetail(e)
       this.$emit('blur', e);
     },
     focusEvent(e) {
+      this.handleDetail(e)
       this.$emit('focus', e);
     },
     // support enter key event
     keyupEvent (e) {
+      this.handleDetail(e)
+
       const customKeyType = this.returnKeyType
       if (customKeyType) {
         const code = e.keyCode
@@ -172,6 +169,13 @@ export default {
         } else {
             this.$refs[ref].blur();
         }       
+    },
+    handleDetail(e) {
+      let value = e.target.value
+
+      if (this.isInputNumber) {
+        e.target.value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <input
-      value="{{value}}"
+      value="{{inputValue}}"
       type="{{type}}"
       placeholder="{{placeholder}}"
       disabled="{{disabled}}"
@@ -9,7 +9,7 @@
       c-bind:input="inputEvent"
       c-bind:blur="blurEvent"
       c-bind:focus="focusEvent"
-      c-bind:confirm="confirmEvent"
+      c-bind:change="confirmEvent"
 
       ref="weexinput"
       return-key-type="{{returnKeyType}}"
@@ -95,7 +95,15 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
     watch = {
       focus: function(newVal, oldVal) {
         this.changeFocus(newVal);
+      },
+      value: function(newVal, oldVal) {
+        this.inputValue = newVal;
       }
+    }
+    mounted() {
+      this.changeFocus(this.focus)
+      
+      this.inputValue = this.value;
     }
     methods = {
       changeFocus(focus) {
@@ -107,38 +115,54 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       },
 
       inputEvent(e) {
-        let value = e.detail.value;
-        if (this.isInputNumber) {
-          value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
-          this.inputValue = value;
-        }
+        this.handleDetail(e)
+
         this.$cmlEmit('input',{
-          value: value || ''
+          value: this.inputValue
         })
         this.$cmlEmit('inputevent',{
-          value: value || ''
+          value: this.inputValue
         })
       },
-      blurEvent(e) {
+      blurEvent() {
         this.$cmlEmit('blur',{
-          value: this.inputValue || ''
+          value: this.inputValue
         });
         this.$cmlEmit('blurevent',{
-          value: this.inputValue || ''
+          value: this.inputValue
         });
       },
-      focusEvent(e) {
-        this.$cmlEmit('focus');
-        this.$cmlEmit('focusevent');
+      focusEvent() {
+        this.$cmlEmit('focus', {
+          value: this.inputValue
+        });
+        this.$cmlEmit('focusevent', {
+          value: this.inputValue
+        });
       },
       confirmEvent(e) {
-        this.$cmlEmit('confirm')
-        this.$cmlEmit('confirmevent')
+        this.handleDetail(e)
+
+        this.$cmlEmit('confirm', {
+          value: this.inputValue
+        })
+        this.$cmlEmit('confirmevent', {
+          value: this.inputValue
+        })
+      },
+      handleDetail(e) {
+        if (!e) {
+          return ''
+        }
+        
+        let value = e.detail.value;
+
+        if (this.isInputNumber) {
+          value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
+        }
+        return this.inputValue = value || ''
       }
     }
-    mounted() {
-      this.changeFocus(this.focus);
-    }  
   }
   export default new Input();
 </script>

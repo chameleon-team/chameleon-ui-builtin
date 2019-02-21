@@ -1,6 +1,6 @@
 <template>
   <textarea 
-      value="{{value}}"
+      value="{{inputValue}}"
       placeholder="{{placeholder}}"
       disabled="{{disabled}}"
       maxlength="{{maxlength}}"
@@ -9,7 +9,7 @@
       c-bind:input="inputEvent"
       c-bind:blur="blurEvent"
       c-bind:focus="focusEvent"
-      c-bind:confirm="confirmEvent"
+      c-bind:change="confirmEvent"
 
       ref="weextextarea"
       return-key-type="{{returnKeyType}}"
@@ -66,7 +66,8 @@
       }
     }
     data = {
-      defaultStyle: "font-size: 40cpx; height: 150cpx; line-height: 50cpx; padding-left:20cpx; padding-right:20cpx; color: #000; text-align: left; background-color: #fff; border: 1px solid #999; border-radius: 8cpx;"
+      defaultStyle: "font-size: 40cpx; height: 150cpx; line-height: 50cpx; padding-left:20cpx; padding-right:20cpx; color: #000; text-align: left; background-color: #fff; border: 1px solid #999; border-radius: 8cpx;",
+      inputValue: ''
     }
     computed ={
       computedStyle() {
@@ -81,7 +82,13 @@
     watch = {
       focus: function(newVal, oldVal) {
         // this.changeFocus(newVal);
+      },
+      value: function(newVal, oldVal) {
+        this.inputValue = newVal;
       }
+    }
+    mounted() {
+      this.inputValue = this.value;
     }
     methods = {
       changeFocus(focus) {
@@ -92,29 +99,42 @@
         }       
       },
       inputEvent(e) {
+        this.inputValue = e.detail.value || ''
+
         this.$cmlEmit('input',{
-          value: e.detail.value || ''
+          value: this.inputValue
         })
         this.$cmlEmit('inputevent',{
-          value: e.detail.value || ''
+          value: this.inputValue
         })
       },
-      blurEvent(e) {
-        this.$cmlEmit('blur')
-        this.$cmlEmit('blurevent')
+      blurEvent() {
+        this.$cmlEmit('blur',{
+          value: this.inputValue
+        })
+        this.$cmlEmit('blurevent',{
+          value: this.inputValue
+        })
       },
-      focusEvent(e) {
-        this.$cmlEmit('focus')
-        this.$cmlEmit('focusevent')
+      focusEvent() {
+        this.$cmlEmit('focus',{
+          value: this.inputValue
+        })
+        this.$cmlEmit('focusevent',{
+          value: this.inputValue
+        })
       },
       confirmEvent(e) {
-        this.$cmlEmit('confirm')
-        this.$cmlEmit('confirmevent')
+        this.inputValue = e.detail.value || ''
+
+        this.$cmlEmit('confirm',{
+          value: this.inputValue
+        })
+        this.$cmlEmit('confirmevent',{
+          value: this.inputValue
+        })
       }
     }
-    mounted() {
-      // this.changeFocus(this.focus);
-    }   
   }
   export default new Textarea();
 </script>

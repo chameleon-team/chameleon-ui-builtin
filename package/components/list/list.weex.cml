@@ -91,7 +91,7 @@ const dom = weex.requireModule('dom')
           return
         }
         if (this.height === -1) {
-          let rectData = await cml.getRect(this.$refs['c-list'], this)
+          let rectData = await cml.getRect('c-list', this)
           let windowRect = await cml.getSystemInfo()
           let height = windowRect.viewportHeight - rectData.top;
           this.cmtStyle = `height:${height}cpx;`

@@ -2,7 +2,7 @@
 <view class="cml-radio">
   <view class="cml-radio-wrap" c-bind:tap="changeSelect">
     <view class="cml-radio-select" style="{{ radioStyle }}">
-      <view class="{{ radioClass }}">
+      <view class="{{ radioClass }}" style="{{ radioInnerStyle }}">
       </view>
     </view>
     <text class="cml-radio-label" >{{ label }}</text>
@@ -30,6 +30,10 @@ class Radio  {
     groupIndex: {
       type: Number,
       default: -1
+    },
+    color: {
+      type: String,
+      default: '#fc9153'
     }
   }
   data = {
@@ -47,6 +51,14 @@ class Radio  {
       } else {
         style += 'margin-right:13cpx;'
       }
+      return style;
+    },
+    radioInnerStyle () {
+      let style = ''
+      if (this.innerChecked) {
+        style += `border:10cpx solid ${this.color};`
+      }
+      
       return style;
     },
     radioClass () {
@@ -102,14 +114,12 @@ export default new Radio();
 .cml-radio-selected {
   width:32cpx;
   height:32cpx;
-  border:10cpx solid @color-orange;
   border-radius: 100cpx;
   box-sizing: border-box;
 }
 .cml-radio-selected-disabled {
   width:32cpx;
   height:32cpx;
-  border:10cpx solid @color-orange;
   border-radius: 100cpx;
   box-sizing: border-box;
   opacity: 0.5;
