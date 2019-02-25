@@ -1,6 +1,0 @@
-<c-page title="richtext" class=" cml-base cml-c-page">
-  <view class="container  cml-base cml-view">
-    <c-header title="richtext" class=" cml-base cml-c-header"></c-header>
-    <c-richtext rich-data="{{richData}}" style="width:200rpx;height:100rpx" class=" cml-base cml-c-richtext"></c-richtext>
-  </view>
-</c-page>
