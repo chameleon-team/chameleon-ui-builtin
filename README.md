@@ -26,7 +26,8 @@ npm install
 cml dev  //开始开发
 ```
 
- ### 多端预览效果
+### 多端预览效果
+ 
 | web   |      微信小程序      |  native-weex |
 |:----------:|:-------------:|:------:|
 | <img src="./preview/web.jpg" width="200px"/> |  <img src="./preview/wx.png" width="200px"/>| <img src="./preview/weex.jpg" width="200px"/> |
