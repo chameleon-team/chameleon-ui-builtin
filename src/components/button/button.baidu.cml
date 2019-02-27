@@ -17,7 +17,8 @@
     c-bind:error="error"
     c-bind:opensetting="opensetting"
     >
-    <text class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
+    <text c-if="{{text}}" class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
+    <slot c-else></slot>
   </button>
 </template>
 <script>
@@ -47,7 +48,7 @@ function obj2style(styleObj) {
     props = {
       text: {
         type: String,
-        default: "确认"
+        default: ""
       },
       size: {
         type: String,

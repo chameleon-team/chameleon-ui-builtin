@@ -17,7 +17,8 @@
     c-bind:error="error"
     c-bind:opensetting="opensetting"
     >
-    <text class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
+    <text c-if="{{text}}" class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
+    <slot c-else></slot>
   </button>
 </template>
 <script>
@@ -47,7 +48,7 @@ function obj2style(styleObj) {
     props = {
       text: {
         type: String,
-        default: "确认"
+        default: ""
       },
       size: {
         type: String,
@@ -186,18 +187,20 @@ function obj2style(styleObj) {
 .cml-btn {
   display: flex;
   width: 702cpx;
-  height: 88cpx;
+  height: 100cpx;
+  line-height: 100cpx;
   background: @color-regular-blue;
   border: none;
   align-items: center;
   justify-content: center;
-  border-radius: 4cpx;
+  border-radius: 6cpx;
+  font-size: 32cpx;
   &:after{
     border: none;
   }
 }
 .cml-btn:active {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 .btn-text {
   text-align: center;

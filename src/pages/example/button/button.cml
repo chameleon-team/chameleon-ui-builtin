@@ -8,7 +8,7 @@
       </view>
       <view class="button-list">
         <text class="button-text">default/blue</text>
-        <c-button c-bind:onclick='testclick'></c-button>
+        <c-button c-bind:onclick='testclick' text="按钮"><text>确定</text></c-button>
 
         <text class="button-text">disabled</text>
         <c-button

@@ -1,6 +1,7 @@
 <template>
   <view class="cml-btn" c-bind:click="onclick" style="{{mrBtnStyle}}">
-    <text class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
+    <text c-if="{{text}}" class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
+    <slot c-else></slot>
   </view>
 </template>
 <script>
@@ -36,7 +37,7 @@ function obj2str(obj) {
     props = {
       text: {
         type: String,
-        default: "确认"
+        default: ""
       },
       size: {
         type: String,
