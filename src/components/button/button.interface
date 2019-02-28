@@ -36,6 +36,7 @@ interface ButtonInterface {
   disabled: Boolean,
   btnStyle: String,
   textStyle: String,
+  textStyleDisabled: String,
   disabledStyle: String,
   openType: String,
   lang: String,

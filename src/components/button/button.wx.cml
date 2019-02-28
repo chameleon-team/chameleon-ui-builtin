@@ -1,8 +1,8 @@
 <template>
   <button 
-    class="cml-btn" 
+    class="{{btnClasses}}"
+    style="{{mrBtnStyle}}"
     c-bind:tap="onclick" 
-    style="{{mrBtnStyle}}" 
     open-type="{{openType}}"
     lang="{{lang}}"
     session-from="{{sessionFrom}}"
@@ -17,38 +17,17 @@
     c-bind:error="error"
     c-bind:opensetting="opensetting"
     >
-    <text c-if="{{text}}" class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
-    <slot c-else></slot>
+    <slot></slot>
+    <text class="{{textClasses}}" style="{{mrTextStyle}}">{{text}}</text>
   </button>
 </template>
 <script>
-import {
-  STYLE_MAP,
-  TEXT_STYLE_MAP,
-  BUTTON_STYLE_MAP,
-  TEXT_FONTSIZE_STYLE_MAP
-} from "./type";
 
-function str2obj(str) {
-  let styleArr = str.split(';');
-  let style = {}
-  styleArr.forEach(item => {
-    let si = item.split(':');
-    if (si.length === 2) {
-      style[si[0]] = si[1];
-    }    
-  })
-  return style;
-}
-
-function obj2style(styleObj) {
-  return styleObj? Object.keys(styleObj).map((key) => `${key}:${styleObj[key]};`).join(''): '';
-}
  class Button implements ButtonInterface {
     props = {
       text: {
         type: String,
-        default: ""
+        default: "确定"
       },
       size: {
         type: String,
@@ -67,6 +46,10 @@ function obj2style(styleObj) {
         default: ""
       },
       textStyle: {
+        type: String,
+        default: ""
+      },
+      textStyleDisabled: {
         type: String,
         default: ""
       },
@@ -108,46 +91,50 @@ function obj2style(styleObj) {
       }
     }
     computed ={
-      mrBtnStyle() {
-        const { type, disabled, btnStyle, size, disabledStyle } = this;
+      btnClasses() {
+        const { type, disabled, size } = this;
 
-        const mrBtnStyle = {
-          ...STYLE_MAP[type],
-          ...str2obj(btnStyle),
-          ...BUTTON_STYLE_MAP[size]
-        };
-
-        let disabledInStyle = { opacity: 0.2 };
-        if (type === "white") {
-          disabledInStyle = { "background-color": "rgba(0, 0, 0, 0.1)" };
+        let classList = ['cml-btn']
+        if (disabled) {
+          classList.push('disable')
         }
 
-        let afterStyle = disabled
-          ? {
-              ...mrBtnStyle,
-              ...disabledInStyle,
-              ...str2obj(disabledStyle),
-              "border-width": 0
-            }
-          : mrBtnStyle;
-        return obj2style(afterStyle);
+        if (!!~'red|orange|white|green'.indexOf(type)) {
+          classList.push(type)
+        }
+        
+        if (!!~'full|big|medium|small'.indexOf(size)) {
+          classList.push(size)
+        }
+
+        return classList.join(' ')
+      },
+      textClasses() {
+        const { type, disabled, size } = this
+
+        let classList = ['btn-text']
+        if (!!~'red|orange|white|green'.indexOf(type)) {
+          classList.push(type)
+        }
+
+        if (!!~'full|big|medium|small'.indexOf(size)) {
+          classList.push(size)
+        }
+
+        return classList.join(' ')
+      },
+      mrBtnStyle() {
+        const { disabled, btnStyle, disabledStyle } = this;
+        return disabled ? btnStyle + disabledStyle : btnStyle
       },
       mrTextStyle() {
-        const { type, disabled, textStyle, size } = this;
-        const mrTextStyle = {
-          ...TEXT_STYLE_MAP[type],
-          ...str2obj(textStyle),
-          ...TEXT_FONTSIZE_STYLE_MAP[size]
-        };
-        let afterStyle = disabled
-          ? { ...mrTextStyle, color: "#FFFFFF" }
-          : mrTextStyle;
-
-        return obj2style(afterStyle);
+        const { disabled, textStyle, textStyleDisabled } = this;
+        return disabled ? textStyle + textStyleDisabled : textStyle
       }
     }
     methods = {
       onclick(e) {
+
         const { type, disabled } = this
         if (disabled) return;
         this.$cmlEmit('onclick', {
@@ -182,42 +169,133 @@ function obj2style(styleObj) {
   }
   export default new Button();
 </script>
-<style scoped>
+<style scoped lang="less">
 @import "../../assets/css/var.less";
 .cml-btn {
   display: flex;
-  width: 702cpx;
-  height: 100cpx;
-  line-height: 100cpx;
+  flex: 1;
+  padding: 0 30cpx;
+  height: 88cpx;
+  line-height: 88cpx;
   background: @color-regular-blue;
-  border: none;
   align-items: center;
   justify-content: center;
-  border-radius: 6cpx;
+  border-radius: 4cpx;
   font-size: 32cpx;
-  &:after{
+  &:after {
     border: none;
   }
 }
+
 .cml-btn:active {
-  opacity: 0.8;
+  background: #444654;
 }
+.cml-btn.disable {
+  background: @color-light-grey-s;
+}
+
+.cml-btn.orange {
+  background: @color-orange;
+
+  &.active, &:active {
+    background: @color-background-grew;
+  }
+
+  &.disable, &:disabled {
+    background: @color-light-grey-s;
+  }
+}
+
+.cml-btn.green {
+  background: #50a050;
+
+  &.active, &:active {
+    background: #57a957;
+  }
+
+  &.disable, &:disabled {
+    background: @color-light-grey-s;
+  }
+}
+
+.cml-btn.red {
+  background: #db2a36;
+
+  &.active, &:active {
+    background: #ea2e3b;
+  }
+
+  &.disable, &:disabled {
+    background: @color-light-grey-s;
+  }
+}
+
+.cml-btn.white {
+  color: #666;
+  background: #FFFFFF;
+  border: 1cpx solid #A5A5A5;
+  
+  &.active, &:active {
+    background: #e8e8e8;
+  }
+    
+  &.disable, &:disabled {
+    color: @color-white;
+    background: @color-light-grey-s;
+  }
+}
+
+.cml-btn.full {
+  width: 702cpx;
+  height: 88cpx;
+}
+
+.cml-btn.big {
+  width: 339cpx;
+  height: 70cpx;
+}
+
+.cml-btn.medium {
+  width: 218cpx;
+  height: 60cpx;
+}
+
+.cml-btn.small {
+  width: 157cpx;
+  height: 44cpx;
+}
+
 .btn-text {
   text-align: center;
   vertical-align: middle;
   text-overflow: ellipsis;
   white-space: nowrap;
   outline: none;
-  lines: 1;
   font-size: 36cpx;
-  font-weight: 500;
   color: #ffffff;
+}
+
+.btn-text.white {
+  color: #666;
+}
+
+.btn-text.full {
+  font-size: 36cpx;
+}
+
+.btn-text.big {
+  font-size: 32cpx;
+}
+
+.btn-text.medium {
+  font-size: 28cpx;
+}
+
+.btn-text.small {
+  font-size: 24cpx;
 }
 </style>
 <script cml-type="json">
 {
-  "base": {
-    "component": true
-  }
 }
 </script>

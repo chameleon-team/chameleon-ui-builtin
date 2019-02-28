@@ -1,7 +1,16 @@
 <template>
 <c-page title="button">
-  <!-- <view class="container"> -->
     <c-scroller height="{{-1}}">
+      <view>
+        <c-button
+          class="g-main-btn"
+          type="blue"
+          text="确定"
+          disabled="{{false}}"
+          btn-style="background-color:red"
+          c-bind:onclick='testclick' >
+        </c-button>
+      </view>
       <c-header title="button"></c-header>
       <view class="section-title">
         <text class="section-title-text">类型样式</text>
@@ -33,9 +42,9 @@
           c-bind:onclick='testclick' >
         </c-button>
 
-        <text class="button-text">green</text>
+        <text class="button-text">white</text>
         <c-button
-          type="green"
+          type="white"
           text="确定"
           c-bind:onclick='testclick' >
         </c-button>
@@ -46,11 +55,11 @@
       </view>
       <view class="button-list">
         <text class="button-text">big</text>
-        <c-button c-bind:onclick='testclick' ></c-button>
+        <c-button c-bind:onclick='testclick' size="big"></c-button>
 
         <text class="button-text">medium</text>
         <c-button
-          type="orange"
+          type="green"
           text="确定"
           size="medium"
           c-bind:onclick='testclick' >
@@ -61,12 +70,11 @@
           type="red"
           text="确定"
           size="small"
-          disabled="{{true}}"
+          disabled="{{false}}"
           c-bind:onclick='testclick' >
         </c-button>
       </view>
     </c-scroller>
-  <!-- </view> -->
 </c-page>
 </template>
 <script>
@@ -93,6 +101,9 @@ export default new Button();
 </script>
 <style scoped>
 @import "../../../assets/css/var.less";
+.g-main-btn {
+  background-color: red;
+}
 .container {
   flex: 1;
   padding-bottom: 60cpx;
