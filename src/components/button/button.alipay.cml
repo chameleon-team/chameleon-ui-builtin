@@ -1,8 +1,10 @@
 <template>
-  <button
-    class="cml-btn"
-    c-bind:tap="onclick"
+  <button 
+    class="{{btnClasses}}"
     style="{{mrBtnStyle}}"
+    c-bind:tap="onclick"
+    c-bind:touchstart="touchstart"
+    c-bind:touchend="touchend"
     open-type="{{openType}}"
     lang="{{lang}}"
     session-from="{{sessionFrom}}"
@@ -17,38 +19,48 @@
     c-bind:error="error"
     c-bind:opensetting="opensetting"
     >
-    <text c-if="{{text}}" class="btn-text" style="{{mrTextStyle}}">{{text}}</text>
-    <slot c-else></slot>
+    <slot></slot>
+    <text class="{{textClasses}}" style="{{mrTextStyle}}">{{text}}</text>
   </button>
 </template>
+
 <script>
-import {
-  STYLE_MAP,
-  TEXT_STYLE_MAP,
-  BUTTON_STYLE_MAP,
-  TEXT_FONTSIZE_STYLE_MAP
-} from "./type";
+function transCls(base, cxt) {
+  const { type, disabled, size, hover } = cxt;
 
-function str2obj(str) {
-  let styleArr = str.split(';');
-  let style = {}
-  styleArr.forEach(item => {
-    let si = item.split(':');
-    if (si.length === 2) {
-      style[si[0]] = si[1];
+  let classList = [base]
+
+  if (hover) {
+    classList.push(`${base}-active`)
+  }
+
+  if (!!~'red|orange|white|green'.indexOf(type)) {
+    classList.push(`${base}-${type}`)
+
+    if (hover) {
+      classList.push(`${base}-${type}-active`)
     }
-  })
-  return style;
-}
 
-function obj2style(styleObj) {
-  return styleObj? Object.keys(styleObj).map((key) => `${key}:${styleObj[key]};`).join(''): '';
+    if (disabled) {
+      classList.push(`${base}-${type}-disable`)
+    }
+  }
+  
+  if (!!~'full|big|medium|small'.indexOf(size)) {
+    classList.push(`${base}-${size}`)
+  }
+
+  if (disabled) {
+    classList.push(`${base}-disable`)
+  }
+
+  return classList.join(' ')
 }
  class Button implements ButtonInterface {
     props = {
       text: {
         type: String,
-        default: ""
+        default: "确定"
       },
       size: {
         type: String,
@@ -70,9 +82,21 @@ function obj2style(styleObj) {
         type: String,
         default: ""
       },
+      textStyleDisabled: {
+        type: String,
+        default: ""
+      },
       disabledStyle: {
         type: String,
         default: ""
+      },
+      btnHoverStyle: {
+        type: String,
+        default: ''
+      },
+      textHoverStyle: {
+        type: String,
+        default: ''
       },
       openType: {
         type: String,
@@ -107,53 +131,48 @@ function obj2style(styleObj) {
         default: ""
       }
     }
+    data = {
+      hover: false
+    }
     computed ={
+      btnClasses() {
+        return transCls('cml-btn', this)
+      },
+      textClasses() {
+        return transCls('btn-text', this)
+      },
       mrBtnStyle() {
-        const { type, disabled, btnStyle, size, disabledStyle } = this;
-
-        const mrBtnStyle = {
-          ...STYLE_MAP[type],
-          ...str2obj(btnStyle),
-          ...BUTTON_STYLE_MAP[size]
-        };
-
-        let disabledInStyle = { opacity: 0.2 };
-        if (type === "white") {
-          disabledInStyle = { "background-color": "rgba(0, 0, 0, 0.1)" };
-        }
-
-        let afterStyle = disabled
-          ? {
-              ...mrBtnStyle,
-              ...disabledInStyle,
-              ...str2obj(disabledStyle),
-              "border-width": 0
-            }
-          : mrBtnStyle;
-        return obj2style(afterStyle);
+        const { disabled, btnStyle, disabledStyle, hover, btnHoverStyle } = this;
+        return disabled
+              ? `${btnStyle};${disabledStyle}`
+              : hover
+              ? `${btnStyle};${btnHoverStyle}`
+              : btnStyle
       },
       mrTextStyle() {
-        const { type, disabled, textStyle, size } = this;
-        const mrTextStyle = {
-          ...TEXT_STYLE_MAP[type],
-          ...str2obj(textStyle),
-          ...TEXT_FONTSIZE_STYLE_MAP[size]
-        };
-        let afterStyle = disabled
-          ? { ...mrTextStyle, color: "#FFFFFF" }
-          : mrTextStyle;
-
-        return obj2style(afterStyle);
+        const { disabled, textStyle, textStyleDisabled, hover, textHoverStyle } = this;
+        return disabled
+              ? `${textStyle};${textStyleDisabled}`
+              : hover
+              ? `${textStyle};${textHoverStyle}`
+              : textStyle
       }
     }
     methods = {
       onclick(e) {
+
         const { type, disabled } = this
         if (disabled) return;
         this.$cmlEmit('onclick', {
           type,
           disabled
         });
+      },
+      touchstart(e) {
+        this.hover = true
+      },
+      touchend(e) {
+        this.hover = false
       },
       getuserinfo(e){
         this.$cmlEmit('getuserinfo',e.detail);
@@ -178,45 +197,137 @@ function obj2style(styleObj) {
       opensetting(e){
         this.$cmlEmit('opensetting');
       }
-    }
+    }                       
   }
   export default new Button();
 </script>
-<style scoped>
+<style scoped lang="less">
 @import "../../assets/css/var.less";
 .cml-btn {
   display: flex;
-  width: 702cpx;
+  flex: 1;
+  padding: 0 30cpx;
   height: 88cpx;
+  line-height: 88cpx;
   background: @color-regular-blue;
-  border: none;
   align-items: center;
   justify-content: center;
-  border-radius: 4cpx;
   align-self: center;
-  &:after{
+  border-radius: 4cpx;
+  font-size: 32cpx;
+  &-active {
+    background: #444654;
+  }
+  &:after {
     border: none;
   }
 }
-.cml-btn:active {
-  opacity: 0.9;
+
+.cml-btn-orange {
+  background: @color-orange;
+
+  &-active {
+    background: @color-background-grew;
+  }
 }
+
+.cml-btn-green {
+  background: #50a050;
+
+  &-active {
+    background: #57a957;
+  }
+}
+
+.cml-btn-red {
+  background: #db2a36;
+
+  &-active {
+    background: #ea2e3b;
+  }
+}
+
+.cml-btn-disable {
+  background: @color-light-grey-s;
+  &:active {
+    background: @color-light-grey-s;
+  }
+}
+
+.cml-btn-white {
+  color: #666;
+  background: #FFFFFF;
+  border: 1cpx solid #A5A5A5;
+  
+  &-active {
+    background: #e8e8e8;
+  }
+    
+  &-disable, &:disabled {
+    color: @color-white;
+    background: @color-light-grey-s;
+    border: 0;
+    &:active {
+      background: @color-light-grey-s;
+    }
+  }
+}
+
+.cml-btn-full {
+  width: 702cpx;
+  height: 88cpx;
+}
+
+.cml-btn-big {
+  width: 339cpx;
+  height: 70cpx;
+}
+
+.cml-btn-medium {
+  width: 218cpx;
+  height: 60cpx;
+}
+
+.cml-btn-small {
+  width: 157cpx;
+  height: 44cpx;
+}
+
 .btn-text {
   text-align: center;
   vertical-align: middle;
   text-overflow: ellipsis;
   white-space: nowrap;
   outline: none;
-  lines: 1;
   font-size: 36cpx;
-  font-weight: 500;
   color: #ffffff;
+}
+
+.btn-text-white {
+  color: #666;
+}
+
+.btn-text-white-disable {
+  color: @color-white;
+}
+
+.btn-text-full {
+  font-size: 36cpx;
+}
+
+.btn-text-big {
+  font-size: 32cpx;
+}
+
+.btn-text-medium {
+  font-size: 28cpx;
+}
+
+.btn-text-small {
+  font-size: 24cpx;
 }
 </style>
 <script cml-type="json">
 {
-  "base": {
-    "component": true
-  }
 }
 </script>
