@@ -8,6 +8,9 @@
           text="确定"
           disabled="{{false}}"
           btn-style="background-color:red"
+          btn-hover-style="background-color:green"
+          text-style="color:black"
+          text-hover-style="color:pink"
           c-bind:onclick='testclick' >
         </c-button>
       </view>
@@ -54,8 +57,8 @@
         <text class="section-title-text">尺寸</text>
       </view>
       <view class="button-list">
-        <text class="button-text">big</text>
-        <c-button c-bind:onclick='testclick' size="big"></c-button>
+        <text class="button-text">big && white && disabled</text>
+        <c-button c-bind:onclick='testclick' size="big" disabled="{{true}}" type="white"></c-button>
 
         <text class="button-text">medium</text>
         <c-button

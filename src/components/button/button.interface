@@ -38,6 +38,8 @@ interface ButtonInterface {
   textStyle: String,
   textStyleDisabled: String,
   disabledStyle: String,
+  btnHoverStyle: String,
+  textHoverStyle: String,
   openType: String,
   lang: String,
   sessionFrom: String,
