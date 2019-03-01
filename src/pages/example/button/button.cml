@@ -5,13 +5,14 @@
         <c-button
           class="g-main-btn"
           type="blue"
-          text="确定"
+          text=""
           disabled="{{false}}"
           btn-style="background-color:red"
           btn-hover-style="background-color:green"
           text-style="color:black"
           text-hover-style="color:pink"
           c-bind:onclick='testclick' >
+          <text style="color:blue">确定</text>
         </c-button>
       </view>
       <c-header title="button"></c-header>
@@ -20,7 +21,7 @@
       </view>
       <view class="button-list">
         <text class="button-text">default/blue</text>
-        <c-button c-bind:onclick='testclick' text="按钮"><text>确定</text></c-button>
+        <c-button c-bind:onclick='testclick' text="按钮"></c-button>
 
         <text class="button-text">disabled</text>
         <c-button

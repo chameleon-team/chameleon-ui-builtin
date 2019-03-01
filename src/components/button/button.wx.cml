@@ -2,7 +2,9 @@
   <button 
     class="{{btnClasses}}"
     style="{{mrBtnStyle}}"
-    c-bind:tap="onclick" 
+    c-bind:tap="onclick"
+    c-bind:touchstart="touchstart"
+    c-bind:touchend="touchend"
     open-type="{{openType}}"
     lang="{{lang}}"
     session-from="{{sessionFrom}}"
@@ -21,8 +23,39 @@
     <text class="{{textClasses}}" style="{{mrTextStyle}}">{{text}}</text>
   </button>
 </template>
-<script>
 
+<script>
+function transCls(base, cxt) {
+  const { type, disabled, size, hover } = cxt;
+
+  let classList = [base]
+
+  if (hover) {
+    classList.push(`${base}-active`)
+  }
+
+  if (!!~'red|orange|white|green'.indexOf(type)) {
+    classList.push(`${base}-${type}`)
+
+    if (hover) {
+      classList.push(`${base}-${type}-active`)
+    }
+
+    if (disabled) {
+      classList.push(`${base}-${type}-disable`)
+    }
+  }
+  
+  if (!!~'full|big|medium|small'.indexOf(size)) {
+    classList.push(`${base}-${size}`)
+  }
+
+  if (disabled) {
+    classList.push(`${base}-disable`)
+  }
+
+  return classList.join(' ')
+}
  class Button implements ButtonInterface {
     props = {
       text: {
@@ -57,6 +90,14 @@
         type: String,
         default: ""
       },
+      btnHoverStyle: {
+        type: String,
+        default: ''
+      },
+      textHoverStyle: {
+        type: String,
+        default: ''
+      },
       openType: {
         type: String,
         default: ""
@@ -90,46 +131,31 @@
         default: ""
       }
     }
+    data = {
+      hover: false
+    }
     computed ={
       btnClasses() {
-        const { type, disabled, size } = this;
-
-        let classList = ['cml-btn']
-        if (disabled) {
-          classList.push('disable')
-        }
-
-        if (!!~'red|orange|white|green'.indexOf(type)) {
-          classList.push(type)
-        }
-        
-        if (!!~'full|big|medium|small'.indexOf(size)) {
-          classList.push(size)
-        }
-
-        return classList.join(' ')
+        return transCls('cml-btn', this)
       },
       textClasses() {
-        const { type, disabled, size } = this
-
-        let classList = ['btn-text']
-        if (!!~'red|orange|white|green'.indexOf(type)) {
-          classList.push(type)
-        }
-
-        if (!!~'full|big|medium|small'.indexOf(size)) {
-          classList.push(size)
-        }
-
-        return classList.join(' ')
+        return transCls('btn-text', this)
       },
       mrBtnStyle() {
-        const { disabled, btnStyle, disabledStyle } = this;
-        return disabled ? btnStyle + disabledStyle : btnStyle
+        const { disabled, btnStyle, disabledStyle, hover, btnHoverStyle } = this;
+        return disabled
+              ? `${btnStyle};${disabledStyle}`
+              : hover
+              ? `${btnStyle};${btnHoverStyle}`
+              : btnStyle
       },
       mrTextStyle() {
-        const { disabled, textStyle, textStyleDisabled } = this;
-        return disabled ? textStyle + textStyleDisabled : textStyle
+        const { disabled, textStyle, textStyleDisabled, hover, textHoverStyle } = this;
+        return disabled
+              ? `${textStyle};${textStyleDisabled}`
+              : hover
+              ? `${textStyle};${textHoverStyle}`
+              : textStyle
       }
     }
     methods = {
@@ -141,6 +167,12 @@
           type,
           disabled
         });
+      },
+      touchstart(e) {
+        this.hover = true
+      },
+      touchend(e) {
+        this.hover = false
       },
       getuserinfo(e){
         this.$cmlEmit('getuserinfo',e.detail);
@@ -182,85 +214,80 @@
   justify-content: center;
   border-radius: 4cpx;
   font-size: 32cpx;
+  &-active {
+    background: #444654;
+  }
   &:after {
     border: none;
   }
 }
 
-.cml-btn:active {
-  background: #444654;
-}
-.cml-btn.disable {
-  background: @color-light-grey-s;
-}
-
-.cml-btn.orange {
+.cml-btn-orange {
   background: @color-orange;
 
-  &.active, &:active {
+  &-active {
     background: @color-background-grew;
   }
-
-  &.disable, &:disabled {
-    background: @color-light-grey-s;
-  }
 }
 
-.cml-btn.green {
+.cml-btn-green {
   background: #50a050;
 
-  &.active, &:active {
+  &-active {
     background: #57a957;
   }
-
-  &.disable, &:disabled {
-    background: @color-light-grey-s;
-  }
 }
 
-.cml-btn.red {
+.cml-btn-red {
   background: #db2a36;
 
-  &.active, &:active {
+  &-active {
     background: #ea2e3b;
   }
+}
 
-  &.disable, &:disabled {
+.cml-btn-disable {
+  background: @color-light-grey-s;
+  &:active {
     background: @color-light-grey-s;
   }
 }
 
-.cml-btn.white {
+.cml-btn-white {
   color: #666;
   background: #FFFFFF;
   border: 1cpx solid #A5A5A5;
   
-  &.active, &:active {
+  &-active {
     background: #e8e8e8;
   }
     
-  &.disable, &:disabled {
+  &-disable, &:disabled {
     color: @color-white;
     background: @color-light-grey-s;
+    border: 0;
+    &:active {
+      background: @color-light-grey-s;
+    }
   }
 }
 
-.cml-btn.full {
+.cml-btn-full {
   width: 702cpx;
   height: 88cpx;
 }
 
-.cml-btn.big {
+.cml-btn-big {
   width: 339cpx;
   height: 70cpx;
 }
 
-.cml-btn.medium {
+.cml-btn-medium {
   width: 218cpx;
   height: 60cpx;
 }
 
-.cml-btn.small {
+.cml-btn-small {
   width: 157cpx;
   height: 44cpx;
 }
@@ -275,23 +302,27 @@
   color: #ffffff;
 }
 
-.btn-text.white {
+.btn-text-white {
   color: #666;
 }
 
-.btn-text.full {
+.btn-text-white-disable {
+  color: @color-white;
+}
+
+.btn-text-full {
   font-size: 36cpx;
 }
 
-.btn-text.big {
+.btn-text-big {
   font-size: 32cpx;
 }
 
-.btn-text.medium {
+.btn-text-medium {
   font-size: 28cpx;
 }
 
-.btn-text.small {
+.btn-text-small {
   font-size: 24cpx;
 }
 </style>
