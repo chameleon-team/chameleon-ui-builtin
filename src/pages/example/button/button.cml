@@ -1,7 +1,7 @@
 <template>
 <c-page title="button">
     <c-scroller height="{{-1}}">
-      <view>
+      <!-- <view>
         <c-button
           class="g-main-btn"
           type="blue"
@@ -14,7 +14,7 @@
           c-bind:onclick='testclick' >
           <text style="color:blue">确定</text>
         </c-button>
-      </view>
+      </view> -->
       <c-header title="button"></c-header>
       <view class="section-title">
         <text class="section-title-text">类型样式</text>
