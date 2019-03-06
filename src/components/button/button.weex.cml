@@ -172,6 +172,7 @@ function transCls(base, cxt) {
   justify-content: center;
   border-radius: 4cpx;
   font-size: 32cpx;
+  color: #fff;
   &-active {
     background: #444654;
   }
