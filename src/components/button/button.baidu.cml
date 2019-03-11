@@ -213,6 +213,7 @@ function transCls(base, cxt) {
   align-items: center;
   justify-content: center;
   border-radius: 4cpx;
+  align-self: auto;
   font-size: 32cpx;
   &-active {
     background: #444654;
