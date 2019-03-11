@@ -57,7 +57,7 @@
       <view class="section-title">
         <text class="section-title-text">尺寸</text>
       </view>
-      <view class="button-list">
+      <view class="button-list button-list-left">
         <text class="button-text">big && white && disabled</text>
         <c-button c-bind:onclick='testclick' size="big" disabled="{{true}}" type="white"></c-button>
 
@@ -117,8 +117,12 @@ export default new Button();
 .button-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 0 20cpx;
 }
+.button-list-left {
+  align-items: flex-start;
+}
+
 .section-title {
   margin-top: 60cpx;
   display: flex;
