@@ -211,12 +211,14 @@ class Carousel implements CCarouselInterface {
         }
         // 遍历子集
         let $sliderChildren = $slider.children[0].children
-        let offsetLeft = $sliderChildren[lastPage].offsetLeft
-        if (this.circular) {
-          offsetLeft = $sliderChildren[lastPage].offsetLeft
-        }
+        const current = $sliderChildren[lastPage]
+        if (!current) return
+        let offsetLeft = current.offsetLeft
+        // if (this.circular) {
+        //   offsetLeft = current.offsetLeft
+        // }
         // 居中
-        let offsetWidth = $sliderChildren[lastPage].offsetWidth
+        let offsetWidth = current.offsetWidth
         let slidesPerView = this.options.slidesPerView
         let sliderLength = this.s_data.sliderLength
         if (this.options.centeredSlides) {
