@@ -1,19 +1,21 @@
 <template>
   <input
-      value="{{inputValue}}"
-      type="{{type}}"
-      placeholder="{{placeholder}}"
-      disabled="{{disabled}}"
-      maxlength="{{maxlength}}"
+    class="input-wrap"
+    style="{{computedStyle}}"
 
-      c-bind:input="inputEvent"
-      c-bind:blur="blurEvent"
-      c-bind:focus="focusEvent"
-      c-bind:change="confirmEvent"
+    value="{{inputValue}}"
+    type="{{type}}"
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    maxlength="{{maxlength}}"
 
-      ref="weexinput"
-      return-key-type="{{returnKeyType}}"
-      style="{{computedStyle}}"
+    c-bind:input="inputEvent"
+    c-bind:blur="blurEvent"
+    c-bind:focus="focusEvent"
+    c-bind:change="confirmEvent"
+
+    ref="weexinput"
+    return-key-type="{{returnKeyType}}"
   />
 </template>
 <script>
@@ -23,6 +25,14 @@ event: inputevent blurevent focusevent cconfirmevent
 import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
  class Input implements InputInterface {
     props = {
+      cStyle: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      },
       //input的内容
       value: {
         type: String,
@@ -62,10 +72,6 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
         type: String,
         default: '#bebebe'
       },
-      cStyle: {
-        type: String,
-        default: ''
-      },
       maxValue: { //type=number 最大值
         type: Number,
         default: Infinity
@@ -76,12 +82,12 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       }
     }
     data = {
-      defaultStyle: "font-size: 33cpx; height: 80cpx; line-height: 80cpx; padding-left:20cpx; padding-right:20cpx; color: #000; border-width:1px; border-style:solid; border-color:#999;border-radius: 8cpx; text-align: left; background-color: #fff;",
       inputValue: ''
     }
     computed ={
       computedStyle() {
-        let style = this.defaultStyle + this.cStyle;
+        let style = this.cStyle || this.cstyle
+        
         if(style[style.length-1] !== ';') {
           style +=';'
         }
@@ -168,6 +174,18 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
 </script>
 
 <style scoped>
+.input-wrap {
+  font-size: 33cpx;
+  height: 80cpx;
+  line-height: 80cpx;
+  padding-left: 20cpx;
+  padding-right: 20cpx;
+  color: #000;
+  border: 1cpx solid #999;
+  border-radius: 8cpx;
+  text-align: left;
+  background-color: #fff;
+}
 </style>
 
 <script cml-type="json">

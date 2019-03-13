@@ -1,20 +1,23 @@
 <template>
   <input
-      value="{{inputValue}}"
-      type="{{type}}"
-      placeholder="{{placeholder}}"
-      disabled="{{disabled}}"
-      maxlength="{{maxlength}}"
-      style="{{wxStyle}}"
+    class="input-wrap"
+    style="{{cStyle || cstyle}}"
 
-      c-bind:input="inputEvent"
-      c-bind:blur="blurEvent"
-      c-bind:focus="focusEvent"
-      c-bind:confirm="confirmEvent"
+    value="{{inputValue}}"
+    type="{{type}}"
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    maxlength="{{maxlength}}"
+    style="{{wxStyle}}"
 
-      focus="{{focus}}"
-      confirm-type="{{returnKeyType}}"
-      placeholder-style="{{wxPlaceHolderStyle}}"
+    c-bind:input="inputEvent"
+    c-bind:blur="blurEvent"
+    c-bind:focus="focusEvent"
+    c-bind:confirm="confirmEvent"
+
+    focus="{{focus}}"
+    confirm-type="{{returnKeyType}}"
+    placeholder-style="{{wxPlaceHolderStyle}}"
   />
 </template>
 <script>
@@ -22,6 +25,14 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
 
  class Input implements InputInterface {
     props = {
+      cStyle: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      },
       value: {
         type: String,
         default: ''
@@ -60,10 +71,6 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
         type: String,
         default: '#bebebe'
       },
-      cStyle: {
-        type: String,
-        default: ''
-      },
       maxValue: { //type=number 最大值
         type: Number,
         default: Infinity
@@ -74,16 +81,11 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       }
     }
     data = {
-      inputValue: "",
-      defaultStyle: "font-size: 33cpx; height: 80cpx; line-height: 80cpx; padding-left:20cpx; padding-right:20cpx; color: #000; border: 1px solid #999;border-radius: 8cpx; text-align: left; background-color: #fff;"
+      inputValue: ""
     }
     computed ={
       wxPlaceHolderStyle() {
         return `color: ${this.placerHolderColor};`
-      },
-      wxStyle() {
-        let style = this.defaultStyle + this.cStyle;
-        return style
       },
       isInputNumber () {
         return this.type === 'number';
@@ -158,7 +160,18 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
 </script>
 
 <style scoped>
-
+.input-wrap {
+  font-size: 33cpx;
+  height: 80cpx;
+  line-height: 80cpx;
+  padding-left: 20cpx;
+  padding-right: 20cpx;
+  color: #000;
+  border: 1cpx solid #999;
+  border-radius: 8cpx;
+  text-align: left;
+  background-color: #fff;
+}
 </style>
 
 <script cml-type="json">
