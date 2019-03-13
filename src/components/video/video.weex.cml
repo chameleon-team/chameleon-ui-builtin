@@ -2,7 +2,7 @@
   <video
       style="{{cstyle}}"
       controls="{{controls}}"
-      autoplay="{{autoplay}}"
+      auto-play="{{autoplay}}"
       loop="{{loop}}"
       src="{{src}}"
       c-bind:start="onstart"

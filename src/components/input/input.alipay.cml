@@ -8,7 +8,6 @@
     placeholder="{{placeholder}}"
     disabled="{{disabled}}"
     maxlength="{{maxlength}}"
-    style="{{wxStyle}}"
 
     c-bind:input="inputEvent"
     c-bind:blur="blurEvent"

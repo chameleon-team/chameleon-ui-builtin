@@ -1,18 +1,23 @@
 <template>
   <html:video
-      :controls="controls"
-      :autoplay="autoplay"
-      :loop="loop"
-      :src="src"
-      @play="onstart"
-      @pause="onpause"
-      @ended="onfinish"
-      @error="onfail"
+    :style="cstyle"
+    :controls="controls"
+    :autoplay="autoplay"
+    :loop="loop"
+    :src="src"
+    @play="onstart"
+    @pause="onpause"
+    @ended="onfinish"
+    @error="onfail"
   />
 </template>
 <script>
  class Video implements VideoInterface {
     props = {
+      cstyle: {
+        type: String,
+        default: ''
+      },
       controls: {
         type: Boolean,
         default: false
