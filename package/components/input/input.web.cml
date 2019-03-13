@@ -31,6 +31,14 @@ event: inputevent blurevent focusevent cconfirmevent
     }
 
     props = {
+      cStyle: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      },
       //类型
       type: {
         type: String,
@@ -69,10 +77,6 @@ event: inputevent blurevent focusevent cconfirmevent
         type: String,
         default: '#bebebe'
       },
-      cStyle: {
-        type: String,
-        default: ''
-      },
       maxValue: { //type=number 最大值
         type: Number,
         default: Infinity
@@ -84,7 +88,7 @@ event: inputevent blurevent focusevent cconfirmevent
     }
     computed = {
       computedStyle() {
-        return this.defaultStyle + this.cStyle
+        return this.defaultStyle + (this.cStyle || this.cstyle)
       }
     }
     methods = {

@@ -170,8 +170,10 @@ function transCls(base, cxt) {
   background: @color-regular-blue;
   align-items: center;
   justify-content: center;
+  align-self: stretch;
   border-radius: 4cpx;
   font-size: 32cpx;
+  color: #fff;
   &-active {
     background: #444654;
   }

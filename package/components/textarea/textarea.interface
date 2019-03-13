@@ -5,6 +5,8 @@ type inputEventDetail = {
   value: String
 }
 interface TextareaInterface {
+  cStyle: String,
+  cstyle: String,
   value: String,
   placeholder: String,
   disabled: Boolean,
@@ -12,7 +14,6 @@ interface TextareaInterface {
   maxlength: Number,
   returnKeyType: String,
   placerHolderColor: String,
-  cStyle: String,
   rows: Number,
   inputevent(eventDetail: inputEventDetail): void;
   blurevent(eventDetail: inputEventDetail): void;

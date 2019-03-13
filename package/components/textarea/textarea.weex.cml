@@ -1,19 +1,20 @@
 <template>
-  <textarea 
-      value="{{inputValue}}"
-      placeholder="{{placeholder}}"
-      disabled="{{disabled}}"
-      maxlength="{{maxlength}}"
-      rows="{{rows}}"
+  <textarea
+    style="{{computedStyle}}"
 
-      c-bind:input="inputEvent"
-      c-bind:blur="blurEvent"
-      c-bind:focus="focusEvent"
-      c-bind:change="confirmEvent"
+    value="{{inputValue}}"
+    placeholder="{{placeholder}}"
+    disabled="{{disabled}}"
+    maxlength="{{maxlength}}"
+    rows="{{rows}}"
 
-      ref="weextextarea"
-      return-key-type="{{returnKeyType}}"
-      style="{{computedStyle}}"
+    c-bind:input="inputEvent"
+    c-bind:blur="blurEvent"
+    c-bind:focus="focusEvent"
+    c-bind:change="confirmEvent"
+
+    ref="weextextarea"
+    return-key-type="{{returnKeyType}}"
   ></textarea>
 </template>
 <script>
@@ -22,6 +23,14 @@
   */
  class Textarea implements TextareaInterface {
     props = {
+      cStyle: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      },
       //textarea的内容
       value: {
         type: String,
@@ -56,22 +65,19 @@
         type: String,
         default: '#666'
       },
-      cStyle: {
-        type: String,
-        default: ''
-      },
       rows: {
         type: Number,
         default: 2
       }
     }
     data = {
-      defaultStyle: "font-size: 40cpx; height: 150cpx; line-height: 50cpx; padding-left:20cpx; padding-right:20cpx; color: #000; text-align: left; background-color: #fff; border: 1px solid #999; border-radius: 8cpx;",
-      inputValue: ''
+      inputValue: '',
+      defaultStyle: 'font-size: 40cpx;height: 150cpx;line-height: 50cpx;padding-left: 20cpx;padding-right: 20cpx;color: #000;text-align: left;background-color: #fff;border: 1cpx solid #999;border-radius: 8cpx;'
     }
     computed ={
       computedStyle() {
-        let style = this.defaultStyle + this.cStyle;
+        let style = this.defaultStyle + (this.cStyle || this.cstyle);
+
         if(style[style.length-1] !== ';') {
           style +=';'
         } 
