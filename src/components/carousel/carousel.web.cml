@@ -214,9 +214,7 @@ class Carousel implements CCarouselInterface {
         const current = $sliderChildren[lastPage]
         if (!current) return
         let offsetLeft = current.offsetLeft
-        // if (this.circular) {
-        //   offsetLeft = current.offsetLeft
-        // }
+
         // 居中
         let offsetWidth = current.offsetWidth
         let slidesPerView = this.options.slidesPerView
