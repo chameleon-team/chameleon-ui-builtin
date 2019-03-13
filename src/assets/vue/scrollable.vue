@@ -65,7 +65,9 @@ export default {
       scrollOptions: {
         probeType: 3,
         // 上拉下拉是否回弹
-        bounce: this.bounce
+        bounce: this.bounce,
+        click: true,
+        tap: true
       }
     }
   },
