@@ -1,5 +1,6 @@
 <template>
   <video
+      style="{{cstyle}}"
       controls="{{controls}}"
       autoplay="{{autoplay}}"
       loop="{{loop}}"
@@ -27,6 +28,10 @@
         default: false
       },
       src: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
         type: String,
         default: ''
       }
