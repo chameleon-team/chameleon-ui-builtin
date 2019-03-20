@@ -1,7 +1,7 @@
 <template>
   <c-page title="carousel">
     <c-header title="carousel"></c-header>
-    <carousel class="container" indicator-dots="{{true}}"  current="{{0}}" circular="{{true}}">
+    <carousel class="container" indicator-dots="{{true}}"  current="{{0}}" circular="{{true}}" autoplay="{{true}}" interval="{{2000}}">
       <carousel-item>
         <view  class="carousel-item" style="background-color: #EBDEAA"></view>
       </carousel-item>

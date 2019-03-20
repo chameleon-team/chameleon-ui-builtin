@@ -19,7 +19,7 @@
             c-for-item="item"
             data-idx="{{i}}"
           >
-            <view class="panel border-1px" ref="div{{i+1}}"
+            <view class="panel" ref="div{{i+1}}"
            >
               <text class="text">{{item}}</text>
             </view>
@@ -108,9 +108,8 @@ export default new List();
   margin-bottom: 35cpx;
   flex-direction: column;
   justify-content: center;
-  border-style: solid;
-  border-color: rgb(162, 217, 192);
   background-color: rgba(162, 217, 192, 0.2);
+  border: 2cpx solid rgb(162, 217, 192);
 }
 .text {
   font-size: 88cpx;
