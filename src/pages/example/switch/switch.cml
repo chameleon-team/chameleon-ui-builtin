@@ -6,6 +6,7 @@
         checked="{{ switchValue1 }}"
         label="Switch"
         c-bind:change="switchChange1"
+        opencolor="#fc9153"
         >
       </c-switch>
     </view>
@@ -39,6 +40,7 @@
         checked="{{ switchValue4 }}"
         label="Disabled Switch"
         disabled="{{true}}"
+        opencolor="green"
         >
       </c-switch>
     </view>

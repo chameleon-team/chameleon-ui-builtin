@@ -55,13 +55,14 @@ class Header   {
 export default new Header();
 </script>
 <style scoped>
-.page-head{
+
+.page-head {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 60cpx 50cpx 80cpx;
 }
-.page-head-title{
+.page-head-title {
   padding: 0 40cpx 20cpx 40cpx;
 }
 .page-head-title-text {

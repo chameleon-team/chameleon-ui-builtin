@@ -1,5 +1,6 @@
 <template>
   <videoable
+      :cstyle="cstyle"
       :controls="controls"
       :autoplay="autoplay"
       :loop="loop"
@@ -13,6 +14,10 @@
 <script>
  class Video implements VideoInterface {
     props = {
+      cstyle: {
+        type: String,
+        default: ''
+      },
       controls: {
         type: Boolean,
         default: false

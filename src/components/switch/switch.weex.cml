@@ -1,12 +1,12 @@
 <template>
 <view class="cml-switch">
   <view class="cml-switch-wrap" c-bind:tap="changeSwitch">
-  <view class="{{ switchClass }}" style="{{ switchStyle }}">
-    <view class="inner-icon" style="{{ innerStyle }}">
+    <view class="cml-switch-icon" style="{{ switchStyle }}">
+      <view class="inner-icon" style="{{ innerStyle }}">
+      </view>
     </view>
+    <text class="cml-switch-label" >{{ label }}</text>
   </view>
-  <text class="cml-switch-label" >{{ label }}</text>
-</view>
 </view>
 </template>
 <script>
@@ -23,6 +23,10 @@ class Switch implements SwitchInterface {
     disabled: {
       type: Boolean,
       default: false
+    },
+    opencolor: {
+      type: String,
+      default: '#fc9153'
     }
   }
   data = {
@@ -34,12 +38,18 @@ class Switch implements SwitchInterface {
       if (this.disabled) {
         style += 'opacity:0.5;'
       }
+      
+      if (this.checked) {
+        style += `border:1px solid ${this.opencolor};background-color:${this.opencolor};`
+      } else {
+        style += `border:1px solid #ccc;background-color:#fff;`
+      }
       return style;
     },
     innerStyle () {
       let style = '';
       if (this.checked) {
-        style += 'left:40cpx;border:1px solid #fc9153;'
+        style += `left:40cpx;border:1px solid ${this.opencolor};`
       } else {
         style += 'left:0; border:1px solid #ccc;'
       }
@@ -78,25 +88,13 @@ export default new Switch();
   line-height: 1.5;
   position: relative;
 }
-.cml-switch-open {
+.cml-switch-icon {
   width:100cpx;
   height:60cpx;
   border-radius:60cpx;
   position:relative;
   box-sizing: border-box;
   margin-right: 13cpx;
-  border:1px solid @color-orange;
-  background-color:@color-orange;
-}
-.cml-switch-close {
-  width:100cpx;
-  height:60cpx;
-  border-radius:60cpx;
-  position:relative;
-  border:1px solid @color-light-grey-s;
-  box-sizing: border-box;
-  margin-right: 13cpx;
-  background-color:@color-white;
 }
 .inner-icon {
   width:60cpx;
@@ -119,7 +117,7 @@ export default new Switch();
 </style>
 <script cml-type="json">
 {
-  "weex": {
+  "base": {
     "component": true
   }
 }

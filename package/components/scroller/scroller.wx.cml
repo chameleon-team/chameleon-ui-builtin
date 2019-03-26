@@ -108,7 +108,7 @@
           return
         }
         if (this.height === -1 || this.width === -1) {
-          let rectData = await cml.getRect(this.$refs['c-scroller'], this)
+          let rectData = await cml.getRect('c-scroller', this)
           let windowRect = await cml.getSystemInfo()
           if (this.scrollDirection === 'vertical') {
             let height = windowRect.viewportHeight - rectData.top;
@@ -131,7 +131,7 @@
 
 <script cml-type="json">
 {
-  "wx": {
+  "base": {
     "component": true
   }
 }

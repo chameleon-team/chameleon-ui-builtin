@@ -1,20 +1,20 @@
 <template>
   <inputable 
-      :value="value"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :maxlength="maxlength"
-      :rows="rows"
-      :focus="focus"
-      :returnKeyType="returnKeyType"
-      :placerHolderColor="placerHolderColor"
-      :computedStyle="computedStyle"
-      template="textarea"
+    :value="value"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    :maxlength="maxlength"
+    :rows="rows"
+    :focus="focus"
+    :returnKeyType="returnKeyType"
+    :placerHolderColor="placerHolderColor"
+    :computedStyle="computedStyle"
+    template="textarea"
 
-      @input="inputEvent"
-      @blur="blurEvent"
-      @focus="focusEvent"
-      @keyup="keyupEvent"
+    @input="inputEvent"
+    @blur="blurEvent"
+    @focus="focusEvent"
+    @confirm="keyupEvent"
   ></inputable>
 </template>
 <script>
@@ -23,6 +23,14 @@ event: cinput cblur cfocus cconfirm
 */
  class Textarea implements TextareaInterface {
     props = {
+      cStyle: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      },
       rows: {
         type: Number,
         default: 2
@@ -59,10 +67,6 @@ event: cinput cblur cfocus cconfirm
       placerHolderColor: {
         type: String,
         default: '#bebebe'
-      },
-      cStyle: {
-        type: String,
-        default: ''
       }
     }
     data = {
@@ -75,7 +79,7 @@ event: cinput cblur cfocus cconfirm
     // }
     computed ={
       computedStyle() {
-        return this.defaultStyle + this.cStyle
+        return this.defaultStyle + (this.cStyle || this.cstyle)
       }
     }
     methods = {
@@ -89,17 +93,29 @@ event: cinput cblur cfocus cconfirm
       },
       blurEvent(e) {
         window.scroll(0,0); // 键盘收起留白的bug
-        this.$cmlEmit('blur');
-        this.$cmlEmit('blurevent');
+        this.$cmlEmit('blur', {
+          value: e.target.value || ''
+        });
+        this.$cmlEmit('blurevent', {
+          value: e.target.value || ''
+        });
       },
       focusEvent(e) {
-        this.$cmlEmit('focus');
-        this.$cmlEmit('focusevent');
+        this.$cmlEmit('focus', {
+          value: e.target.value || ''
+        });
+        this.$cmlEmit('focusevent', {
+          value: e.target.value || ''
+        });
       },
       // support enter key event
       keyupEvent (e) {
-        this.$cmlEmit('confirm')
-        this.$cmlEmit('confirmevent')
+        this.$cmlEmit('confirm', {
+          value: e.target.value || ''
+        })
+        this.$cmlEmit('confirmevent', {
+          value: e.target.value || ''
+        })
       }
     }
     // mounted() {

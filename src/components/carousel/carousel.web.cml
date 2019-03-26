@@ -215,12 +215,12 @@ class Carousel implements CCarouselInterface {
         }
         // 遍历子集
         let $sliderChildren = $slider.children[0].children
-        let offsetLeft = $sliderChildren[lastPage].offsetLeft
-        if (this.circular) {
-          offsetLeft = $sliderChildren[lastPage].offsetLeft
-        }
+        const current = $sliderChildren[lastPage]
+        if (!current) return
+        let offsetLeft = current.offsetLeft
         // 居中
-        let offsetWidth = $sliderChildren[lastPage].offsetWidth
+        let offsetWidth = current.offsetWidth
+
         let slidesPerView = this.options.slidesPerView
         let sliderLength = this.s_data.sliderLength
         if (this.options.centeredSlides) {
@@ -300,6 +300,8 @@ class Carousel implements CCarouselInterface {
     }
   }
   created() {
+    //修复数据没有初始化导致的指示器数量错误问题
+    this.s_data.sliderLength = 0
     this.data.currentPage = this.current;
     this.s_data.currentPage = this.current;
     // 目前只支持横向滚动
@@ -1019,7 +1021,7 @@ export default new Carousel();
   margin: 5px 0;
 } */
 .slider-pagination-bullet-active {
-  background: #fff none repeat scroll 0 0;
+  background: #000 none repeat scroll 0 0;
   opacity: 1;
 }
 

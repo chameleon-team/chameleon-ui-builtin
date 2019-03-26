@@ -19,6 +19,7 @@ interface SwitchInterface {
   checked: Boolean,
   disabled: Boolean,
   label: String,
+  opencolor: String,
   changeevent(eventDetail: valueDetail): void;
   change(eventDetail: valueDetail): void;
 

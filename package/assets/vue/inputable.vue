@@ -90,7 +90,7 @@ export default {
     },
     template: {
         type: String,
-        default: 'text' 
+        default: 'input' 
     },
     rows: {
         type: Number,
@@ -112,18 +112,21 @@ export default {
       this.changeFocus(newVal);
     },
     value: function (val) {
-      this.$refs['c-input'].value = val
+      this.$refs[this.refsName].value = val
     }
   },
   computed: {
     isInput () {
-      return this.template == 'input';
+      return this.template === 'input';
     },
     styleObj () {
       return cmlStyleTransfer(this.computedStyle) || {};
     },
     isInputNumber () {
-      return this.template == 'input' && this.type === 'number';
+      return this.isInput && this.type === 'number';
+    },
+    refsName () {
+      return 'c-' + this.template
     }
   },
   mounted() {
@@ -135,24 +138,21 @@ export default {
   },
   methods: {
     inputEvent(e) {
-      let value = e.target.value;
-      if (this.isInputNumber) {
-        e.target.value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
-      }
+      this.handleDetail(e)
       this.$emit('input',e);
     },
     blurEvent(e) {
-      let value = e.target.value;
-      if (this.isInputNumber) {
-        e.target.value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
-      }
+      this.handleDetail(e)
       this.$emit('blur', e);
     },
     focusEvent(e) {
+      this.handleDetail(e)
       this.$emit('focus', e);
     },
     // support enter key event
     keyupEvent (e) {
+      this.handleDetail(e)
+
       const customKeyType = this.returnKeyType
       if (customKeyType) {
         const code = e.keyCode
@@ -166,12 +166,18 @@ export default {
       }
     },
     changeFocus(focus) {
-        let ref = 'c-' + this.template;
         if(focus) {
-            this.$refs[ref].focus();
+            this.$refs[this.refsName].focus();
         } else {
-            this.$refs[ref].blur();
+            this.$refs[this.refsName].blur();
         }       
+    },
+    handleDetail(e) {
+      let value = e.target.value
+
+      if (this.isInputNumber) {
+        e.target.value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
+      }
     }
   }
 }

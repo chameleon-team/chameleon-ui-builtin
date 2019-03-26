@@ -5,6 +5,8 @@ type inputEventDetail = {
   value: String
 }
 interface TextareaInterface {
+  cStyle: String,
+  cstyle: String,
   value: String,
   placeholder: String,
   disabled: Boolean,
@@ -12,15 +14,14 @@ interface TextareaInterface {
   maxlength: Number,
   returnKeyType: String,
   placerHolderColor: String,
-  cStyle: String,
   rows: Number,
   inputevent(eventDetail: inputEventDetail): void;
-  blurevent(eventDetail: void): void;
-  focusevent(eventDetail: void): void;
-  confirmevent(eventDetail: void): void;
+  blurevent(eventDetail: inputEventDetail): void;
+  focusevent(eventDetail: inputEventDetail): void;
+  confirmevent(eventDetail: inputEventDetail): void;
   input(eventDetail: inputEventDetail): void;
-  blur(eventDetail: void): void;
-  focus(eventDetail: void): void;
-  confirm(eventDetail: void): void;
+  blur(eventDetail: inputEventDetail): void;
+  focus(eventDetail: inputEventDetail): void;
+  confirm(eventDetail: inputEventDetail): void;
 }
 </script>

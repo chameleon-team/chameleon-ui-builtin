@@ -13,7 +13,7 @@
           c-bind:pause="onpause"
           c-bind:finish="onfinish"
           c-bind:fail="onfail"
-          style="display:flex;flex-direction: column;align-items: center;"
+          cstyle="display:flex;flex-direction: column;align-items: center;"
       ></c-video>
 </view>
 </c-page>
@@ -32,15 +32,15 @@
   methods = {
     onstart (event) {
       this.state = 'onstart'
-      cml.showToast({
-        message: this.state
-      })
+      // cml.showToast({
+      //   message: this.state
+      // })
     },
     onpause (event) {
       this.state = 'onpause'
-      cml.showToast({
-        message: this.state
-      })
+      // cml.showToast({
+      //   message: this.state
+      // })
     },
     onfinish (event) {
       this.state = 'onfinish'

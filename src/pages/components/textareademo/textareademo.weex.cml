@@ -4,7 +4,7 @@
         <c-scroller height="{{-1}}">
             <view class="input-wrap">
                 <text class="title-text" >focus聚焦</text>
-                <c-textarea placeholder="focus聚焦" focus="{{isfocus}}"  c-bind:blur="bindblurevent"></c-textarea>
+                <c-textarea placeholder="focus聚焦" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>
             </view>
             <view class="input-wrap">
                 <text class="title-text">数据绑定,value:{{inputValue}}</text>
@@ -58,9 +58,18 @@
     testEvent(e) {
       this.eventName = e.type
     },
-    bindblurevent()  {
-      console.log('blur')
-      this.isfocus = false;      
+    bindblurevent(e)  {
+      console.log('bindblurevent value', e.detail.value)
+      this.isfocus = false;
+    },
+    bindfocusevent(e)  {
+      console.log('bindfocusevent value', e.detail.value)
+    },
+    bindinputevent(e)  {
+      console.log('bindinputevent value', e.detail.value)
+    },
+    bindconfirmevent(e)  {
+      console.log('bindconfirmevent value', e.detail.value)
     }
   }
   mounted() {

@@ -4,11 +4,11 @@
         <c-scroller height="{{-1}}">
             <view class="input-wrap">
                 <text class="title-text" >focus聚焦 web端不支持</text>
-                <c-textarea placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent"></c-textarea>
+                <c-textarea placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>
             </view>
             <view class="input-wrap">
                 <text class="title-text">数据绑定,value:{{inputValue}}</text>
-                <c-textarea placeholder="数据绑定" value="" c-bind:input="inputEvent"></c-textarea>
+                <c-textarea placeholder="数据绑定" value="{{inputValue}}" c-bind:input="inputEvent"></c-textarea>
             </view>
             <view class="input-wrap">
                 <text class="title-text">监听input事件,当前事件：{{eventName}}</text>
@@ -52,15 +52,24 @@
   watch  = {}
 
   methods = {
-    inputEvent(e) {    
+    inputEvent(e) {
       this.inputValue = e.detail.value;      
     },
     testEvent(e) {
       this.eventName = e.type
     },
-    bindblurevent()  {
-      console.log('blur')
-      this.isfocus = false;      
+    bindblurevent(e)  {
+      console.log('bindblurevent value', e.detail.value)
+      this.isfocus = false;
+    },
+    bindfocusevent(e)  {
+      console.log('bindfocusevent value', e.detail.value)
+    },
+    bindinputevent(e)  {
+      console.log('bindinputevent value', e.detail.value)
+    },
+    bindconfirmevent(e)  {
+      console.log('bindconfirmevent value', e.detail.value)
     }
   }
   mounted() {

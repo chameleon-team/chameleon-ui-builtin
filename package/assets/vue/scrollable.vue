@@ -3,7 +3,7 @@
         class="scroll-container" 
         ref="c-scroller"
         :style="wrapperStyle" @touchstart="touchstartHandler">
-          <div ref="inner" :style="innerStyle">
+          <div class="inner-scroll" ref="inner" :style="innerStyle">
             <slot></slot>
           </div>
       </div>
@@ -65,7 +65,9 @@ export default {
       scrollOptions: {
         probeType: 3,
         // 上拉下拉是否回弹
-        bounce: this.bounce
+        bounce: this.bounce,
+        // click: true,
+        // tap: true
       }
     }
   },
@@ -301,6 +303,9 @@ export default {
 <style scoped>
   .scroll-container{
     overflow: hidden;
+  }
+  .inner-scroll {
+    display: flex;
   }
   .flex-row {
     flex-direction: row;
