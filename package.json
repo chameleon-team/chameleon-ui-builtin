@@ -13,7 +13,7 @@
   "dependencies": {
     "chameleon-api": "^0.3.0",
     "chameleon-bridge": "^0.1.0",
-    "chameleon-runtime": "0.0.12",
+    "chameleon-runtime": "^0.1.1",
     "chameleon-scroll": "0.0.3",
     "chameleon-store": "0.0.3"
   }

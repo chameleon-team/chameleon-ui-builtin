@@ -20,7 +20,7 @@
       </view>
       <view c-if="{{indicatorDots}}" class="slider-pagination slider-pagination-bullets">
         <view c-for="{{pagenums||s_data.sliderLength}}" c-for-item="n" c-key="index">
-          <view c-if="{{!options.renderPagination}}" c-bind:click='slide(n-1)' class="slider-pagination-bullet {{n-1 === data.currentPage ? 'slider-pagination-bullet-active':''}}"></view>
+          <view c-if="{{!options.renderPagination}}" c-bind:click='slide(n-1)' class="slider-pagination-bullet {{n-1 === currentIndex ? 'slider-pagination-bullet-active':''}}"></view>
         </view>
       </view>
     </view>
@@ -163,6 +163,9 @@ class Carousel implements CCarouselInterface {
     }
   }
   computed = {
+    currentIndex() {
+      return this.data.currentPage % (this.pagenum || this.s_data.sliderLength)
+    },
     // 动画执行obj
     styleStr: function () {
       let style = {}
@@ -200,6 +203,7 @@ class Carousel implements CCarouselInterface {
             lastPage = lastPage + 1
           }
         }
+
         if (this.options.effect === 'coverflow') {
           lastPage -= 1
         }
@@ -242,7 +246,7 @@ class Carousel implements CCarouselInterface {
             offsetLeft = $sliderChildren[sliderLength - slidesToScroll].offsetLeft
           }
         }
-        return offsetLeft + pageWidth - pageWidth
+        return offsetLeft
       }
     },
     currentHeight () {
@@ -281,7 +285,7 @@ class Carousel implements CCarouselInterface {
           posheight += parseInt($sliderChildren[item].style.marginBottom || 0)
         }
       }
-      return posheight + pageWidth - pageWidth
+      return posheight
     },
     getWrapperClass () {
       let str = ''
@@ -717,6 +721,11 @@ class Carousel implements CCarouselInterface {
             return
           }
           that.s_data.setIntervalid = setInterval(function () {
+            if (that.data.currentPage >= (that.pagenums || that.s_data.sliderLength)) {
+              return;
+            } else if (that.data.currentPage < 0) {
+              return;
+            } 
             that.next()
             if (that.data.currentPage === (that.pagenums || that.s_data.sliderLength) - 1 && !that.circular) {
               clearInterval(that.s_data.setIntervalid)
