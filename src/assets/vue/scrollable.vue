@@ -10,7 +10,7 @@
 </template>
 <script>
 import CScroll from 'chameleon-scroll'
-import {cpx2px, cmlStyleTransfer} from '../js/utils/utils';
+import {cmlStyleTransfer} from '../js/utils/utils';
 import collectSlotRefs from '../js/mixins/collectSlotRefs/collectSlotRefs'
 import cml from 'chameleon-api';
 
@@ -279,10 +279,10 @@ export default {
         let offset, isReachedBottom;
         if (this.scrollDirection === 'vertical') {
           offset = this.scroll.startY - this.scroll.y;
-          isReachedBottom = this.scroll.y <= (this.scroll.maxScrollY + cpx2px(this.bottomOffset));
+          isReachedBottom = this.scroll.y <= (this.scroll.maxScrollY + cml.cpx2px(this.bottomOffset));
         } else {
           offset = this.scroll.startX - this.scroll.x;
-          isReachedBottom = this.scroll.x <= (this.scroll.maxScrollX + cpx2px(this.bottomOffset));
+          isReachedBottom = this.scroll.x <= (this.scroll.maxScrollX + cml.cpx2px(this.bottomOffset));
         }
         // 滚动到底部
         if (offset > 0 && this.loadmoreReset && isReachedBottom) {

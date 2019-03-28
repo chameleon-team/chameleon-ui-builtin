@@ -17,7 +17,7 @@
   </scrollable>
 </template>
 <script>
-  import {cpx2px} from '../../assets/js/utils/utils'
+  import cml from 'chameleon-api'
   class Scroller implements ScrollerInterface {
     props = {
       bottomOffset: {
@@ -58,21 +58,21 @@
     computed = {
       heightPx () {
         if (this.height >= 0) {
-          return cpx2px(this.height);
+          return cml.cpx2px(this.height);
         }
         return -1;
       },
       widthPx () {
         if (this.width >= 0) {
-          return cpx2px(this.width);
+          return cml.cpx2px(this.width);
         }
         return -1;
       },
       scrollTopPx () {
-        return cpx2px(this.scrollTop);
+        return cml.cpx2px(this.scrollTop);
       },
       scrollLeftPx () {
-        return cpx2px(this.scrollLeft);
+        return cml.cpx2px(this.scrollLeft);
       }
     }
     methods = {

@@ -14,7 +14,8 @@
   </scrollable>
 </template>
 <script>
-  import {cpx2px} from '../../assets/js/utils/utils'
+  import cml from 'chameleon-api'
+
   class List implements ListInterface {
     props = {
       bottomOffset: {
@@ -42,7 +43,7 @@
     computed = {
       heightPx () {
         if (this.height >= 0) {
-          return cpx2px(this.height);
+          return cml.cpx2px(this.height);
         }
         return -1
       }

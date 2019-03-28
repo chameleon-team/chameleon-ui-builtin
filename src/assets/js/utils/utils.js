@@ -1,3 +1,5 @@
+import cml from 'chameleon-api'
+
 export function str2obj (str) {
     let styleAry = str.split(';');
     let obj = {};
@@ -9,20 +11,12 @@ export function str2obj (str) {
     });
     return obj;
 }
-export function cpx2px(cpx) {
-    if (typeof cpx !== 'number') {
-        console.error('Parameter must be a number');
-        return;
-    }
-    const viewportWidth = window.innerWidth;
-    let px = viewportWidth / 750 * cpx;
-    return px;
-}
+
 export function pxTransform(s) {
     if (!s) return '';
     if (/(-?\d*\.?\d*)cpx/ig.test(s)) {
         return s.replace(/(-?\d*\.?\d*)cpx/ig, (matchs, $1) => {
-            return cpx2px(Number($1)) + 'px';
+            return cml.cpx2px(Number($1)) + 'px';
         });
     }
    return s;
