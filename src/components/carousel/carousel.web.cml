@@ -1036,10 +1036,6 @@ export default new Carousel();
   display: block;
   margin: 5px 0;
 } */
-.slider-pagination-bullet-active {
-  background: #000 none repeat scroll 0 0;
-  opacity: 1;
-}
 
 .slider-loading {
   position: absolute;
