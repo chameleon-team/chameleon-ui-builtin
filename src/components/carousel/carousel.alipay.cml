@@ -17,6 +17,14 @@ class CCarousel implements CCarouselInterface {
       type: Boolean,
       default: false
     },
+    indicatorColor: {
+      type: String,
+      default: '#cccccc'
+    },
+    indicatorActiveColor: {
+      type: String,
+      default: '#000000'
+    },
     circular: {
       type: Boolean,
       default: false

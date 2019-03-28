@@ -8,6 +8,8 @@ interface CCarouselInterface {
   circular: Boolean,
   current: Number,
   indicatorDots: Boolean,
+  indicatorColor: String,
+  indicatorActiveColor: String,
   change(eventDetail: EventDetail): void;
 }
 </script>
