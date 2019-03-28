@@ -12,7 +12,8 @@
     </origin-slider>
     <view style="{{directorStyle}}" c-if="{{indicatorDots}}">
       <view
-        class="{{currentIndex == index ? 'director-icon director-icon-selected' : 'director-icon director-not-icon'}}"
+        class="director-icon"
+        style="{{currentIndex == index ? indicatorActiveStyle : indicatorStyle}}"
         c-for="{{children}}"
         c-key="index"
       ></view>
@@ -52,6 +53,22 @@ import cml from 'chameleon-api'
       indicatorDots: {
         type: Boolean,
         default: false,
+      },
+      indicatorColor: {
+        type: String,
+        default: '#cccccc'
+      },
+      indicatorActiveColor: {
+        type: String,
+        default: '#000000'
+      }
+    }
+    computed = {
+      indicatorStyle() {
+        return `background: ${this.indicatorColor}`;
+      },
+      indicatorActiveStyle() {
+        return `background: ${this.indicatorActiveColor}`;
       }
     }
     mounted() {
@@ -110,14 +127,6 @@ import cml from 'chameleon-api'
   width: 20cpx;
   border-radius: 10cpx;
   margin-right: 20cpx;
-}
-
-.director-icon-selected {
-  background-color: #000;
-}
-
-.director-not-icon {
-  background-color: #ccc;
 }
 </style>
 
