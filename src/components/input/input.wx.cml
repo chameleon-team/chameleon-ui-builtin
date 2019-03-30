@@ -1,7 +1,7 @@
 <template>
   <input
     class="input-wrap"
-    style="{{cStyle || cstyle}}"
+    style="{{computedStyle}}"
 
     value="{{inputValue}}"
     type="{{type}}"
@@ -88,6 +88,10 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       },
       isInputNumber () {
         return this.type === 'number';
+      },
+      computedStyle() {
+        // props 必须经过计算属性，否则没有经过 cpx 转换
+        return this.cStyle || this.cstyle
       }
     }
     watch = {
