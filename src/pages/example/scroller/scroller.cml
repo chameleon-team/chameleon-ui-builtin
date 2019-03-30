@@ -8,6 +8,7 @@
         c-bind:scrolltobottom="onBottom"
         c-bind:onscroll="onScroll"
         scroll-top="{{scrollTop}}"
+        cstyle="width:750cpx"
     >
         <c-header title="scroller"></c-header>
         <view

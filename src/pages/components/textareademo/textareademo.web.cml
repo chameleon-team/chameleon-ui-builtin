@@ -4,7 +4,7 @@
         <c-scroller height="{{-1}}">
             <view class="input-wrap">
                 <text class="title-text" >focus聚焦 web端不支持</text>
-                <c-textarea placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>
+                <c-textarea cstyle="width: 400cpx" placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>
             </view>
             <view class="input-wrap">
                 <text class="title-text">数据绑定,value:{{inputValue}}</text>

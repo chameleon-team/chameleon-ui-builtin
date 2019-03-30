@@ -1,7 +1,7 @@
 <template>
   <textarea
     class="textarea-wrap"
-    style="{{cStyle || cstyle}}"
+    style="{{computedStyle}}"
 
     value="{{value}}"
     placeholder="{{placeholder}}"
@@ -77,6 +77,10 @@ event: cinput cblur cfocus cconfirm
     computed ={
       wxPlaceHolderStyle() {
         return `color: ${this.placerHolderColor}`
+      },
+      computedStyle() {
+        // props 必须经过计算属性，否则没有经过 cpx 转换
+        return this.cStyle || this.cstyle
       }
     }
     watch = {

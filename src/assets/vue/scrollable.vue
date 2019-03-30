@@ -201,6 +201,7 @@ export default {
         style = this.width < 0 ? `width:${window.innerWidth - wrapper.getBoundingClientRect().left}px;`: `width:${this.width}px;`;
       }
       let wrapperStyle = this.hasSize ? this.cstyle + style : style + this.cstyle;
+      // 需要将 "width:200px" => {"width": "200px"} 在 weex 动态样式才生效
       this.wrapperStyle = cmlStyleTransfer(wrapperStyle);
     },
     calculateInnerWidth  () {

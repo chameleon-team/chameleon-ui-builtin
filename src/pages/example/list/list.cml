@@ -7,6 +7,7 @@
         c-bind:onscroll="onScroll"
         to-element="{{toElement}}"
         height="{{-1}}"
+        cstyle="width: 750cpx;"
       >
         <cell>
           <c-header title="list"></c-header>

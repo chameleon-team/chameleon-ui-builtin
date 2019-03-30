@@ -1,6 +1,6 @@
 <template>
   <html:video
-    :style="cstyle"
+    :style="computedStyle"
     :controls="controls"
     :autoplay="autoplay"
     :loop="loop"
@@ -12,45 +12,53 @@
   />
 </template>
 <script>
- class Video implements VideoInterface {
-    props = {
-      cstyle: {
-        type: String,
-        default: ''
-      },
-      controls: {
-        type: Boolean,
-        default: false
-      },
-      autoplay: {
-        type: Boolean,
-        default: false
-      },
-      loop: {
-        type: Boolean,
-        default: false
-      },
-      src: {
-        type: String,
-        default: ''
-      }
+
+import {cmlStyleTransfer} from '../js/utils/utils';
+
+export default {
+  props: {
+    cstyle: {
+      type: String,
+      default: ''
+    },
+    controls: {
+      type: Boolean,
+      default: false
+    },
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    loop: {
+      type: Boolean,
+      default: false
+    },
+    src: {
+      type: String,
+      default: ''
     }
-    methods = {
-      onstart (e) {
-        this.$cmlEmit('start')
-      },
-      onpause (e) {
-        this.$cmlEmit('pause')
-      },
-      onfinish (e) {
-        this.$cmlEmit('finish')
-      },
-      onfail (e) {
-        this.$cmlEmit('fail')
-      }
+  },
+  computed: {
+    computedStyle() {
+      // vue 的动态style只接收 Object 或者 数组
+      return cmlStyleTransfer(this.cstyle)
+    }
+  },
+  methods: {
+    onstart (e) {
+      this.$cmlEmit('start')
+    },
+    onpause (e) {
+      this.$cmlEmit('pause')
+    },
+    onfinish (e) {
+      this.$cmlEmit('finish')
+    },
+    onfail (e) {
+      this.$cmlEmit('fail')
     }
   }
-  export default new Video();
+}
 </script>
 <style scoped>
 </style>

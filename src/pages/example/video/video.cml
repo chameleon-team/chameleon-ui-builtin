@@ -13,7 +13,7 @@
           c-bind:pause="onpause"
           c-bind:finish="onfinish"
           c-bind:fail="onfail"
-          cstyle="display:flex;flex-direction: column;align-items: center;"
+          cstyle="display:flex;flex-direction: column;align-items: center;width: 700cpx;"
       ></c-video>
 </view>
 </c-page>
