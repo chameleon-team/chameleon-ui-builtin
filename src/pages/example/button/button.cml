@@ -1,20 +1,20 @@
 <template>
 <c-page title="button">
     <c-scroller height="{{-1}}">
-      <!-- <view>
+      <view>
         <c-button
           class="g-main-btn"
           type="blue"
           text=""
           disabled="{{false}}"
-          btn-style="background-color:red"
-          btn-hover-style="background-color:green"
-          text-style="color:black"
+          btn-style="background-color:red;width:200cpx;"
+          btn-hover-style="background-color:green;"
+          text-style="color:black;"
           text-hover-style="color:pink"
           c-bind:onclick='testclick' >
           <text style="color:blue">确定</text>
         </c-button>
-      </view> -->
+      </view>
       <c-header title="button"></c-header>
       <view class="section-title">
         <text class="section-title-text">类型样式</text>
@@ -106,7 +106,7 @@ export default new Button();
 <style scoped>
 @import "../../../assets/css/var.less";
 .g-main-btn {
-  background-color: red;
+  /* background-color: red; */
 }
 .container {
   flex: 1;
