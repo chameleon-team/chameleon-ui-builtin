@@ -1,18 +1,20 @@
 <template>
-  <video
-      style="{{cstyle}}"
-      controls="{{controls}}"
-      auto-play="{{autoplay}}"
-      loop="{{loop}}"
-      src="{{src}}"
-      c-bind:start="onstart"
-      c-bind:pause="onpause"
-      c-bind:finish="onfinish"
-      c-bind:fail="onfail"
+  <origin-video
+      :style="computedStyle"
+      :controls="controls"
+      :auto-play="autoplay"
+      :loop="loop"
+      :src="src"
+      @start="onstart"
+      @pause="onpause"
+      @finish="onfinish"
+      @fail="onfail"
   >
-  </video>
+  </origin-video>
 </template>
 <script>
+import {cmlStyleTransfer} from '../../assets/js/utils/utils';
+
  class Video implements VideoInterface {
     props = {
       controls: {
@@ -34,6 +36,11 @@
       cstyle: {
         type: String,
         default: ''
+      }
+    }
+    computed = {
+      computedStyle() {
+        return cmlStyleTransfer(this.cstyle)
       }
     }
     methods = {
