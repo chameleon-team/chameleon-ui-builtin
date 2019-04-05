@@ -57,6 +57,8 @@ class Radio  {
       let style = ''
       if (this.innerChecked) {
         style += `border:10cpx solid ${this.color};`
+      } else {
+        style += `border:1px solid #ccc;`
       }
       
       return style;
