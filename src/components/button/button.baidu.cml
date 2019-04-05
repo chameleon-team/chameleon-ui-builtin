@@ -19,52 +19,27 @@
     c-bind:error="error"
     c-bind:opensetting="opensetting"
     >
-    <slot></slot>
-    <text class="{{textClasses}}" style="{{mrTextStyle}}">{{text}}</text>
+    <text c-if="{{text}}" class="{{textClasses}}" style="{{mrTextStyle}}">{{text}}</text>
+    <slot c-else></slot>
   </button>
 </template>
 
 <script>
-function transCls(base, cxt) {
-  const { type, disabled, size, hover } = cxt;
+import { transCls } from './util'
 
-  let classList = [base]
-
-  if (hover) {
-    classList.push(`${base}-active`)
-  }
-
-  if (!!~'red|orange|white|green'.indexOf(type)) {
-    classList.push(`${base}-${type}`)
-
-    if (hover) {
-      classList.push(`${base}-${type}-active`)
-    }
-
-    if (disabled) {
-      classList.push(`${base}-${type}-disable`)
-    }
-  }
-  
-  if (!!~'full|big|medium|small'.indexOf(size)) {
-    classList.push(`${base}-${size}`)
-  }
-
-  if (disabled) {
-    classList.push(`${base}-disable`)
-  }
-
-  return classList.join(' ')
-}
  class Button implements ButtonInterface {
     props = {
       text: {
         type: String,
-        default: "确定"
+        default: ""
       },
       size: {
         type: String,
-        default: "none"
+        default: "stretch"
+      },
+      width: {
+        type: Number,
+        default: -1
       },
       type: {
         type: String,
@@ -135,19 +110,28 @@ function transCls(base, cxt) {
       hover: false
     }
     computed ={
+      hasWidth() {
+        return this.width !== -1
+      },
       btnClasses() {
-        return transCls('cml-btn', this)
+        return transCls('cml-view cml-btn', this)
       },
       textClasses() {
         return transCls('btn-text', this)
       },
       mrBtnStyle() {
-        const { disabled, btnStyle, disabledStyle, hover, btnHoverStyle } = this;
-        return disabled
+        const { disabled, btnStyle, disabledStyle, hover, btnHoverStyle, hasWidth, width } = this;
+        
+        let style = disabled
               ? `${btnStyle};${disabledStyle}`
               : hover
               ? `${btnStyle};${btnHoverStyle}`
               : btnStyle
+        
+        if (hasWidth) {
+          style = `width:${width}cpx;${style}`
+        }
+        return style
       },
       mrTextStyle() {
         const { disabled, textStyle, textStyleDisabled, hover, textHoverStyle } = this;
@@ -205,7 +189,6 @@ function transCls(base, cxt) {
 @import "../../assets/css/var.less";
 .cml-btn {
   display: flex;
-  flex: 1;
   padding: 0 30cpx;
   height: 88cpx;
   line-height: 88cpx;
@@ -213,8 +196,8 @@ function transCls(base, cxt) {
   align-items: center;
   justify-content: center;
   border-radius: 4cpx;
-  align-self: stretch;
   font-size: 32cpx;
+  color: #fff;
   &-active {
     background: #444654;
   }
@@ -291,6 +274,14 @@ function transCls(base, cxt) {
 .cml-btn-small {
   width: 157cpx;
   height: 44cpx;
+}
+
+.cml-btn-stretch {
+  align-self: stretch;
+}
+
+.cml-btn-auto {
+  align-self: flex-start;
 }
 
 .btn-text {

@@ -32,6 +32,7 @@ type errorEventDetail = {
 interface ButtonInterface {
   text: String,
   size: String,
+  width: Number,
   type: String,
   disabled: Boolean,
   btnStyle: String,

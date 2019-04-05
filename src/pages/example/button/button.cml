@@ -5,9 +5,10 @@
         <c-button
           class="g-main-btn"
           type="blue"
-          text=""
+          text="{{''}}"
           disabled="{{false}}"
-          btn-style="background-color:red;width:200cpx;"
+          btn-style="background-color:red;"
+          width="{{300}}"
           btn-hover-style="background-color:green;"
           text-style="color:black;"
           text-hover-style="color:pink"
@@ -57,15 +58,15 @@
       <view class="section-title">
         <text class="section-title-text">尺寸</text>
       </view>
-      <view class="button-list button-list-left">
-        <text class="button-text">big && white && disabled</text>
-        <c-button c-bind:onclick='testclick' size="big" disabled="{{true}}" type="white"></c-button>
+      <view class="button-list button-list-auto">
+        <text class="button-text">stretch && white && disabled</text>
+        <c-button c-bind:onclick='testclick' size="stretch" disabled="{{true}}" type="white">确定</c-button>
 
-        <text class="button-text">medium</text>
+        <text class="button-text">auto</text>
         <c-button
           type="green"
           text="确定"
-          size="medium"
+          size="auto"
           c-bind:onclick='testclick' >
         </c-button>
 
@@ -119,8 +120,9 @@ export default new Button();
   flex-direction: column;
   padding: 0 20cpx;
 }
-.button-list-left {
-  align-items: flex-start;
+
+.button-list-auto {
+  align-items: center;
 }
 
 .section-title {
