@@ -1,0 +1,71 @@
+<template>
+  <view class="audio">
+    <origin-audio
+      poster="{{poster}}"
+      name="{{name}}"
+      author="{{author}}"
+      src="{{src}}"
+      controls="{{controls}}"
+      loop="{{loop}}"
+      bindplay="play"
+      bindpause="pause"
+      bindtimeupdate="timeupdate"
+      bindended="ended"
+      binderror="error"
+    ></origin-audio>
+  </view>
+</template>
+<script>
+class Audio implements AudioInterface {
+  props = {
+    src: String,
+    name: String,
+    poster: String,
+    author: String,
+    controls: {
+      type: Boolean,
+      default: true
+    },
+    loop: {
+      type: Boolean,
+      default: true
+    }
+  }
+
+  methods = {
+    play () {
+      this.$cmlEmit('play')
+    },
+    pause () {
+      this.$cmlEmit('pause')
+    },
+    timeupdate ({ detail: { currentTime, duration } }) {
+      this.$cmlEmit('timeupdate', {
+        currentTime: +Math.round(currentTime),
+        duration: +Math.round(duration)
+      })
+    },
+    ended () {
+      this.$cmlEmit('ended')
+    },
+    error ({ detail: { code } }) {
+      this.triggerEvent('error', {errMsg: code})
+    }
+  }
+}
+
+export default new Audio();
+</script>
+<style scoped>
+.audio {
+  padding: 0 30cpx;
+  box-sizing: border-box;
+}
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "component": true
+  }
+}
+</script>

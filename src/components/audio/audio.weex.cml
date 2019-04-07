@@ -1,0 +1,224 @@
+<template>
+  <view class="audio">
+    <view class="audio-controls" c-if="{{controls}}">
+      <view class="poster" c-bind:tap="switchPlay">
+        <image class="poster-img" src="{{poster}}"></image>
+        <image class="icon" src="{{status === 'play' ? pauseImg : palyImg}}"></image>  
+      </view>
+      <view class="info">
+        <text class="name">{{name}}</text>
+        <text class="author">{{author}}</text>
+        <text class="time">{{currentTime}}</text>
+      </view>
+    </view>
+    <block c-else/>
+    <origin-video
+      class="video"
+      :loop="loop"
+      :src="src"
+      :play-status="status"
+      @start="onstart"
+      @pause="onpause"
+      @finish="onfinish"
+      @fail="onfail"
+    >
+    </origin-video>
+    <text>
+      {{tip}}
+    </text>
+  </view>
+</template>
+<script>
+const modal = weex.requireModule('modal')
+
+const toast = message => {
+  modal.toast({
+    message,
+    duration: 1,
+  });
+};
+class Audio implements AudioInterface {
+  props = {
+    src: String,
+    name: String,
+    poster: String,
+    author: String,
+    controls: {
+      type: Boolean,
+      default: true
+    },
+    loop: {
+      type: Boolean,
+      default: true
+    }
+  }
+
+  data = {
+    palyImg: require('../../assets/images/component/audio/play.png'),
+    pauseImg: require('../../assets/images/component/audio/pause.png'),
+    timer: null,
+    time: 0,
+    count: 1,
+    tip: '',
+    currentTimeNum: 0,
+    status: 'pause',
+    errorTip: {
+      src: 'src地址不能为空',
+      poster: '封面图不能为空'
+    }
+  }
+
+  computed = {
+    currentTime () {
+      const minute = Math.floor(this.currentTimeNum / 60)
+      const second = this.currentTimeNum % 60
+      return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
+    }
+  }
+
+  methods = {
+    onstart (e) {
+      this.tip = JSON.stringify(e)
+      this.play()
+      // toast('onstart')
+    },
+    onpause () {
+      this.pause()
+    },
+    onfinish () {
+      toast('onfinish')
+      this.ended()
+    },
+    onfail () {
+      toast('onfail')
+    },
+    switchPlay () {
+      this.status = this.status === 'pause' ? 'play' : 'pause'
+    },
+    setInterval () {
+      this.timer = setInterval(this.updateTime, 1000)
+    },
+    clearTimer () {
+      clearInterval(this.timer)
+      this.timer = null
+    },
+    updateTime () {
+      this.count++
+      toast(this.count)
+      this.currentTimeNum = this.count
+      this.$cmlEmit('timeupdate', {
+        currentTime: this.currentTimeNum,
+        duration: 0
+      })
+    },
+    play () {
+      if (this.status) return
+      this.status = 'play'
+      this.setInterval()
+      this.$cmlEmit('play')
+    },
+    ended () {
+      this.clearTimer()
+      this.$cmlEmit('ended')
+    },
+    pause () {
+      this.status = 'pause'
+      this.clearTimer()
+      this.$cmlEmit('pause')
+    },
+    alertTip (tip) {
+      console.error('audio component error: ', tip)
+    },
+    createAudio () {
+      const verification = this.controls ? ['src', 'poster'] : ['src']
+      this.emptyVerification(verification)
+    },
+    emptyVerification (arr) {
+      return arr.every(a => {
+        const bool = !!this.$props[a]
+        !bool && toast(this.errorTip[a])
+        return bool
+      })
+    }
+  }
+  mounted () {
+    this.createAudio()
+  }
+}
+export default new Audio();
+</script>
+<style scoped>
+@import "../../assets/css/var.less";
+.video {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.audio {
+  padding: 30cpx;
+  box-sizing: border-box;
+}
+.audio-controls {
+  display: block;
+  position: relative;
+  padding: 30cpx;
+  height: 180upx;
+  box-sizing: border-box;
+  border: 2cpx solid #eee;
+  border-radius: 8cpx;
+}
+.poster {
+  display: block;
+  position: absolute;
+  top: 30cpx;
+  left: 30cpx;
+  width: 120cpx;
+  height: 120cpx;
+}
+.poster-img {
+  display: block;
+  width: 120cpx;
+  height: 120cpx;
+}
+.icon {
+  position: absolute;
+  top: 30cpx;
+  left: 30cpx;
+  display: block;
+  width: 60cpx;
+  height: 60cpx;
+}
+.info {
+  position: relative;
+  display: block;
+  margin-left: 140cpx;
+}
+
+.name {
+  font-size: 28cpx;
+  color: @color-dark-grey;
+}
+
+.author {
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+
+.time {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80cpx;
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "component": true
+  }
+}
+</script>

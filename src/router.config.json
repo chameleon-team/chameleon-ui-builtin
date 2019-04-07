@@ -57,6 +57,12 @@
       "mock": "index.php"
     },
     {
+      "name": "audio",
+      "url": "/pages/example/audio/audio",
+      "path": "/pages/example/audio/audio",
+      "mock": "index.php"
+    },
+    {
       "name": "video",
       "url": "/pages/example/video/video",
       "path": "/pages/example/video/video",

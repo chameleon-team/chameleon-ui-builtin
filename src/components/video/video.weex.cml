@@ -1,6 +1,5 @@
 <template>
   <origin-video
-      :style="computedStyle"
       :controls="controls"
       :auto-play="autoplay"
       :loop="loop"
@@ -13,6 +12,7 @@
   </origin-video>
 </template>
 <script>
+// :style="computedStyle"
 import {cmlStyleTransfer} from '../../assets/js/utils/utils';
 
  class Video implements VideoInterface {

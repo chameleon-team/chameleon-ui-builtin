@@ -1,0 +1,196 @@
+<template>
+  <view class="audio">
+    <view class="audio-controls" c-if="{{controls}}">
+      <view class="poster" c-bind:tap="switchPlay">
+        <image class="poster-img" src="{{poster}}"></image>
+        <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>  
+      </view>
+      <view class="info">
+        <text class="name">{{name}}</text>
+        <text class="author">{{author}}</text>
+        <text class="time">{{currentTime}}</text>
+      </view>
+    </view>
+    <block c-else/>
+  </view>
+</template>
+<script>
+class Audio implements AudioInterface {
+  props = {
+    src: String,
+    name: String,
+    poster: String,
+    author: String,
+    controls: {
+      type: Boolean,
+      default: true
+    },
+    loop: {
+      type: Boolean,
+      default: true
+    }
+  }
+
+  data = {
+    palyImg: require('../../assets/images/component/audio/play.png'),
+    pauseImg: require('../../assets/images/component/audio/pause.png'),
+    audio: null,
+    timer: null,
+    time: 0,
+    currentTimeNum: 0,
+    status: false,
+    errorTip: {
+      src: 'src地址不能为空',
+      poster: '封面图不能为空'
+    }
+  }
+  watch = {
+    loop (v) {
+      this.audio.loop = v
+    }
+  }
+  computed = {
+    currentTime () {
+      const minute = Math.floor(this.currentTimeNum / 60)
+      const second = this.currentTimeNum % 60
+      return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
+    }
+  }
+
+  methods = {
+    switchPlay () {
+      this.status ? this.pause() : this.play()
+    },
+    setInterval () {
+      this.timer = setInterval(this.updateTime, 1000)
+    },
+    clearTimer () {
+      clearInterval(this.timer)
+      this.timer = null
+    },
+    updateTime () {
+      this.$cmlEmit('timeupdate', {
+        currentTime: this.currentTimeNum,
+        duration: +Math.round(this.audio.duration)
+      })
+      this.audio.ended && this.ended()
+      this.currentTimeNum = +Math.round(this.audio.currentTime)
+    },
+    play () {
+      if (this.status) return
+      this.audio.play().then(() => {
+        this.status = true
+        this.setInterval()
+        this.$cmlEmit('play')
+      }).catch(this.alertTip)
+    },
+    ended () {
+      this.status = false
+      this.clearTimer()
+      this.$cmlEmit('ended')
+    },
+    pause () {
+      this.audio.pause()
+      this.status = false
+      this.clearTimer()
+      this.$cmlEmit('pause')
+    },
+    seek (second) {
+      if (!this.audio.fastSeek) return this.alertTip('该浏览器不支持跳转播放')
+      this.audio.fastSeek(second)
+    },
+    alertTip (tip) {
+      console.error('audio component error: ', tip)
+    },
+    createAudio () {
+      const verification = this.controls ? ['src', 'poster'] : ['src']
+      if (!this.emptyVerification(verification)) return
+      this.audio = new window.Audio(this.src)
+      this.audio.loop = this.loop
+      this.audio.onerror = e => {
+        console.log(e)
+        this.$cmlEmit('error', { errMsg: e })
+      }
+    },
+    emptyVerification (arr) {
+      return arr.every(a => {
+        const bool = !!this.$props[a]
+        !bool && this.alertTip(this.errorTip[a])
+        return bool
+      })
+    }
+  }
+  mounted () {
+    this.createAudio()
+  }
+}
+
+export default new Audio()
+</script>
+<style scoped>
+@import "../../assets/css/var.less";
+.audio {
+  padding: 30cpx;
+  box-sizing: border-box;
+}
+.audio-controls {
+  display: block;
+  position: relative;
+  padding: 30cpx;
+  box-sizing: border-box;
+  border: 2cpx solid #eee;
+  border-radius: 8cpx;
+}
+.poster {
+  display: block;
+  position: relative;
+  width: 120cpx;
+  height: 120cpx;
+  float: left;
+}
+.poster-img {
+  display: block;
+  width: 120cpx;
+  height: 120cpx;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 60cpx;
+  height: 60cpx;
+  transform: translate(-50%, -50%);
+}
+.info {
+  position: relative;
+  display: block;
+  margin-left: 140cpx;
+}
+
+.info .name {
+  font-size: 28cpx;
+  color: @color-dark-grey;
+}
+
+.info .author {
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+
+.time {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100cpx;
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "component": true
+  }
+}
+</script>

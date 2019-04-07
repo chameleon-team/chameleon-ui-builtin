@@ -122,6 +122,7 @@ class Demo {
         open: false,
         pages: [
           routeObj["image"],
+          routeObj["audio"],
           routeObj["video"]
         ],
         src: require(`../../assets/images/component/kind/media.png`)

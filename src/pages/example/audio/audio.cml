@@ -1,0 +1,71 @@
+<template>
+  <c-page title="audio">
+    <c-scroller height="{{-1}}">
+      <c-header title="audio"></c-header>
+      <c-audio
+      src="{{src}}"
+      name="{{name}}"
+      poster="{{poster}}"
+      author="{{author}}"
+      controls="{{controls}}"
+      loop="{{loop}}"
+      c-bind:play="onPlay"
+      c-bind:pause="onPause"
+      c-bind:timeupdate="updateTime"
+      c-bind:ended="ended"
+      c-bind:error="onError"
+      ></c-audio>
+    </c-scroller>
+  </c-page>
+</template>
+<script>
+class Audio {
+  data = {
+    controls: true,
+    poster: 'http://p1.music.126.net/bYTctrjUegSyzDPteIeNOw==/74766790705099.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0',
+    name: '月半小夜曲',
+    author: '李克勤',
+    loop: false,
+    src: require('../../../assets/mp3/ybxyq.mp3'),
+    audio: null
+  }
+
+  methods = {
+    onPlay () {
+      console.log('播放开始了')
+    },
+    onPause () {
+      console.log('暂停了')
+    },
+    ended () {
+      console.log('播放完毕')
+    },
+    updateTime ({ detail: { currentTime, duration } }) {
+      console.log('已播放: ', currentTime, '总时长: ', duration)
+    },
+    onError (e) {
+      console.log('发生错误了')
+      console.log(e)
+    }
+  }
+}
+export default new Audio()
+</script>
+<style scoped>
+
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+      "c-page": "/components/page/page",
+      "c-header": "../../components/header/header",
+      "c-audio": "/components/audio/audio",
+      "c-scroller": "/components/scroller/scroller"
+    },
+    "navigationBarTitleText": "audio",
+    "backgroundTextStyle": "dark",
+    "backgroundColor": "#E2E2E2"
+  }
+}
+</script>

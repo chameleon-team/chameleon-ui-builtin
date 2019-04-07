@@ -1,0 +1,28 @@
+<script cml-type="interface">
+/*
+定义一个inteface用于描述组件的属性和事件
+*/
+type eventDetail = {
+  currentTime: Number,
+  duration: Number
+}
+
+type errorDetail = {
+  errMsg: Number
+}
+
+interface AudioInterface {
+  src: String,
+  name: String,
+  poster: String,
+  author: String,
+  controls: Boolean,
+  loop: Boolean,
+  play(eventDetail: void): void;
+  pause(eventDetail: void): void;
+  timeupdate(eventDetail: eventDetail): void;
+  ended(eventDetail: void): void;
+  error(eventDetail: errorDetail): void;
+}
+
+</script>
