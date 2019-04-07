@@ -40,16 +40,22 @@ const toast = message => {
 class Audio implements AudioInterface {
   props = {
     src: String,
-    name: String,
+    name: {
+      type: String,
+      default: '未知音频'
+    },
     poster: String,
-    author: String,
+    author: {
+      type: String,
+      default: '未知作者'
+    },
     controls: {
       type: Boolean,
-      default: true
+      default: false
     },
     loop: {
       type: Boolean,
-      default: true
+      default: false
     }
   }
 
