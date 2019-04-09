@@ -42,7 +42,6 @@ class Audio implements AudioInterface {
     pauseImg: require('../../assets/images/component/audio/pause.png'),
     audio: null,
     timer: null,
-    time: 0,
     currentTimeNum: 0,
     status: false,
     errorTip: {
@@ -114,7 +113,6 @@ class Audio implements AudioInterface {
       this.audio = new window.Audio(this.src)
       this.audio.loop = this.loop
       this.audio.onerror = e => {
-        console.log(e)
         this.$cmlEmit('error', { errMsg: e })
       }
     },

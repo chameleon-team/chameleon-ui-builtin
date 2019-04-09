@@ -3,7 +3,7 @@
     <view class="audio-controls" c-if="{{controls}}">
       <view class="poster" c-bind:tap="switchPlay">
         <image class="poster-img" src="{{poster}}"></image>
-        <image class="icon" src="{{status === 'play' ? pauseImg : palyImg}}"></image>  
+        <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>  
       </view>
       <view class="info">
         <text class="name">{{name}}</text>
@@ -12,31 +12,11 @@
       </view>
     </view>
     <block c-else/>
-    <origin-video
-      class="video"
-      :loop="loop"
-      :src="src"
-      :play-status="status"
-      @start="onstart"
-      @pause="onpause"
-      @finish="onfinish"
-      @fail="onfail"
-    >
-    </origin-video>
-    <text>
-      {{tip}}
-    </text>
+    <web style="width: 700px; height: 200px" src="../audio.html"></web>
   </view>
 </template>
 <script>
-const modal = weex.requireModule('modal')
 
-const toast = message => {
-  modal.toast({
-    message,
-    duration: 1,
-  });
-};
 class Audio implements AudioInterface {
   props = {
     src: String,
@@ -62,18 +42,20 @@ class Audio implements AudioInterface {
   data = {
     palyImg: require('../../assets/images/component/audio/play.png'),
     pauseImg: require('../../assets/images/component/audio/pause.png'),
+    audio: null,
     timer: null,
-    time: 0,
-    count: 1,
-    tip: '',
     currentTimeNum: 0,
-    status: 'pause',
+    status: false,
     errorTip: {
       src: 'src地址不能为空',
       poster: '封面图不能为空'
     }
   }
-
+  watch = {
+    loop (v) {
+      this.audio.loop = v
+    }
+  }
   computed = {
     currentTime () {
       const minute = Math.floor(this.currentTimeNum / 60)
@@ -83,23 +65,8 @@ class Audio implements AudioInterface {
   }
 
   methods = {
-    onstart (e) {
-      this.tip = JSON.stringify(e)
-      this.play()
-      // toast('onstart')
-    },
-    onpause () {
-      this.pause()
-    },
-    onfinish () {
-      toast('onfinish')
-      this.ended()
-    },
-    onfail () {
-      toast('onfail')
-    },
     switchPlay () {
-      this.status = this.status === 'pause' ? 'play' : 'pause'
+      this.status ? this.pause() : this.play()
     },
     setInterval () {
       this.timer = setInterval(this.updateTime, 1000)
@@ -109,40 +76,53 @@ class Audio implements AudioInterface {
       this.timer = null
     },
     updateTime () {
-      this.count++
-      toast(this.count)
-      this.currentTimeNum = this.count
       this.$cmlEmit('timeupdate', {
         currentTime: this.currentTimeNum,
-        duration: 0
+        duration: +Math.round(this.audio.duration)
       })
+      this.audio.ended && this.ended()
+      this.currentTimeNum = +Math.round(this.audio.currentTime)
     },
     play () {
       if (this.status) return
-      this.status = 'play'
-      this.setInterval()
-      this.$cmlEmit('play')
+      this.audio.play().then(() => {
+        this.status = true
+        this.setInterval()
+        this.$cmlEmit('play')
+      }).catch(this.alertTip)
     },
     ended () {
+      this.status = false
       this.clearTimer()
       this.$cmlEmit('ended')
     },
     pause () {
-      this.status = 'pause'
+      this.audio.pause()
+      this.status = false
       this.clearTimer()
       this.$cmlEmit('pause')
+    },
+    seek (second) {
+      if (!this.audio.fastSeek) return this.alertTip('该浏览器不支持跳转播放')
+      this.audio.fastSeek(second)
     },
     alertTip (tip) {
       console.error('audio component error: ', tip)
     },
     createAudio () {
       const verification = this.controls ? ['src', 'poster'] : ['src']
-      this.emptyVerification(verification)
+      if (!this.emptyVerification(verification)) return
+      this.audio = new window.Audio(this.src)
+      this.audio.loop = this.loop
+      this.audio.onerror = e => {
+        console.log(e)
+        this.$cmlEmit('error', { errMsg: e })
+      }
     },
     emptyVerification (arr) {
       return arr.every(a => {
         const bool = !!this.$props[a]
-        !bool && toast(this.errorTip[a])
+        !bool && this.alertTip(this.errorTip[a])
         return bool
       })
     }
@@ -151,16 +131,11 @@ class Audio implements AudioInterface {
     this.createAudio()
   }
 }
-export default new Audio();
+
+export default new Audio()
 </script>
 <style scoped>
 @import "../../assets/css/var.less";
-.video {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
 .audio {
   padding: 30cpx;
   box-sizing: border-box;
@@ -220,7 +195,6 @@ export default new Audio();
   color: @color-light-grey;
 }
 </style>
-
 <script cml-type="json">
 {
   "base": {
