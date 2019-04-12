@@ -1,0 +1,52 @@
+<template>
+  <origin-image
+      style="{{computedStyle}}"
+      src="{{src}}"
+      onLoad="onload"
+      onError="onerror"
+  >
+  </origin-image>
+</template>
+<script>
+import cml from 'chameleon-api'
+ class Image implements ImageInterface {
+    props = {
+      src: {
+        type: String,
+        default: ''
+      },
+      cstyle: {
+        type: String,
+        default: ''
+      }
+    }
+    computed = {
+      computedStyle() {
+        // props 必须经过计算属性，否则没有经过 cpx 转换
+        return this.cstyle
+      }
+    }
+    methods = {
+      onload (e) {
+        const height = e.detail.height
+        const width = e.detail.width
+        this.$cmlEmit('load', {
+          height,
+          width
+        })
+      },
+      onerror (e) {
+        this.$cmlEmit('error', {
+          errMsg: `GET ${this.src} 404 (Not Found)`
+        })
+      }
+    }
+  }
+  export default new Image();
+</script>
+<style scoped>
+</style>
+<script cml-type="json">
+{
+}
+</script>
