@@ -28,13 +28,16 @@ import cml from 'chameleon-api'
     }
     methods = {
       onload (e) {
+        const height = e.detail.height
+        const width = e.detail.width
         this.$cmlEmit('load', {
-          ...e.detail
+          height,
+          width
         })
       },
       onerror (e) {
         this.$cmlEmit('error', {
-          ...e.detail
+          errMsg: `GET ${this.src} 404 (Not Found)`
         })
       }
     }
