@@ -10,7 +10,7 @@
 </view>
 </template>
 <script>
-class Radio  {
+class Radio implements RadioInterface  {
   props = {
     checked: {
       type: Boolean,
