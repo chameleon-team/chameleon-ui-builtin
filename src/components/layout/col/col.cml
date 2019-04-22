@@ -4,7 +4,7 @@
 </view>
 </template>
 <script>
-  class CCol   {
+  class CCol implements ColInterface   {
     props = {
       width: {
         type: Number,
