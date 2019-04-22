@@ -84,13 +84,19 @@ export default {
       if (!val) return
       this.sizeInitAndChange()
     },
-    scrollTop (val) {
-      if (!this.scroll) return
-      this.scroll.scrollTo(0, -val, 1000)
+    scrollTop: {
+      handler(val) {
+        if (!this.scroll) return
+        this.scroll.scrollTo(0, -val, 1000)
+      },
+      immediate: true
     },
-    scrollLeft (val) {
-      if (!this.scroll) return
-      this.scroll.scrollTo(-val, 0, 1000)
+    scrollLeft: {
+      handler (val) {
+        if (!this.scroll) return
+        this.scroll.scrollTo(-val, 0, 1000)
+      },
+      immediate: true
     },
     toElement (val) {
       this.collectSlotRefs(this.$slots.default)
@@ -250,16 +256,6 @@ export default {
 
       this.initOptions()
       this.scroll = new CScroll(wrapper, this.scrollOptions)
-
-      if (this.scrollLeft && this.direction === 'horizontal') {
-        // 初始化横向滚动位置
-        this.scroll.scrollTo(-this.scrollLeft, 0, 1000)
-      }
-
-      if (this.scrollTop && this.direction === 'vertical') {
-        // 初始化纵向滚动位置
-        this.scroll.scrollTo(-this.scrollTop, 0, 1000)
-      }
 
       // 监听事件
       // 上拉
