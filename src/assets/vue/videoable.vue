@@ -1,5 +1,7 @@
 <template>
   <html:video
+    id="cmlVideo"
+    ref="cmlVideo"
     :style="computedStyle"
     :controls="controls"
     :autoplay="autoplay"
