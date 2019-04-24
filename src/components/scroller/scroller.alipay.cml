@@ -56,7 +56,9 @@
       }
     }
     data = {
-      cmtStyle: ''
+      cmtStyle: '',
+      scrollTopPx: 0,
+      scrollLeftPx: 0
     }
 
     computed = {
@@ -72,13 +74,14 @@
         }
         // 没有传递的情况
         return this.cmtStyle + this.cstyle;
+      }
+    }
+    watch = {
+      scrollTop(v) {
+        this.scrollTopPx = cml.cpx2px(v);
       },
-      scrollTopPx () {
-        // scroll-top仅支持px
-        return cml.cpx2px(this.scrollTop)
-      },
-      scrollLeftPx () {
-        return cml.cpx2px(this.scrollLeft)
+      scrollLeft(v) {
+        this.scrollLeftPx = cml.cpx2px(v);
       }
     }
     methods = {
@@ -129,6 +132,9 @@
             }
           });
         }
+        
+        this.scrollLeftPx = cml.cpx2px(this.scrollLeft);
+        this.scrollTopPx = cml.cpx2px(this.scrollTop);
       }, 200)
     }
   }
