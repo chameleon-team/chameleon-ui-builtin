@@ -173,7 +173,7 @@ class Carousel implements CCarouselInterface {
       }
     },
     current(v) {
-      if (v !== this.data.currentPage && v !== this.s_data.currentPage) {
+      if (v !== this.data.currentPage) {
         this.slide(v);
       }
     }
