@@ -36,7 +36,7 @@
       },
       bounce: {
         type: Boolean,
-        default: true
+        default: false
       },
       //-1表示占用剩余高度或者宽度
       height: {
@@ -130,6 +130,15 @@
             this.cmtStyle = `width:${width}cpx;white-space:nowrap;`
           }
         }
+
+        if (this.scrollDirection === 'vertical' && this.scrollTop) {
+          this.scrollTo(this.scrollTop)
+        }
+
+        if (this.scrollDirection === 'horizontal' && this.scrollLeft) {
+          this.scrollTo(this.scrollLeft)
+        }
+
       }, 200)
     }
 

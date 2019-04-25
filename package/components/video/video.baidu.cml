@@ -1,14 +1,15 @@
 <template>
   <video
-      style="{{computedStyle}}"
-      controls="{{controls}}"
-      autoplay="{{autoplay}}"
-      loop="{{loop}}"
-      src="{{src}}"
-      c-bind:play="onstart"
-      c-bind:pause="onpause"
-      c-bind:ended="onfinish"
-      c-bind:error="onfail"
+    id="cmlVideo"
+    style="{{computedStyle}}"
+    controls="{{controls}}"
+    autoplay="{{autoplay}}"
+    loop="{{loop}}"
+    src="{{src}}"
+    c-bind:play="onstart"
+    c-bind:pause="onpause"
+    c-bind:ended="onfinish"
+    c-bind:error="onfail"
   >
   </video>
 </template>
