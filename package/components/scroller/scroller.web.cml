@@ -27,7 +27,7 @@
       },
       bounce: {
         type: Boolean,
-        default: true
+        default: false
       },
       cstyle: {
         type: String,
