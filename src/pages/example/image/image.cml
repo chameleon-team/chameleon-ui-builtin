@@ -2,8 +2,7 @@
 <c-page title="image">
     <view class="container">
         <c-header title="image" desc="这是一张本地图片"></c-header>
-        <c-image src="{{imageSrc}}" cstyle="width: 682cpx;height:600cpx;" c-bind:load="imageLoad" c-bind:error="imageError"></c-image>
-        <c-image src="https://cn.vuejs.org/images/logo.png1" cstyle="width: 682cpx;height:600cpx;" c-bind:load="imageLoad" c-bind:error="imageError"></c-image>
+        <image src="{{imageSrc}}" style="width: 682cpx;height:600cpx;" c-bind:load="imageLoad" c-bind:error="imageError"></image>
     </view>
 </c-page>
 </template>
@@ -14,10 +13,8 @@ class Image {
   }
   methods = {
       imageLoad(e){
-        console.log('imageLoad e', e)
       },
       imageError(e){
-        console.log('imageError e', e)
       }
   }
 }
@@ -37,8 +34,7 @@ export default new Image();
     "base": {
         "usingComponents": {
             "c-page": "/components/page/page",
-            "c-header": "../../components/header/header",
-            "c-image": "/components/image/image"
+            "c-header": "../../components/header/header"
         },
         "navigationBarTitleText": "image",
         "backgroundTextStyle": "dark",
