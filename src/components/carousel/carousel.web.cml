@@ -382,7 +382,7 @@ class Carousel implements CCarouselInterface {
   beforeDestroy () {
     this.autoplay && this.clock().stop(this)
     if (this.options.preventDocumentMove === true) {
-      document.removeEventListener('touchmove', this.preventDefault())
+      document.removeEventListener('touchmove', this.preventDefault)
     }
     document.removeEventListener('visibilitychange', this.visibilitychange, false)
     window.removeEventListener('resize', this.resize)
