@@ -428,7 +428,7 @@ class Carousel implements CCarouselInterface {
       }
       // 阻止页面滚动
       if (this.options.preventDocumentMove === true) {
-        document.addEventListener('touchmove', that.preventDefault)
+        document.addEventListener('touchmove', that.preventDefault, { passive: false })
       }
       if (e.type === 'touchstart') {
         if (e.touches.length > 1) {
