@@ -31,65 +31,6 @@ class Audio implements AudioInterface {
 export default new Audio()
 </script>
 <style scoped>
-@import "../../assets/css/var.less";
-.audio {
-  padding: 30cpx;
-  box-sizing: border-box;
-}
-.audio-controls {
-  display: block;
-  position: relative;
-  padding: 30cpx;
-  height: 180upx;
-  box-sizing: border-box;
-  border: 2cpx solid #eee;
-  border-radius: 8cpx;
-}
-.poster {
-  display: block;
-  position: absolute;
-  top: 30cpx;
-  left: 30cpx;
-  width: 120cpx;
-  height: 120cpx;
-}
-.poster-img {
-  display: block;
-  width: 120cpx;
-  height: 120cpx;
-}
-.icon {
-  position: absolute;
-  top: 30cpx;
-  left: 30cpx;
-  display: block;
-  width: 60cpx;
-  height: 60cpx;
-}
-.info {
-  position: relative;
-  display: block;
-  margin-left: 140cpx;
-}
-
-.name {
-  font-size: 28cpx;
-  color: @color-dark-grey;
-}
-
-.author {
-  font-size: 24cpx;
-  color: @color-light-grey;
-}
-
-.time {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80cpx;
-  font-size: 24cpx;
-  color: @color-light-grey;
-}
 </style>
 <script cml-type="json">
 {
