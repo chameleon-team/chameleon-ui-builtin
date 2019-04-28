@@ -75,11 +75,10 @@ class Checkbox implements CheckboxInterface   {
       if (this.disabled) return;
       this.innerChecked = !this.innerChecked
       let value = {
-        value: this.innerChecked
+        value: this.innerChecked,
+        index: this.groupIndex
       }
-      if (this.groupIndex !== -1) {
-        value.index = this.groupIndex
-      }
+
       this.$cmlEmit('changeevent', value);
       this.$cmlEmit('change', value);
     }

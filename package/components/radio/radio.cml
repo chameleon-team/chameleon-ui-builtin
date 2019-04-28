@@ -82,11 +82,10 @@ class Radio implements RadioInterface  {
       if (this.disabled) return;
       this.innerChecked = !this.innerChecked
       let value = {
-        value: this.innerChecked
+        value: this.innerChecked,
+        index: this.groupIndex
       }
-      if (this.groupIndex !== -1) {
-        value.index = this.groupIndex
-      }
+  
       this.$cmlEmit('change', value);
       this.$cmlEmit('changeevent', value);
     }
