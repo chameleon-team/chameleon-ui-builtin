@@ -1,6 +1,7 @@
 <script cml-type="interface">
 type EventDetail = {
-  value: Boolean
+  value: Boolean,
+  index: Number
 }
 interface RadioInterface {
   checked: Boolean,
