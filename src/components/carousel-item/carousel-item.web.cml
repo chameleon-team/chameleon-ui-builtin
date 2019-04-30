@@ -15,9 +15,11 @@
     props =  {
       index: {
         type: Number,
+        default: 0
       },
       pageLength: {
         type: Number,
+        default: 0
       },
     }
     name = 'slideritem'
