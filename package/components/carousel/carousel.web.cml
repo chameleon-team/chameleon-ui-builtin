@@ -171,6 +171,11 @@ class Carousel implements CCarouselInterface {
         that.route = true
         that.autoplay && that.clock().stop(that)
       }
+    },
+    current(v) {
+      if (v !== this.data.currentPage) {
+        this.slide(v);
+      }
     }
   }
   computed = {

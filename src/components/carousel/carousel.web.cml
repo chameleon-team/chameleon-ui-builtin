@@ -5,7 +5,6 @@
         style="{{styleStr}}"
         c-bind:touchmove="swipeMove"
         c-bind:touchstart="swipeStart"
-        c-bind:touchend="swipeEnd"
         c-bind:mousedown="swipeStart"
         c-bind:mouseup="swipeEnd"
         c-bind:mousemove="swipeMove"
@@ -104,7 +103,9 @@ class Carousel implements CCarouselInterface {
   name =  'slider'
   data = {
     pages: [],
-    options: {},
+    options: {
+      preventDocumentMove: true
+    },
     data: {
       poswidth: 0,
       posheight: 0,
@@ -170,6 +171,11 @@ class Carousel implements CCarouselInterface {
       } else {
         that.route = true
         that.autoplay && that.clock().stop(that)
+      }
+    },
+    current(v) {
+      if (v !== this.data.currentPage) {
+        this.slide(v);
       }
     }
   }
@@ -376,7 +382,7 @@ class Carousel implements CCarouselInterface {
   beforeDestroy () {
     this.autoplay && this.clock().stop(this)
     if (this.options.preventDocumentMove === true) {
-      document.removeEventListener('touchmove', this.preventDefault())
+      document.removeEventListener('touchmove', this.preventDefault)
     }
     document.removeEventListener('visibilitychange', this.visibilitychange, false)
     window.removeEventListener('resize', this.resize)
@@ -422,7 +428,7 @@ class Carousel implements CCarouselInterface {
       }
       // 阻止页面滚动
       if (this.options.preventDocumentMove === true) {
-        document.addEventListener('touchmove', that.preventDefault(e))
+        document.addEventListener('touchmove', that.preventDefault, { passive: false })
       }
       if (e.type === 'touchstart') {
         if (e.touches.length > 1) {
@@ -436,6 +442,7 @@ class Carousel implements CCarouselInterface {
           this.data.start.y = e._originEvent.targetTouches[0].clientY
           this.data.end.x = e._originEvent.targetTouches[0].clientX
           this.data.end.y = e._originEvent.targetTouches[0].clientY
+          document.addEventListener('touchend', this.swipeEnd);
         }
       } else {
         this.s_data.tracking = true
@@ -507,6 +514,7 @@ class Carousel implements CCarouselInterface {
       }
     },
     swipeEnd (e) {
+      document.removeEventListener('touchend', this.swipeEnd);
       this.s_data.e = e
       this.s_data.tracking = false
       let now = new Date().getTime()
@@ -524,7 +532,7 @@ class Carousel implements CCarouselInterface {
       }
       // 解除阻止
       if (this.options.preventDocumentMove === true) {
-        document.removeEventListener('touchmove', this.preventDefault(e))
+        document.removeEventListener('touchmove', this.preventDefault)
       }
       if (deltaTime > this.s_data.thresholdTime) {
         this.slide(currentPage)

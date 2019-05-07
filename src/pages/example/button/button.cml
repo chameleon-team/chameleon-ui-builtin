@@ -60,7 +60,7 @@
       </view>
       <view class="button-list button-list-auto">
         <text class="button-text">stretch && white && disabled</text>
-        <c-button c-bind:onclick='testclick' size="stretch" disabled="{{true}}" type="white">确定</c-button>
+        <c-button c-bind:onclick='testclick' size="stretch" disabled="{{true}}" type="white"><text>确定</text></c-button>
 
         <text class="button-text">auto</text>
         <c-button

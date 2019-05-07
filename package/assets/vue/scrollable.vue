@@ -24,7 +24,7 @@ export default {
     },
     bounce: {
       type: Boolean,
-      default: true
+      default: false
     },
     cstyle: {
       type: String,
@@ -84,11 +84,11 @@ export default {
       if (!val) return
       this.sizeInitAndChange()
     },
-    scrollTop (val) {
+    scrollTop(val) {
       if (!this.scroll) return
       this.scroll.scrollTo(0, -val, 1000)
     },
-    scrollLeft (val) {
+    scrollLeft(val) {
       if (!this.scroll) return
       this.scroll.scrollTo(-val, 0, 1000)
     },
@@ -250,6 +250,14 @@ export default {
 
       this.initOptions()
       this.scroll = new CScroll(wrapper, this.scrollOptions)
+
+      if (this.scrollDirection === 'vertical' && this.scrollTop) {
+        this.scroll.scrollTo(0, -this.scrollTop, 1000)
+      }
+
+      if (this.scrollDirection === 'horizontal' && this.scrollLeft) {
+        this.scroll.scrollTo(-this.scrollLeft, 0, 1000)
+      }
 
       // 监听事件
       // 上拉
