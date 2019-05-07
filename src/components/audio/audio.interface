@@ -18,6 +18,7 @@ interface AudioInterface {
   author: String,
   controls: Boolean,
   loop: Boolean,
+  autoplay: Boolean,
   play(eventDetail: void): void;
   pause(eventDetail: void): void;
   timeupdate(eventDetail: eventDetail): void;

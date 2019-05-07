@@ -24,6 +24,10 @@ class Audio implements AudioInterface {
     loop: {
       type: Boolean,
       default: false
+    },
+    autoplay: {
+      type: Boolean,
+      default: false
     }
   }
 }

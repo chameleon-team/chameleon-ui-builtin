@@ -7,6 +7,7 @@
       name="{{name}}"
       poster="{{poster}}"
       author="{{author}}"
+      autoplay="{{autoplay}}"
       controls="{{controls}}"
       loop="{{loop}}"
       c-bind:play="onPlay"
@@ -26,6 +27,7 @@ class Audio {
     name: '月半小夜曲',
     author: '李克勤',
     loop: false,
+    autoplay: true,
     src: require('../../../assets/mp3/ybxyq.mp3'),
     audio: null
   }

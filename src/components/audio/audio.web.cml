@@ -3,7 +3,7 @@
     <view class="audio-controls" c-if="{{controls}}">
       <view class="poster" c-bind:tap="switchPlay">
         <image class="poster-img" src="{{poster}}"></image>
-        <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>  
+        <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>
       </view>
       <view class="info">
         <text class="name">{{name}}</text>
@@ -32,6 +32,10 @@ class Audio implements AudioInterface {
       default: false
     },
     loop: {
+      type: Boolean,
+      default: false
+    },
+    autoplay: {
       type: Boolean,
       default: false
     }
@@ -115,6 +119,7 @@ class Audio implements AudioInterface {
       this.audio.onerror = e => {
         this.$cmlEmit('error', { errMsg: e })
       }
+      this.autoplay && this.play()
     },
     emptyVerification (arr) {
       return arr.every(a => {
@@ -138,6 +143,7 @@ export default new Audio()
   box-sizing: border-box;
 }
 .audio-controls {
+  background-color: #fff;
   display: block;
   position: relative;
   padding: 30cpx;
