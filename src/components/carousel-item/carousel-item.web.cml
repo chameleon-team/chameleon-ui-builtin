@@ -1,4 +1,5 @@
 <template>
+<view>
     <view 
       c-bind:mousedown="touchStart"
       c-bind:mouseup="touchEnd"
@@ -9,6 +10,7 @@
     >
       <slot></slot>
     </view>
+  </view>
 </template>
 <script>
   class CCarouselItem implements CCarouselItemInterface {
