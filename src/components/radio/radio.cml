@@ -1,5 +1,5 @@
 <template>
-<view class="cml-radio">
+<view class="cml-radio" style="{{cstyle}}">
   <view class="cml-radio-wrap" c-bind:tap="changeSelect">
     <view class="cml-radio-select" style="{{ radioStyle }}">
       <view class="{{ radioClass }}" style="{{ radioInnerStyle }}">
@@ -34,6 +34,10 @@ class Radio  {
     color: {
       type: String,
       default: '#fc9153'
+    },
+    cstyle: {
+      type: String,
+      default: ''
     }
   }
   data = {
