@@ -1,5 +1,5 @@
 <template>
-<view class="cml-radio">
+<view class="cml-radio" style="{{computedCstyle}}">
   <view class="cml-radio-wrap" c-bind:tap="changeSelect">
     <view class="cml-radio-select" style="{{ radioStyle }}">
       <view class="{{ radioClass }}" style="{{ radioInnerStyle }}">
@@ -34,6 +34,10 @@ class Radio  {
     color: {
       type: String,
       default: '#fc9153'
+    },
+    cstyle: {
+      type: String,
+      default: ''
     }
   }
   data = {
@@ -68,6 +72,10 @@ class Radio  {
         return  this.innerChecked? 'cml-radio-selected-disabled': 'cml-radio-unselect-disabled';
       }
       return this.innerChecked? 'cml-radio-selected': 'cml-radio-unselect';
+    },
+    computedCstyle() {
+      //小程序端转cpx
+      return this.cstyle;
     }
   }
 
