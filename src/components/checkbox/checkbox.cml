@@ -1,5 +1,5 @@
 <template>
-<view class="cml-checkbox" style="{{cstyle}}">
+<view class="cml-checkbox" style="{{computedCstyle}}">
   <view class="cml-checkbox-wrap" c-bind:tap="changeCheck">
     <view class="cml-checkbox-check" style="{{ checkStyle }}">
       <view class="{{ checkClass }}">
@@ -73,6 +73,9 @@ class Checkbox   {
       }
       return this.innerChecked? 'cml-checkbox-checked': 'cml-checkbox-uncheck';
     },
+    computedCstyle() {
+      return this.cstyle;
+    }
   }
 
   watch  = {
