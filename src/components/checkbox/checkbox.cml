@@ -1,5 +1,5 @@
 <template>
-<view class="cml-checkbox">
+<view class="cml-checkbox" style="{{computedCstyle}}">
   <view class="cml-checkbox-wrap" c-bind:tap="changeCheck">
     <view class="cml-checkbox-check" style="{{ checkStyle }}">
       <view class="{{ checkClass }}">
@@ -31,6 +31,18 @@ class Checkbox   {
     groupIndex: {
       type: Number,
       default: -1
+    },
+    checkedIcon: {
+      type: String,
+      default: ''
+    },
+    uncheckIcon: {
+      type: String,
+      default: ''
+    },
+    cstyle: {
+      type: String,
+      default: ''
     }
   }
   data = {
@@ -61,11 +73,20 @@ class Checkbox   {
       }
       return this.innerChecked? 'cml-checkbox-checked': 'cml-checkbox-uncheck';
     },
+    computedCstyle() {
+      return this.cstyle;
+    }
   }
 
   watch  = {
     checked(newChecked) {
       this.innerChecked = newChecked;
+    },
+    uncheckIcon() {
+      this.initImg();
+    },
+    checkedIcon() {
+      this.initImg();
     }
   }
 
@@ -81,12 +102,24 @@ class Checkbox   {
       }
       this.$cmlEmit('changeevent', value);
       this.$cmlEmit('change', value);
+    },
+    initImg() {
+      if (this.uncheckIcon) {
+        this.uncheckImg = this.uncheckIcon;
+      }
+      if (this.checkedIcon) {
+        this.checkedImg = this.checkedIcon;
+      }
     }
   }
 
   created() {
     let { checked } = this
     this.innerChecked = checked
+  }
+
+  mounted() {
+    this.initImg();
   }
 }
 
