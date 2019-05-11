@@ -14,7 +14,7 @@ type errorDetail = {
 interface AudioInterface {
   src: String,
   name: String,
-  poster: String,
+  poster: String || Nullable,
   author: String,
   controls: Boolean,
   loop: Boolean,

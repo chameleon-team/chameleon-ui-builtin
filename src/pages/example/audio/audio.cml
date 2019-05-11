@@ -2,10 +2,10 @@
   <c-page title="audio">
     <c-scroller height="{{-1}}">
       <c-header title="audio"></c-header>
+      <!-- poster="{{poster}}" -->
       <c-audio
       src="{{src}}"
       name="{{name}}"
-      poster="{{poster}}"
       author="{{author}}"
       autoplay="{{autoplay}}"
       controls="{{controls}}"
@@ -23,7 +23,6 @@
 class Audio {
   data = {
     controls: true,
-    poster: '',
     // poster: 'http://p1.music.126.net/bYTctrjUegSyzDPteIeNOw==/74766790705099.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0',
     name: '月半小夜曲',
     author: '李克勤',
