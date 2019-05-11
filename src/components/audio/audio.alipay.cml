@@ -1,18 +1,17 @@
 <template>
   <view class="audio">
-    <origin-audio
-      poster="{{poster}}"
-      name="{{name}}"
-      author="{{author}}"
-      src="{{src}}"
-      controls="{{controls}}"
-      loop="{{loop}}"
-      bindplay="play"
-      bindpause="pause"
-      bindtimeupdate="timeupdate"
-      bindended="ended"
-      binderror="error"
-    ></origin-audio>
+    <view class="audio-controls" c-if="{{controls}}">
+      <view class="poster" c-bind:tap="switchPlay">
+        <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
+        <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>
+      </view>
+      <view class="info">
+        <text class="name">{{name}}</text>
+        <text class="author">{{author}}</text>
+        <text class="time">{{currentTime}}</text>
+      </view>
+    </view>
+    <block c-else/>
   </view>
 </template>
 <script>
@@ -42,34 +41,152 @@ class Audio implements AudioInterface {
     }
   }
 
+  data = {
+    palyImg: require('../../assets/images/component/audio/play.png'),
+    pauseImg: require('../../assets/images/component/audio/pause.png'),
+    audio: null,
+    currentTimeNum: 0,
+    status: false,
+    errorTip: {
+      src: 'src地址不能为空',
+      poster: '封面图不能为空'
+    }
+  }
+  watch = {
+    loop (v) {
+      this.audio.loop = v
+    }
+  }
+  computed = {
+    currentTime () {
+      const minute = Math.floor(this.currentTimeNum / 60)
+      const second = this.currentTimeNum % 60
+      return `${minute < 10 ? '0' + minute : minute}:${second < 10 ? '0' + second : second}`
+    }
+  }
+
   methods = {
-    play () {
-      this.$cmlEmit('play')
+    switchPlay () {
+      this.status ? this.pause() : this.play()
     },
-    pause () {
-      this.$cmlEmit('pause')
-    },
-    timeupdate ({ detail: { currentTime, duration } }) {
+    updateTime () {
+      this.currentTimeNum = +Math.round(this.audio.currentTime)
       this.$cmlEmit('timeupdate', {
-        currentTime: +Math.round(currentTime),
-        duration: +Math.round(duration)
+        currentTime: this.currentTimeNum,
+        duration: +Math.round(this.audio.duration)
       })
     },
+    play () {
+      if (this.status) return
+      this.audio.play()
+      this.status = true
+      this.$cmlEmit('play')
+    },
     ended () {
+      this.status = false
       this.$cmlEmit('ended')
     },
-    error ({ detail: { code } }) {
-      this.triggerEvent('error', {errMsg: code})
+    pause () {
+      this.audio.pause()
+      this.status = false
+      this.$cmlEmit('pause')
+    },
+    seek (second) {
+      this.audio.seek(second)
+    },
+    alertTip (tip) {
+      console.error('audio component error: ', tip)
+    },
+    createAudio () {
+      if (!this.emptyVerification(['src'])) return
+      this.audio = my.createInnerAudioContext()
+      console.log(this.audio)
+      // this.audio.src = this.src
+      // this.audio.loop = this.loop
+      // this.audio.volume = 3
+      // this.audio.onTimeUpdate(this.updateTime.bind(this))
+      // this.audio.onEnded(this.ended.bind(this))
+      // this.audio.onError(e => {
+      //   this.$cmlEmit('error', { errMsg: e })
+      // })
+      // this.autoplay && this.audio.onCanplay(this.play.bind(this))
+    },
+    emptyVerification (arr) {
+      return arr.every(a => {
+        const bool = !!this[a]
+        !bool && this.alertTip(this.errorTip[a])
+        return bool
+      })
     }
+  }
+  mounted () {
+    console.log(my)
+    this.createAudio()
   }
 }
 
-export default new Audio();
+export default new Audio()
 </script>
 <style scoped>
+@import "../../assets/css/var.less";
 .audio {
-  padding: 0 30cpx;
+  padding: 30cpx;
   box-sizing: border-box;
+}
+.audio-controls {
+  background-color: #fff;
+  display: block;
+  position: relative;
+  padding: 30cpx;
+  box-sizing: border-box;
+  border: 2cpx solid #eee;
+  border-radius: 8cpx;
+}
+.poster {
+  display: block;
+  position: relative;
+  width: 120cpx;
+  height: 120cpx;
+  float: left;
+  background-color: #eee;
+}
+.poster-img {
+  display: block;
+  width: 120cpx;
+  height: 120cpx;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 60cpx;
+  height: 60cpx;
+  transform: translate(-50%, -50%);
+}
+.info {
+  position: relative;
+  display: block;
+  margin-left: 140cpx;
+}
+
+.info .name {
+  font-size: 28cpx;
+  color: @color-dark-grey;
+}
+
+.info .author {
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+
+.time {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100cpx;
+  font-size: 24cpx;
+  color: @color-light-grey;
 }
 </style>
 <script cml-type="json">

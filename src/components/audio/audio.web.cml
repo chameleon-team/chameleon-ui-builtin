@@ -2,7 +2,7 @@
   <view class="audio">
     <view class="audio-controls" c-if="{{controls}}">
       <view class="poster" c-bind:tap="switchPlay">
-        <image class="poster-img" src="{{poster}}"></image>
+        <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
         <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>
       </view>
       <view class="info">
@@ -17,7 +17,10 @@
 <script>
 class Audio implements AudioInterface {
   props = {
-    src: String,
+    src: {
+      type: String,
+      default: ''
+    },
     name: {
       type: String,
       default: '未知音频'
@@ -45,7 +48,6 @@ class Audio implements AudioInterface {
     palyImg: require('../../assets/images/component/audio/play.png'),
     pauseImg: require('../../assets/images/component/audio/pause.png'),
     audio: null,
-    timer: null,
     currentTimeNum: 0,
     status: false,
     errorTip: {
@@ -70,13 +72,6 @@ class Audio implements AudioInterface {
     switchPlay () {
       this.status ? this.pause() : this.play()
     },
-    setInterval () {
-      this.timer = setInterval(this.updateTime, 1000)
-    },
-    clearTimer () {
-      clearInterval(this.timer)
-      this.timer = null
-    },
     updateTime () {
       this.$cmlEmit('timeupdate', {
         currentTime: this.currentTimeNum,
@@ -89,19 +84,16 @@ class Audio implements AudioInterface {
       if (this.status) return
       this.audio.play().then(() => {
         this.status = true
-        this.setInterval()
         this.$cmlEmit('play')
       }).catch(this.alertTip)
     },
     ended () {
       this.status = false
-      this.clearTimer()
       this.$cmlEmit('ended')
     },
     pause () {
       this.audio.pause()
       this.status = false
-      this.clearTimer()
       this.$cmlEmit('pause')
     },
     seek (second) {
@@ -112,13 +104,13 @@ class Audio implements AudioInterface {
       console.error('audio component error: ', tip)
     },
     createAudio () {
-      const verification = this.controls ? ['src', 'poster'] : ['src']
-      if (!this.emptyVerification(verification)) return
+      if (!this.emptyVerification(['src'])) return
       this.audio = new window.Audio(this.src)
       this.audio.loop = this.loop
       this.audio.onerror = e => {
         this.$cmlEmit('error', { errMsg: e })
       }
+      this.audio.ontimeupdate = this.updateTime
       this.autoplay && this.play()
     },
     emptyVerification (arr) {
@@ -157,6 +149,7 @@ export default new Audio()
   width: 120cpx;
   height: 120cpx;
   float: left;
+  background-color: #eee;
 }
 .poster-img {
   display: block;

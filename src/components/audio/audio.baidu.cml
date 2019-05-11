@@ -2,7 +2,7 @@
   <view class="audio">
     <view class="audio-controls" c-if="{{controls}}">
       <view class="poster" c-bind:tap="switchPlay">
-        <image class="poster-img" src="{{poster}}"></image>
+        <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
         <image class="icon" src="{{status ? pauseImg : palyImg}}"></image>
       </view>
       <view class="info">
@@ -98,8 +98,7 @@ class Audio implements AudioInterface {
       console.error('audio component error: ', tip)
     },
     createAudio () {
-      const verification = this.controls ? ['src', 'poster'] : ['src']
-      if (!this.emptyVerification(verification)) return
+      if (!this.emptyVerification(['src'])) return
       this.audio = swan.createInnerAudioContext()
       this.audio.src = this.src
       this.audio.loop = this.loop
@@ -147,6 +146,7 @@ export default new Audio()
   width: 120cpx;
   height: 120cpx;
   float: left;
+  background-color: #eee;
 }
 .poster-img {
   display: block;
