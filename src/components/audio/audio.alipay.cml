@@ -100,16 +100,14 @@ class Audio implements AudioInterface {
     createAudio () {
       if (!this.emptyVerification(['src'])) return
       this.audio = my.createInnerAudioContext()
-      console.log(this.audio)
-      // this.audio.src = this.src
-      // this.audio.loop = this.loop
-      // this.audio.volume = 3
-      // this.audio.onTimeUpdate(this.updateTime.bind(this))
-      // this.audio.onEnded(this.ended.bind(this))
-      // this.audio.onError(e => {
-      //   this.$cmlEmit('error', { errMsg: e })
-      // })
-      // this.autoplay && this.audio.onCanplay(this.play.bind(this))
+      this.audio.src = this.src
+      this.audio.loop = this.loop
+      this.audio.onTimeUpdate(this.updateTime.bind(this))
+      this.audio.onEnded(this.ended.bind(this))
+      this.audio.onError(e => {
+        this.$cmlEmit('error', { errMsg: e })
+      })
+      this.autoplay && this.audio.onCanplay(this.play.bind(this))
     },
     emptyVerification (arr) {
       return arr.every(a => {
@@ -120,7 +118,6 @@ class Audio implements AudioInterface {
     }
   }
   mounted () {
-    console.log(my)
     this.createAudio()
   }
 }
