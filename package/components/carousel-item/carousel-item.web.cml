@@ -1,14 +1,14 @@
 <template>
-    <view 
-      c-bind:mousedown="touchStart"
-      c-bind:mouseup="touchEnd"
-      c-bind:webkit-transition-end="onTransitionEnd"
-      c-bind:transitionend="onTransitionEnd" 
-      class="{{getSlideClass}}"
-      style="{{transform}}"
-    >
-      <slot></slot>
-    </view>
+  <view 
+    c-bind:mousedown="touchStart"
+    c-bind:mouseup="touchEnd"
+    c-bind:webkit-transition-end="onTransitionEnd"
+    c-bind:transitionend="onTransitionEnd" 
+    class="{{getSlideClass}}"
+    style="{{transform}}"
+  >
+    <slot></slot>
+  </view>
 </template>
 <script>
   class CCarouselItem implements CCarouselItemInterface {
