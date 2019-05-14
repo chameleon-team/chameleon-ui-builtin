@@ -610,8 +610,6 @@ class Carousel implements CCarouselInterface {
       } else {
         this.slide(0)
       }
-      // this.$emit('update:currentpage', this.data.currentPage)
-      // this.$emit('slide', this.data)
     },
     next () {
       this.data.direction = 'right'
@@ -640,8 +638,6 @@ class Carousel implements CCarouselInterface {
       } else {
         this.slide()
       }
-      // this.$emit('update:currentpage', this.data.currentPage)
-      // this.$emit('slide', this.data)
     },
     slide (pagenum, type) {
       // 执行动画
@@ -699,8 +695,6 @@ class Carousel implements CCarouselInterface {
         let sliderActiveCopy = childrens.filter((item) => {
           return item.className.indexOf('slider-active-copy') !== -1
         })
-        // let sliderItem = slideDom.getElementsByClassName('slider-item')
-        // let sliderActiveCopy = slideDom.getElementsByClassName('slider-active-copy')
         let loopedSlides = this.options.loopedSlides || 1
         let sliderLength = this.s_data.sliderLength
         let children = this.$children
@@ -816,23 +810,12 @@ class Carousel implements CCarouselInterface {
         that.s_data.renderTime = undefined
         let slideDom = that.$el.getElementsByClassName('slider-wrapper')[0]
         let children = Array.prototype.slice.call(slideDom.children)
-        // debugger
-        // let sliderItem = children.filter((item) => {
-        //   return item.className.indexOf('slider-item') !== -1
-        // })
-        // debugger
-        // children = children.filter((item) => {
-        //   return item.$options._componentTag === 'slideritem'
-        // })
-        // that.s_data.sliderLength = sliderItem.length
-        // loop && effect !== 'fade'
         if (that.s_data.sliderLength >= 1 && that.circular && that.options.effect !== 'fade' && that.options.effect !== 'coverflow') {
           // 先清空上次添加的节点
           let sliderCopy = slideDom.getElementsByClassName('slider-copy')
           for (let i = sliderCopy.length - 1; i >= 0; i--) {
             slideDom.removeChild(sliderCopy[i])
           }
-          // debugger
           let children = Array.prototype.slice.call(slideDom.children)
           // 批量复制添加
           let sliderItem = children.filter((item) => {
