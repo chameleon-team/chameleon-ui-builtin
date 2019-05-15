@@ -1,5 +1,6 @@
 <template>
   <c-page title="cml内置组件库">
+    <cml-console></cml-console>
     <view class="index-page">
       <view class="index-body" style="{{bodyComputedStyl}}">
         <c-scroller height="{{-1}}">
@@ -54,6 +55,7 @@
         </c-scroller>
       </view>
     </view>
+
   </c-page>
 </template>
 <script>
@@ -122,7 +124,8 @@ class Demo {
         open: false,
         pages: [
           routeObj["image"],
-          routeObj["video"]
+          routeObj["video"],
+          routeObj["audio"]
         ],
         src: require(`../../assets/images/component/kind/media.png`)
       }
@@ -428,6 +431,7 @@ export default new Demo();
     "base": {
         "usingComponents": {
           "c-page": "/components/page/page",
+          "cml-console":"@didi/cml-console/cml-console",
           "c-scroller": "/components/scroller/scroller"
         },
         "navigationBarTitleText": "内置组件库",

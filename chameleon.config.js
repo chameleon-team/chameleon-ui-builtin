@@ -12,6 +12,9 @@ cml.config.merge({
   templateType: 'html',
   cmlComponents: [
   ],
+  // platforms: ["web","wx","alipay","baidu"],
+  platforms: ["web","weex","baidu","wx","alipay"],
+  // platforms: ["web","weex"],
   buildInfo: {
     wxAppId: '123456',
     wxEntryPage: '',

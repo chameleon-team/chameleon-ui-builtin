@@ -1,0 +1,259 @@
+<template>
+<view class="audio">
+    <view class="audio-controls" c-if="{{controls}}">
+      <view class="poster" c-bind:tap="switchPlay">
+        <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
+        <image class="icon" src="{{audioStatus ? pauseImg : palyImg}}"></image>
+        <!-- <view class="icon">
+          <view class="audio-left-pause-btn" >
+            <text class="{{audioStatus ? 'audio-left-autoplay':'audio-left-pause'}}"></text>
+          </view>
+        </view> -->
+      </view>
+      <view class="info">
+        <text class="name">{{name}}</text>
+        <text class="author">{{author}}</text>
+        <text class="time">{{currentTime}}</text>
+      </view>
+    </view>
+    <block c-else/>
+  </view>
+</template>
+
+<script>
+import cml from 'chameleon-api'
+class CAudio implements CAudioInterface {
+  props = {
+    id:{
+      type:String,
+      default:"",
+    },
+    src:{ //audio的要播放的音频资源地址
+      type:String,
+      default:''
+    }, 
+    loop:{ //是否循环播放
+      type:Boolean,
+      default:false,
+    },
+    controls:{ //是否默认显示控件
+      type:Boolean,
+      default:false,
+    },
+    poster:{ //默认控件上的音频封面的图片资源地址，如果 controls 属性值为 false 则设置 poster 无效
+      type:String,
+      default:""
+    },
+    name:{ //默认控件上的音频名字，如果 controls 属性值为 false 则设置 name 无效	
+      type:String,
+      default:'未知音频'
+    },
+    author:{ //默认控件上的作者名字，如果 controls 属性值为 false 则设置 author 无效	
+      type:String,
+      default:'未知作者'
+    },
+    autoplay:{
+      type:Boolean,
+      default:false
+    },
+  }
+
+  data = {
+    palyImg: require('../../assets/images/component/audio/play.png'),
+    pauseImg: require('../../assets/images/component/audio/pause.png'),
+    currentTime:'00:00',
+    audioStatus:false, //默认不是暂停状态
+    audioContext:{},
+  }
+
+  watch = {
+  }
+  
+  methods = {
+    initAudio(){
+      this.audioContext = cml.createInnerAudioContext();
+      this.audioStatus = this.autoplay; //如果默认自动播放 true，那么 audioStatus 为 true;
+      this.audioContext.src = this.src; //初始化音频资源地址
+      this.audioContext.autoplay = this.autoplay;//是否自动播放
+      if(this.autoplay){
+        console.log('autoplay');
+        this.$cmlEmit('play');//自动播放的情况下 emit play
+      }
+      this.audioContext.loop = this.loop
+      this.audioContext.onEnded(() => { //loop情况下不会触发ended这个方法
+        this.hanleEnded();
+      });
+      this.audioContext.onTimeUpdate(() => {
+        this.hanleTimeUpdate();
+      });
+      this.audioContext.onError((res) => {
+        let detail = {errMsg:res.errorCode}
+        this.handleError({detail})
+      })
+    },
+    handleError(e){
+      this.$cmlEmit('error',e.detail)
+    },
+    hanleTimeUpdate(){
+      this.$cmlEmit('timeupdate',{
+        currentTime:this.audioContext.currentTime,
+        duration:this.audioContext.duration
+      })
+      this.setCurrentTime()
+    },
+    hanleEnded(){
+      this.audioStatus = false;
+      console.log('ended')
+      //如果不是loop的情况下，会触发这个ended方法，需要再次emit pause
+      this.$cmlEmit('pause')
+      this.$cmlEmit('ended');
+    },
+    setCurrentTime(){
+      let val = this.audioContext.currentTime;
+      if(!val){
+        this.currentTime =  `00:00`;
+      }else{
+        let min = parseInt(val / 60 );
+        if(min < 10){
+          min = `0${min}`
+        }
+        let second = parseInt(val % 60);
+        if(second < 10){
+          second = `0${second}`;
+        }
+        this.currentTime = `${min}:${second}`
+      }
+    },
+    handlePlay(){
+      this.audioContext.play();
+      console.log('play')
+      this.audioStatus = !this.audioStatus;
+      this.$cmlEmit('play')
+    },
+    handlePause(){
+      this.audioContext.pause();
+      console.log('pause')
+      this.audioStatus = !this.audioStatus;
+      this.$cmlEmit('pause')
+    },
+    switchPlay(){
+      if(this.audioStatus){ //正在播放状态
+        this.handlePause();
+      }else{ //暂停状态
+        this.handlePlay();
+      }
+    }
+  }
+  mounted() {
+    Promise.resolve().then(() => {
+      this.initAudio()
+    })
+  }
+  beforeDestroy(){
+    console.log('destroy-c-audio')
+    this.audioContext.destroy();
+  }
+}
+
+export default new CAudio();
+</script>
+
+<style >
+@import "../../assets/css/var.less";
+.audio {
+  padding: 30cpx;
+  box-sizing: border-box;
+}
+.audio-controls {
+  background-color: #fff;
+  display: block;
+  position: relative;
+  padding: 30cpx;
+  box-sizing: border-box;
+  border: 2cpx solid #eee;
+  border-radius: 8cpx;
+}
+.poster {
+  display: block;
+  position: relative;
+  width: 120cpx;
+  height: 120cpx;
+  float: left;
+  background-color: #eee;
+}
+.poster-img {
+  display: block;
+  width: 120cpx;
+  height: 120cpx;
+}
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  transform: translate(-50%, -50%);
+}
+.info {
+  position: relative;
+  display: block;
+  margin-left: 140cpx;
+}
+
+
+.name {
+  font-size: 28cpx;
+  color: @color-dark-grey;
+}
+
+.author {
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+
+.time {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100cpx;
+  font-size: 24cpx;
+  color: @color-light-grey;
+}
+
+
+
+.audio-left-pause-btn{
+  width:50cpx;
+  height:50cpx;
+  border:3cpx solid #FFFFFF;
+  border-radius: 25cpx;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  background-color:rgba(156,156,156,.6);
+}
+.audio-left-autoplay{
+  width:15cpx;
+  height:15cpx;
+  background-color:#FFFFFF;
+  display:inline-block; 
+}
+.audio-left-pause{
+  border-width:12cpx;
+  border-style:solid;
+  margin-left:17cpx;
+  border-color:transparent transparent transparent #FFFFFF;
+  display:inline-block;
+}
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {}
+  }
+}
+</script>
+
+
+

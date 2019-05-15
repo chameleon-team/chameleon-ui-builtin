@@ -1,0 +1,77 @@
+<template>
+<c-page title="button">
+    <c-scroller height="{{-1}}">
+      <c-header title="button"></c-header>
+      <view class="section-title">
+        <text class="sectin-title-text" >audio-stop</text>
+      </view>
+      <c-audio src="{{src3}}"
+        controls="{{true}}"
+        autoplay="{{false}}"
+        poster="{{poster1}}"
+        loop="{{true}}"
+        c-bind:pause="handlePause"
+        c-bind:play="handlePlay"
+        c-bind:timeupdate="handleTimeupdate"
+        c-bind:ended="handleEnded"
+      ></c-audio>
+    </c-scroller>
+</c-page>
+</template>
+<script>
+import cml from 'chameleon-api'
+class Button   {
+  data = {
+    userStyle: '',
+    poster:'http://p1.music.126.net/bYTctrjUegSyzDPteIeNOw==/74766790705099.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0',
+    poster:'',
+    src2: require('../../../assets/mp3/pack.mp3'),//3秒
+    src3:'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400'
+  }
+
+  computed = {}
+  watch  = {}
+  mounted() {
+  }
+  methods = {
+    testclick(e) {
+      let type = e.detail.type
+      cml.showToast({
+        message: type + ' button'
+      })
+    },
+    handlePause(...args){
+      console.log('emit-pause',args)
+    },
+    handlePlay(...args){
+      console.log('emit-play',args)
+    },
+    handleTimeupdate(...args){
+      // console.log('timeupdate',args)
+    },
+    handleEnded(...args){
+      console.log('emit-ended',args)
+    },
+    
+  }
+}
+export default new Button();
+</script>
+<style scoped>
+
+</style>
+<script cml-type="json">
+{
+    "base": {
+        "usingComponents": {
+          "c-page": "/components/page/page",
+          "c-header": "../../components/header/header",
+          "c-audio": "/components/audio/audio",
+          "c-scroller": "/components/scroller/scroller"
+        },
+        "navigationBarTitleText": "button",
+        "backgroundTextStyle": "dark",
+        "backgroundColor": "#E2E2E2"
+    }
+}
+</script>
