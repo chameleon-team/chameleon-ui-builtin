@@ -4,6 +4,7 @@ type EventDetail = {
   index: Number
 }
 interface RadioInterface {
+  cstyle: String,
   checked: Boolean,
   label: String,
   disabled: Boolean,
