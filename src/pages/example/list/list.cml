@@ -14,6 +14,7 @@
         </cell>
           <cell
             ref="cell{{i+1}}"
+            id="cell{{i+1}}"
             class="cell"
             c-for="{{lists}}"
             c-for-index="i"
@@ -49,6 +50,7 @@ class List {
 
   methods = {
     onBottom(e) {
+      debugger
       cml.showToast({
         message: '加载中...',
         duration: 800

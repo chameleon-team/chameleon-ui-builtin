@@ -2,13 +2,14 @@
   <origin-scroll-view
     class="scroll-container"
     scroll-y
+    scroll-with-animation="{{true}}"
+    enable-back-to-top="{{true}}"
     lower-threshold="{{bottomOffset}}"
-    scroll-with-animation="true"
-    enable-back-to-top="true"
-    bindscrolltolower="onBottom"
-    bindscroll="onScroll"
+    onScrollToLower="onBottom"
+    onScroll="onScroll"
     style="{{ wrapperStyle }}"
     ref="c-list"
+    scroll-into-view="{{toElement}}"
   >
     <slot>
 
@@ -54,6 +55,7 @@
     }
     methods = {
       onScroll(e) {
+        debugger
         let detail = e.detail;
         detail.deltaX = detail.deltaX || 0;
         detail.deltaY = detail.deltaY || 0;
@@ -64,6 +66,7 @@
         this.$cmlEmit('customscroll', detail)
       },
       onBottom(e) {
+        debugger
         this.$cmlEmit('scrolltobottom', e.detail)
       }
     }

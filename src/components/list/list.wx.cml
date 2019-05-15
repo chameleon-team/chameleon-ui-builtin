@@ -9,6 +9,7 @@
     bindscroll="onScroll"
     style="{{ wrapperStyle }}"
     ref="c-list"
+    scroll-into-view="{{toElement}}"
   >
     <slot>
 
