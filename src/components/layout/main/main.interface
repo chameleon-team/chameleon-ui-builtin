@@ -1,0 +1,7 @@
+<script cml-type="interface">
+
+interface MainInterface {
+  mainStyle: String
+}
+</script>
+<script cml-type="web,weex,baidu,wx,alipay" src="./main.cml"></script>
