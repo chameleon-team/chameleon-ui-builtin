@@ -1,14 +1,15 @@
 <template>
   <origin-scroll-view
     class="scroll-container"
-    scroll-y
-    lower-threshold="{{bottomOffset}}"
-    scroll-with-animation="true"
-    enable-back-to-top="true"
-    bindscrolltolower="onBottom"
-    bindscroll="onScroll"
+    scroll-y="{{true}}"
+    lower-threshold="{{bottomOffset+'rpx'}}"
+    scroll-with-animation="{{true}}"
+    enable-back-to-top="{{true}}"
+    onScrollToLower="onBottom"
+    onScroll="onScroll"
     style="{{ wrapperStyle }}"
     ref="c-list"
+    scroll-into-view="{{toElement}}"
   >
     <slot>
 
@@ -79,8 +80,9 @@
             .select('#c-list').boundingClientRect();
           let windowRect = await cml.getSystemInfo();
           query.exec((ret) => {
-            if (ret[0]) {
-              let height = windowRect.viewportHeight - ret.top;
+            let retData = ret[0]
+            if (retData) {
+              let height = windowRect.viewportHeight - retData.top;
               me.cmtstyle = `height:${height}cpx;`
             }
           });

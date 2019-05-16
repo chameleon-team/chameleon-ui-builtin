@@ -66,8 +66,8 @@ export default {
         probeType: 3,
         // 上拉下拉是否回弹
         bounce: this.bounce,
-        // click: true,
-        // tap: true
+        click: true,
+        tap: true
       }
     }
   },
