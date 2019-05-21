@@ -11,7 +11,7 @@
     </c-radio>
   </view>
   <view class="title">
-    <text>value: {{ radioValue1 }}</text>
+    <text>value: {{ radioValue1 + ''}}</text>
   </view>
   <view class="box">
     <c-radio
@@ -24,7 +24,7 @@
     </c-radio>
   </view>
   <view class="title">
-    <text>value: {{ radioValue2 }}</text>
+    <text>value: {{ radioValue2 + '' }}</text>
   </view>
   <view class="box">
      <c-radio
@@ -36,7 +36,7 @@
     </c-radio>
   </view>
   <view class="title">
-    <text>value: {{ radioValue3 }}</text>
+    <text>value: {{ radioValue3 + '' }}</text>
   </view>
   <view class="box">
     <c-radio
@@ -48,7 +48,7 @@
     </c-radio>
   </view>
   <view class="title">
-    <text>value: {{ radioValue4 }}</text>
+    <text>value: {{ radioValue4 + '' }}</text>
   </view>
 </c-page>
 </template>

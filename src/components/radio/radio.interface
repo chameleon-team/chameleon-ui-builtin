@@ -1,0 +1,18 @@
+<script cml-type="interface">
+type EventDetail = {
+  value: Boolean,
+  index: Number
+}
+interface RadioInterface {
+  cstyle: String,
+  checked: Boolean,
+  label: String,
+  disabled: Boolean,
+  position: String,
+  groupIndex: Number,
+  color: String,
+  change(eventDetail: EventDetail): void;
+  changeevent(eventDetail: EventDetail): void;
+}
+</script>
+<script cml-type="web,weex,baidu,wx,alipay" src="./radio.cml"></script>

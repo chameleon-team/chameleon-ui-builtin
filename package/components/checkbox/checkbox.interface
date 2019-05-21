@@ -1,0 +1,19 @@
+<script cml-type="interface">
+type EventDetail = {
+  value: Boolean,
+  index: Number
+}
+interface CheckboxInterface {
+  cstyle: String,
+  checked: Boolean,
+  label: String,
+  disabled: Boolean,
+  position: String,
+  groupIndex: Number,
+  checkedIcon: String,
+  uncheckIcon: String,
+  change(eventDetail: EventDetail): void;
+  changeevent(eventDetail: EventDetail): void;
+}
+</script>
+<script cml-type="web,weex,baidu,wx,alipay" src="./checkbox.cml"></script>

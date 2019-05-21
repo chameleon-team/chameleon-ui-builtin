@@ -12,7 +12,7 @@
       </c-checkbox>
     </view>
     <view class="title">
-      <text>value: {{ checkboxValue1 }}</text>
+      <text>value: {{ checkboxValue1 + '' }}</text>
     </view>
     <view class="box">
       <c-checkbox
@@ -24,7 +24,7 @@
       </c-checkbox>
     </view>
     <view class="title">
-      <text>value: {{ checkboxValue2 }}</text>
+      <text>value: {{ checkboxValue2 + '' }}</text>
     </view>
     <view class="box">
       <c-checkbox
@@ -36,7 +36,7 @@
       </c-checkbox>
     </view>
     <view class="title">
-      <text>value: {{ checkboxValue3 }}</text>
+      <text>value: {{ checkboxValue3 + '' }}</text>
     </view>
 </c-page>
 </template>
