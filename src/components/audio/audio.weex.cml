@@ -2,11 +2,12 @@
   <view class="audio-root" c-if="{{controls}}">
     <view class="audio-left" c-bind:click="switchPlay">
       <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
-      <image class="icon" src="{{audioStatus ? pauseImg : palyImg}}"></image>
+      <image class="icon" style="width: 30cpx;height:30cpx;" src="{{audioStatus ? pauseImg : palyImg}}"></image>
+      <!-- <image class="icon" style="width: 30px;height:30px;" src="{{audioStatus ? pauseImgWhite : palyImgWhite}}"></image> -->
     </view>
     <view class="audio-right">
       <view class="audio-text">
-        <text class="audio-text-name">{{name}}weex</text>
+        <text class="audio-text-name">{{name}}wex</text>
         <text class="audio-text-author">{{author}}</text>
       </view>
       <view class="audio-time">
@@ -59,7 +60,9 @@ class CAudio implements CAudioInterface {
 
   data = {
     palyImg: require('../../assets/images/component/audio/play.png'),
+    // palyImgWhite: require('../../assets/images/component/audio/play-white.png'),
     pauseImg: require('../../assets/images/component/audio/pause.png'),
+    // pauseImgWhite: require('../../assets/images/component/audio/pause-white.png'),
     currentTime:'00:00',
     audioStatus:false, //默认不是暂停状态
     audioContext:{},
@@ -173,10 +176,10 @@ export default new CAudio();
   align-items:center; */
   position:relative;
   width:150cpx;
-  background-color:#d0d4d842;
-  /* background-color:red */
+  background-color:#efeded;
 }
 .poster-img{
+  
   width:120cpx;
   height:120cpx;
   position:absolute;
@@ -184,11 +187,11 @@ export default new CAudio();
   left:15cpx;
 }
 .icon{
-  width:30cpx;
-  height:30cpx;
+  width:50cpx;
+  height:50cpx;
   position:absolute;
-  top:60cpx;
-  left:60cpx;
+  top:50cpx;
+  left:50cpx;
 }
 
 
