@@ -1,25 +1,24 @@
 <template>
-<view class="audio">
-    <view class="audio-controls" c-if="{{controls}}">
-      <view class="poster" c-bind:tap="switchPlay">
-        <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
-        <image class="icon" src="{{audioStatus ? pauseImg : palyImg}}"></image>
-        <!-- <view class="icon">
-          <view class="audio-left-pause-btn" >
-            <text class="{{audioStatus ? 'audio-left-autoplay':'audio-left-pause'}}"></text>
-          </view>
-        </view> -->
+  <view class="audio-root" c-if="{{controls}}">
+    <view class="audio-left" c-bind:click="switchPlay">
+      <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
+      <image class="icon" src="{{audioStatus ? pauseImg : palyImg}}"></image>
+    </view>
+    <view class="audio-right">
+      <view class="audio-text">
+        <text class="audio-text-name">{{name}}weex</text>
+        <text class="audio-text-author">{{author}}</text>
       </view>
-      <view class="info">
-        <text class="name">{{name}}</text>
-        <text class="author">{{author}}</text>
-        <text class="time">{{currentTime}}</text>
+      <view class="audio-time">
+        <text class="audio-time-text">
+        {{currentTime}}
+
+        </text>
       </view>
     </view>
-    <block c-else/>
   </view>
 </template>
-
+  
 <script>
 import cml from 'chameleon-api'
 class CAudio implements CAudioInterface {
@@ -159,92 +158,70 @@ export default new CAudio();
 </script>
 
 <style >
-@import "../../assets/css/var.less";
-.audio {
-  padding: 30cpx;
-  box-sizing: border-box;
-}
-.audio-controls {
-  background-color: #fff;
-  display: block;
-  position: relative;
-  padding: 30cpx;
-  box-sizing: border-box;
-  border: 2cpx solid #eee;
-  border-radius: 8cpx;
-}
-.poster {
-  display: block;
-  position: relative;
-  width: 120cpx;
-  height: 120cpx;
-  float: left;
-  background-color: #eee;
-}
-.poster-img {
-  display: block;
-  width: 120cpx;
-  height: 120cpx;
-}
-.icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  transform: translate(-50%, -50%);
-}
-.info {
-  position: relative;
-  display: block;
-  margin-left: 140cpx;
-}
-
-
-.name {
-  font-size: 28cpx;
-  color: @color-dark-grey;
-}
-
-.author {
-  font-size: 24cpx;
-  color: @color-light-grey;
-}
-
-.time {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100cpx;
-  font-size: 24cpx;
-  color: @color-light-grey;
-}
-
-
-
-.audio-left-pause-btn{
-  width:50cpx;
-  height:50cpx;
-  border:3cpx solid #FFFFFF;
-  border-radius: 25cpx;
+.audio-root{
+  width:720cpx;
+  height:150cpx;
+  margin-left:15cpx;
+  margin-right:15cpx;
   display:flex;
+  flex-direction:row;
+  border:1cpx solid #d0d4d8;
+}
+.audio-left{
+  /* display:flex;
   justify-content: center;
-  align-items:center;
-  background-color:rgba(156,156,156,.6);
+  align-items:center; */
+  position:relative;
+  width:150cpx;
+  background-color:#d0d4d842;
+  /* background-color:red */
 }
-.audio-left-autoplay{
-  width:15cpx;
-  height:15cpx;
-  background-color:#FFFFFF;
-  display:inline-block; 
+.poster-img{
+  width:120cpx;
+  height:120cpx;
+  position:absolute;
+  top:15cpx;
+  left:15cpx;
 }
-.audio-left-pause{
-  border-width:12cpx;
-  border-style:solid;
-  margin-left:17cpx;
-  border-color:transparent transparent transparent #FFFFFF;
-  display:inline-block;
+.icon{
+  width:30cpx;
+  height:30cpx;
+  position:absolute;
+  top:60cpx;
+  left:60cpx;
 }
 
+
+.audio-right{
+  display:flex;
+  flex-direction:row;
+  background-color:#d0d4d81f;
+  width:570cpx;
+}
+.audio-text{
+  width:370cpx;
+  margin-left:20cpx;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.audio-text-name{
+  font-size:36cpx;
+  font-weight:400;
+}
+.audio-text-author{
+  font-size:30cpx;
+  color:rgb(141,137,129)
+}
+.audio-time{
+  width:200cpx;
+  position:relative;
+}
+.audio-time-text{
+  /* position:absolute;
+  top:20cpx;
+  right:50cpx; */
+}
 </style>
 
 <script cml-type="json">
@@ -256,4 +233,5 @@ export default new CAudio();
 </script>
 
 
-
+  
+  

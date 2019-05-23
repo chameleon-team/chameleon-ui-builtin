@@ -149,9 +149,12 @@ class CAudio implements CAudioInterface {
       this.initAudio()
     })
   }
-  beforeDestroy(){
-    console.log('destroy-c-audio')
-    this.audioContext.destroy();
+  pageLifetimes = {
+    hide: function() {
+      // 组件所在的页面被隐藏时触发
+      console.log('destroy-c-audio');
+      this.audioContext.destroy();
+    }
   }
 }
 
