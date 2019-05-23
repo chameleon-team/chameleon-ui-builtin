@@ -1,6 +1,6 @@
 <template>
   <view class="audio-root">
-    <audio
+    <origin-audio
     id="{{id}}"
     src="{{src}}"
     controls="{{controls}}"
@@ -13,7 +13,7 @@
     bindended="hanleEnded"
     bindtimeupdate="hanleTimeUpdate"
     binderror="handleError"
-  ></audio>
+  ></origin-audio>
   </view>
 
 </template>
@@ -121,6 +121,7 @@ export default new CAudio();
 .audio-root{
   display: flex;
   align-items: center;
+  height:150cpx;
   
 }
 </style>

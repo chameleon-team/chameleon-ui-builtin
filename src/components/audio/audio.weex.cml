@@ -179,12 +179,11 @@ export default new CAudio();
   background-color:#efeded;
 }
 .poster-img{
-  
-  width:120cpx;
-  height:120cpx;
+  width:150cpx;
+  height:150cpx;
   position:absolute;
-  top:15cpx;
-  left:15cpx;
+  top:0cpx;
+  left:0cpx;
 }
 .icon{
   width:50cpx;
