@@ -11,8 +11,8 @@
   "license": "Apache",
   "email": "ChameleonCore@didiglobal.com",
   "dependencies": {
-    "@didi/cml-console": "0.0.5",
-    "chameleon-api": "^0.4.3",
+    "chameleon-api": "^0.4.12-alpha.1",
+    "chameleon-bridge": "^0.1.5-alpha.0",
     "chameleon-runtime": "^0.2.0-alpha.4",
     "chameleon-scroll": "0.0.3",
     "chameleon-store": "0.0.3"
