@@ -2,7 +2,7 @@
   <view class="audio-root">
     <origin-audio
     id="{{id}}"
-    src="{{src}}"
+    src="dadads"
     controls="{{controls}}"
     loop="{{loop}}"
     poster="{{poster}}"
@@ -89,7 +89,19 @@ class CAudio implements CAudioInterface {
       this.$cmlEmit('timeupdate',e.detail)
     },
     handleError(e){
-      this.$cmlEmit('error',e.detail)
+      console.log('error-wx');
+      let errorMap = {
+        MEDIA_ERR_ABORTED:1001,
+        MEDIA_ERR_NETWORK:1002,
+        MEDIA_ERR_DECODE:1003,
+        MEDIA_ERR_SRC_NOT_SUPPORTED:1004,
+      }
+      let errMsg = -1;
+      if(e.detail && e.detail.errMsg){
+        errMsg = errorMap[e.detail.errMsg];
+      }
+      let detail = {errMsg}
+      this.$cmlEmit('error',detail)
     },
     setCurrentTime(){},
     handlePlay(){

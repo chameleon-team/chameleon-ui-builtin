@@ -88,7 +88,7 @@ class CAudio implements CAudioInterface {
         this.hanleTimeUpdate();
       });
       this.audioContext.onError((res) => {
-        let detail = {errMsg:res.errorCode}
+        let detail = {errMsg:res.errCode || -1}
         this.handleError({detail})
       })
     },

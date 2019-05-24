@@ -34,7 +34,7 @@ interface CAudioInterface {
   play(eventDetail: Void): void;
   ended(eventDetail: Void): void;
   timeupdate(eventDetail: TimeUpdateDetail): void;
-  error(eventDetail: Void): void;
+  error(eventDetail: CMLObject): void;
   handleError(eventDetail:CMLObject):void;
   
 }

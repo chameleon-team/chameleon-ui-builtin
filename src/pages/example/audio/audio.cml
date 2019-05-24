@@ -5,7 +5,7 @@
       <view class="section-title">
         <text class="sectin-title-text" >audio-stop</text>
       </view>
-      <c-audio src="{{src3}}"
+      <c-audio src="{{errorSrc}}"
         controls="{{true}}"
         autoplay="{{true}}"
         loop="{{true}}"
@@ -13,6 +13,7 @@
         c-bind:play="handlePlay"
         c-bind:timeupdate="handleTimeupdate"
         c-bind:ended="handleEnded"
+        c-bind:error="handleError"
       ></c-audio>
       <text>{{audioText}}</text>
       <cml-console></cml-console>
@@ -23,7 +24,8 @@
 import cml from 'chameleon-api'
 class Button   {
   data = {
-    userStyle: '',
+    errorSrc:'http://vd3.bdddstatic.com/mda-ic7mxzt5cvz6f4y5/mda-ic7mxzt5cvz6f4y5.3',
+    userStyle: '  ',
     poster:'http://p1.music.126.net/bYTctrjUegSyzDPteIeNOw==/74766790705099.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0',
     poster1:'',
     src2: require('../../../assets/mp3/pack.mp3'),//3秒
@@ -56,6 +58,9 @@ class Button   {
       this.audioText = 'ended';
       console.log('emit-ended',args)
     },
+    handleError(...args){
+      console.log('emit-error',args)
+    }
     
   }
   

@@ -17,6 +17,7 @@
         </text>
       </view>
     </view>
+    <cml-console></cml-console>
   </view>
 </template>
   
@@ -229,7 +230,9 @@ export default new CAudio();
 <script cml-type="json">
 {
   "base": {
-    "usingComponents": {}
+    "usingComponents": {
+      "cml-console":"@didi/cml-console/cml-console"
+    }
   }
 }
 </script>
