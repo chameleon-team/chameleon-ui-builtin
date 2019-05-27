@@ -67,7 +67,8 @@ export default {
         // 上拉下拉是否回弹
         bounce: this.bounce,
         click: true,
-        tap: true
+        tap: true,
+        preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
       }
     }
   },
