@@ -70,7 +70,7 @@ export default {
         tap: true,
         preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
       },
-      destroyed: false
+      startTag: false
     }
   },
   watch: {
@@ -150,19 +150,6 @@ export default {
         }, 0)
       }
     },
-    // 用于input blur
-    touchendHandler (e) {
-      let target = e.target.tagName;
-      let activeElement = document.activeElement;
-      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== target) {
-        activeElement.blur();
-        return ;
-      }
-      if ((target === 'INPUT' || target === 'TEXTAREA') && typeof this.scroll.destroy === 'function') {
-        this.scroll.destroy();
-        this.destroyed = true;
-      }
-    },
     touchstartHandler (e) {
       let target = e.target.tagName;
       let activeElement = document.activeElement;
@@ -174,6 +161,7 @@ export default {
         e.preventDefault();
       }
     },
+    // 用于input blur
     touchendHandler(e) {
       let activeElement = document.activeElement;
       if ((activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== this.startTag) {
