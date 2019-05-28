@@ -2,7 +2,7 @@
       <div 
         class="scroll-container" 
         ref="c-scroller"
-        :style="wrapperStyle" @touchend="touchendHandler">
+        :style="wrapperStyle" @touchstart="touchstartHandler" @touchend="touchendHandler">
           <div class="inner-scroll" ref="inner" :style="innerStyle">
             <slot></slot>
           </div>
@@ -69,7 +69,8 @@ export default {
         click: true,
         tap: true,
         preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
-      }
+      },
+      destroyed: false
     }
   },
   watch: {
@@ -155,6 +156,17 @@ export default {
       let activeElement = document.activeElement;
       if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== target) {
         activeElement.blur();
+        return ;
+      }
+      if ((target === 'INPUT' || target === 'TEXTAREA') && typeof this.scroll.destroy === 'function') {
+        this.scroll.destroy();
+        this.destroyed = true;
+      }
+    },
+    touchstartHandler() {
+      if (this.destroyed) {
+        this.initScroller();
+        this.destroyed = false;
       }
     },
     onScrollHandler() {
