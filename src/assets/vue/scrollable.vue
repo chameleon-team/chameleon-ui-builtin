@@ -163,8 +163,9 @@ export default {
         this.destroyed = true;
       }
     },
-    touchstartHandler() {
-      if (this.destroyed) {
+    touchstartHandler(e) {
+      let target = e.target.tagName;
+      if ((target !== 'INPUT' && target !== 'TEXTAREA') && this.destroyed) {
         this.initScroller();
         this.destroyed = false;
       }
