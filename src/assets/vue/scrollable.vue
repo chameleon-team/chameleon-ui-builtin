@@ -154,7 +154,7 @@ export default {
       let target = e.target.tagName;
       let activeElement = document.activeElement;
       this.startTag = target;
-      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== target) {
+      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
         // 当输入框为焦点时，阻止滚动
         e.stopPropagation();
         // 阻止浏览器默认滚动，否则安卓有问题
