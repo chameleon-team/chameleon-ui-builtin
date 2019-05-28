@@ -2,8 +2,8 @@
       <div 
         class="scroll-container" 
         ref="c-scroller"
-        :style="wrapperStyle" @touchstart="touchstartHandler" @touchend="touchendHandler">
-          <div class="inner-scroll" ref="inner" :style="innerStyle">
+        :style="wrapperStyle">
+          <div class="inner-scroll" ref="inner" @touchstart="touchstartHandler" @touchend="touchendHandler" :style="innerStyle">
             <slot></slot>
           </div>
       </div>
@@ -163,11 +163,22 @@ export default {
         this.destroyed = true;
       }
     },
-    touchstartHandler(e) {
+    touchstartHandler (e) {
       let target = e.target.tagName;
-      if ((target !== 'INPUT' && target !== 'TEXTAREA') && this.destroyed) {
-        this.initScroller();
-        this.destroyed = false;
+      let activeElement = document.activeElement;
+      this.startTag = target;
+      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== target) {
+        // 当输入框为焦点时，阻止滚动
+        e.stopPropagation();
+        // 阻止浏览器默认滚动，否则安卓有问题
+        e.preventDefault();
+      }
+    },
+    touchendHandler(e) {
+      let activeElement = document.activeElement;
+      if ((activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== this.startTag) {
+        // touchstart事件不为input则失去焦点，否则会出现重复聚焦
+        activeElement.blur();
       }
     },
     onScrollHandler() {
