@@ -16,7 +16,7 @@ import { transCls } from './util'
       },
       size: {
         type: String,
-        default: "stretch"
+        default: "auto"
       },
       width: {
         type: Number,
@@ -237,7 +237,7 @@ import { transCls } from './util'
 }
 
 .cml-btn-auto {
-  align-self: flex-start;
+  
 }
 
 .btn-text {
