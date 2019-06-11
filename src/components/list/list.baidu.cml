@@ -2,13 +2,14 @@
   <origin-scroll-view
     class="scroll-container"
     scroll-y
-    lower-threshold="{{bottomOffset}}"
-    scroll-with-animation="true"
-    enable-back-to-top="true"
+    lower-threshold="{{bottomOffset+'rpx'}}"
+    scroll-with-animation="{{true}}"
+    enable-back-to-top="{{true}}"
     bindscrolltolower="onBottom"
     bindscroll="onScroll"
     style="{{ wrapperStyle }}"
     ref="c-list"
+    scroll-into-view="{{toElement}}"
   >
     <slot>
 

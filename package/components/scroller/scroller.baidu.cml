@@ -2,10 +2,9 @@
   <origin-scroll-view
     scroll-x="{{ scrollDirection === 'horizontal' }}"
     scroll-y="{{ scrollDirection === 'vertical' }}"
-    scroll-with-animation="true"
-    scroll-into-view="{{toView}}"
+    scroll-with-animation="{{true}}"
     lower-threshold="{{bottomOffset+'rpx'}}"
-    enable-back-to-top="true"
+    enable-back-to-top="{{true}}"
     bindscrolltolower="onBottom"
     bindscroll="onScroll"
     class="cml-scroller"

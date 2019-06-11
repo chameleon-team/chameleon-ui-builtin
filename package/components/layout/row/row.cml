@@ -4,7 +4,7 @@
   </view>
 </template>
 <script>
-  class CRow {
+  class CRow implements RowInterface {
     props = {
       // start/end/center/space-around/space-between
       justify: {

@@ -1,0 +1,11 @@
+<script cml-type="interface">
+
+interface RowInterface {
+  justify: String,
+  align: String,
+  height: Number,
+  wrap: Boolean,
+  margin: Number
+}
+</script>
+<script cml-type="web,weex,baidu,wx,alipay" src="./row.cml"></script>

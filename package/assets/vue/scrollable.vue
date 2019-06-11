@@ -2,7 +2,7 @@
       <div 
         class="scroll-container" 
         ref="c-scroller"
-        :style="wrapperStyle" @touchstart="touchstartHandler">
+        :style="wrapperStyle" @touchend="touchendHandler">
           <div class="inner-scroll" ref="inner" :style="innerStyle">
             <slot></slot>
           </div>
@@ -66,8 +66,9 @@ export default {
         probeType: 3,
         // 上拉下拉是否回弹
         bounce: this.bounce,
-        // click: true,
-        // tap: true
+        click: true,
+        tap: true,
+        preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
       }
     }
   },
@@ -149,7 +150,7 @@ export default {
       }
     },
     // 用于input blur
-    touchstartHandler (e) {
+    touchendHandler (e) {
       let target = e.target.tagName;
       let activeElement = document.activeElement;
       if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== target) {

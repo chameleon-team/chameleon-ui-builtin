@@ -1,0 +1,10 @@
+<script cml-type="interface">
+
+interface ColInterface {
+  width: Number,
+  height: Number,
+  backgroundColor: String,
+  margin: Number
+}
+</script>
+<script cml-type="web,weex,baidu,wx,alipay" src="./col.cml"></script>

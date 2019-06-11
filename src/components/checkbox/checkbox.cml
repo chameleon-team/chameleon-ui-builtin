@@ -1,5 +1,5 @@
 <template>
-<view class="cml-checkbox">
+<view class="cml-checkbox" style="{{computedCstyle}}">
   <view class="cml-checkbox-wrap" c-bind:tap="changeCheck">
     <view class="cml-checkbox-check" style="{{ checkStyle }}">
       <view class="{{ checkClass }}">
@@ -11,14 +11,15 @@
 </view>
 </template>
 <script>
-class Checkbox   {
+class Checkbox implements CheckboxInterface   {
   props = {
     checked: {
       type: Boolean,
       default: false
     },
     label: {
-      type: String
+      type: String,
+      default: ''
     },
     disabled: {
       type: Boolean,
@@ -31,6 +32,18 @@ class Checkbox   {
     groupIndex: {
       type: Number,
       default: -1
+    },
+    checkedIcon: {
+      type: String,
+      default: ''
+    },
+    uncheckIcon: {
+      type: String,
+      default: ''
+    },
+    cstyle: {
+      type: String,
+      default: ''
     }
   }
   data = {
@@ -61,11 +74,20 @@ class Checkbox   {
       }
       return this.innerChecked? 'cml-checkbox-checked': 'cml-checkbox-uncheck';
     },
+    computedCstyle() {
+      return this.cstyle;
+    }
   }
 
   watch  = {
     checked(newChecked) {
       this.innerChecked = newChecked;
+    },
+    uncheckIcon() {
+      this.initImg();
+    },
+    checkedIcon() {
+      this.initImg();
     }
   }
 
@@ -74,19 +96,30 @@ class Checkbox   {
       if (this.disabled) return;
       this.innerChecked = !this.innerChecked
       let value = {
-        value: this.innerChecked
+        value: this.innerChecked,
+        index: this.groupIndex
       }
-      if (this.groupIndex !== -1) {
-        value.index = this.groupIndex
-      }
+
       this.$cmlEmit('changeevent', value);
       this.$cmlEmit('change', value);
+    },
+    initImg() {
+      if (this.uncheckIcon) {
+        this.uncheckImg = this.uncheckIcon;
+      }
+      if (this.checkedIcon) {
+        this.checkedImg = this.checkedIcon;
+      }
     }
   }
 
   created() {
     let { checked } = this
     this.innerChecked = checked
+  }
+
+  mounted() {
+    this.initImg();
   }
 }
 

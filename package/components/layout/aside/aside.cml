@@ -4,7 +4,7 @@
 </view>
 </template>
 <script>
-class CAside {
+class CAside implements AsideInterface {
 
   props = {
     asideStyle:{
