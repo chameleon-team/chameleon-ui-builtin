@@ -2,7 +2,7 @@
   <view class="audio-root">
     <origin-audio
     id="{{id}}"
-    src="dadads"
+    src="{{src}}"
     controls="{{controls}}"
     loop="{{loop}}"
     poster="{{poster}}"

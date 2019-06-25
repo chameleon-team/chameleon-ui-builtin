@@ -5,7 +5,7 @@
       <view class="section-title">
         <text class="sectin-title-text" >audio-stop</text>
       </view>
-      <c-audio src="{{errorSrc}}"
+      <c-audio src="{{src3}}"
         controls="{{true}}"
         autoplay="{{true}}"
         loop="{{true}}"
@@ -16,7 +16,6 @@
         c-bind:error="handleError"
       ></c-audio>
       <text>{{audioText}}</text>
-      <cml-console></cml-console>
     </c-scroller>
 </c-page>
 </template>
@@ -101,7 +100,6 @@ export default new Button();
           "c-page": "/components/page/page",
           "c-header": "../../components/header/header",
           "c-audio": "/components/audio/audio",
-          "cml-console":"@didi/cml-console/cml-console",
           "c-scroller": "/components/scroller/scroller"
         },
         "navigationBarTitleText": "button",
