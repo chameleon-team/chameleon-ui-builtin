@@ -63,10 +63,17 @@
       "mock": "index.php"
     },
     {
+      "name": "audio",
+      "url": "/pages/example/audio/audio",
+      "path": "/pages/example/audio/audio",
+      "mock": "index.php"
+    },
+    {
       "name": "richtext",
       "url": "/pages/example/richtext/richtext",
       "path": "/pages/example/richtext/richtext"
     },
+    
     {
       "name": "switch",
       "url": "/pages/example/switch/switch",

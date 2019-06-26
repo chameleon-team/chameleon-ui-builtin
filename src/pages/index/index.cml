@@ -54,6 +54,7 @@
         </c-scroller>
       </view>
     </view>
+
   </c-page>
 </template>
 <script>
@@ -122,7 +123,8 @@ class Demo {
         open: false,
         pages: [
           routeObj["image"],
-          routeObj["video"]
+          routeObj["video"],
+          routeObj["audio"]
         ],
         src: require(`../../assets/images/component/kind/media.png`)
       }
