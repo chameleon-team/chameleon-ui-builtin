@@ -35,7 +35,7 @@ import { transCls } from './util'
       },
       size: {
         type: String,
-        default: "stretch"
+        default: "auto"
       },
       width: {
         type: Number,
@@ -195,7 +195,7 @@ import { transCls } from './util'
   background: @color-regular-blue;
   align-items: center;
   justify-content: center;
-  border-radius: 4cpx;
+  border-radius: 4cpx !important;
   font-size: 32cpx;
   color: #fff;
   &-active {
@@ -281,7 +281,7 @@ import { transCls } from './util'
 }
 
 .cml-btn-auto {
-  align-self: flex-start;
+  
 }
 
 .btn-text {

@@ -2,8 +2,8 @@
       <div 
         class="scroll-container" 
         ref="c-scroller"
-        :style="wrapperStyle" @touchend="touchendHandler">
-          <div class="inner-scroll" ref="inner" :style="innerStyle">
+        :style="wrapperStyle">
+          <div class="inner-scroll" ref="inner" @touchstart="touchstartHandler" @touchend="touchendHandler" :style="innerStyle">
             <slot></slot>
           </div>
       </div>
@@ -69,7 +69,8 @@ export default {
         click: true,
         tap: true,
         preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
-      }
+      },
+      startTag: false
     }
   },
   watch: {
@@ -149,11 +150,22 @@ export default {
         }, 0)
       }
     },
-    // 用于input blur
-    touchendHandler (e) {
+    touchstartHandler (e) {
       let target = e.target.tagName;
       let activeElement = document.activeElement;
-      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== target) {
+      this.startTag = target;
+      if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+        // 当输入框为焦点时，阻止滚动
+        e.stopPropagation();
+        // 阻止浏览器默认滚动，否则安卓有问题
+        e.preventDefault();
+      }
+    },
+    // 用于input blur
+    touchendHandler(e) {
+      let activeElement = document.activeElement;
+      if ((activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') && activeElement.tagName !== this.startTag) {
+        // touchstart事件不为input则失去焦点，否则会出现重复聚焦
         activeElement.blur();
       }
     },
