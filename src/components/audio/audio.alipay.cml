@@ -60,8 +60,6 @@ class CAudio implements CAudioInterface {
   }
 
   data = {
-    palyImg: require('../../assets/images/component/audio/play.png'),
-    pauseImg: require('../../assets/images/component/audio/pause.png'),
     currentTime:'00:00',
     audioStatus:false, //默认不是暂停状态
     audioContext:{},
@@ -77,7 +75,6 @@ class CAudio implements CAudioInterface {
       this.audioContext.src = this.src; //初始化音频资源地址
       this.audioContext.autoplay = this.autoplay;//是否自动播放
       if(this.autoplay){
-        console.log('autoplay');
         this.$cmlEmit('play');//自动播放的情况下 emit play
       }
       this.audioContext.loop = this.loop
@@ -105,7 +102,6 @@ class CAudio implements CAudioInterface {
     },
     hanleEnded(){
       this.audioStatus = false;
-      console.log('ended')
       //如果不是loop的情况下，会触发这个ended方法，需要再次emit pause
       this.$cmlEmit('pause')
       this.$cmlEmit('ended');
@@ -128,13 +124,11 @@ class CAudio implements CAudioInterface {
     },
     handlePlay(){
       this.audioContext.play();
-      console.log('play')
       this.audioStatus = !this.audioStatus;
       this.$cmlEmit('play')
     },
     handlePause(){
       this.audioContext.pause();
-      console.log('pause')
       this.audioStatus = !this.audioStatus;
       this.$cmlEmit('pause')
     },
@@ -152,7 +146,6 @@ class CAudio implements CAudioInterface {
     })
   }
   beforeDestroy(){
-    console.log('destroy-c-audio')
     this.audioContext.destroy();
   }
 }

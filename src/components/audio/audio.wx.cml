@@ -82,14 +82,12 @@ class CAudio implements CAudioInterface {
       if(this.loop){ //loop为false的时候，会触发这个方法，此时需要将this.isAutoplay置为false
         this.isAutoplay = false;
       }
-      console.log('ended')
       this.$cmlEmit('ended');
     },
     hanleTimeUpdate(e){
       this.$cmlEmit('timeupdate',e.detail)
     },
     handleError(e){
-      console.log('error-wx');
       let errorMap = {
         MEDIA_ERR_ABORTED:1001,
         MEDIA_ERR_NETWORK:1002,
@@ -105,12 +103,10 @@ class CAudio implements CAudioInterface {
     },
     setCurrentTime(){},
     handlePlay(){
-      console.log('play');
       this.isAutoplay = !this.isAutoplay;
       this.$cmlEmit('play')
     },
     handlePause(){
-      console.log('pause');
       this.isAutoplay = !this.isAutoplay;
       this.$cmlEmit('pause')
     }
@@ -119,10 +115,8 @@ class CAudio implements CAudioInterface {
     this.initAudio()
   }
   beforeDestroy(){
-    console.log('before-c-audio')
   }
   destroyed(){
-    console.log('wx-destroy')
   }
 }
 
