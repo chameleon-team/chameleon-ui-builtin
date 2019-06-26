@@ -2,8 +2,8 @@
   <view class="audio-root" c-if="{{controls}}">
     <view class="audio-left" c-bind:click="switchPlay">
       <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
-      <image class="icon" style="width: 30cpx;height:30cpx;" src="{{audioStatus ? pauseImg : palyImg}}"></image>
-      <!-- <image class="icon" style="width: 30px;height:30px;" src="{{audioStatus ? pauseImgWhite : palyImgWhite}}"></image> -->
+      <image class="icon" style="width: 30cpx;height:30cpx;" src="{{audioStatus ? pauseImg : playImg}}"></image>
+      <!-- <image class="icon" style="width: 30px;height:30px;" src="{{audioStatus ? pauseImgWhite : playImgWhite}}"></image> -->
     </view>
     <view class="audio-right">
       <view class="audio-text">
@@ -59,10 +59,8 @@ class CAudio implements CAudioInterface {
   }
 
   data = {
-    palyImg: require('../../assets/images/component/audio/play.png'),
-    // palyImgWhite: require('../../assets/images/component/audio/play-white.png'),
+    playImg: require('../../assets/images/component/audio/play.png'),
     pauseImg: require('../../assets/images/component/audio/pause.png'),
-    // pauseImgWhite: require('../../assets/images/component/audio/pause-white.png'),
     currentTime:'00:00',
     audioStatus:false, //默认不是暂停状态
     audioContext:{},
