@@ -1,6 +1,6 @@
 <template>
 <c-page title="button">
-    <c-scroller height="{{-1}}">
+    <c-scroller>
       <view>
         <c-button
           class="g-main-btn"

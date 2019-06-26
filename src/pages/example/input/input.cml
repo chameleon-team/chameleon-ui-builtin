@@ -1,7 +1,7 @@
 <template>
 <c-page title="input">
     <view class="page-demo">
-        <c-scroller height="{{-1}}">
+        <c-scroller>
             <c-header title="input"></c-header>
             <text class="title-text" >focus聚焦 web端不支持</text>
             <view class="input-wrap">

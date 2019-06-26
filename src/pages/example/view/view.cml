@@ -1,7 +1,7 @@
 <template>
 <c-page title="view">
   <view class="page-demo">
-    <c-scroller height="{{-1}}">
+    <c-scroller>
       <c-header title="view"></c-header>
         <view class="page-box">
             <view class="page-section">

@@ -2,7 +2,7 @@
   <c-page title="cml内置组件库">
     <view class="index-page">
       <view class="index-body" style="{{bodyComputedStyl}}">
-        <c-scroller height="{{-1}}">
+        <c-scroller>
           <view ref="index-content-wrap" class="index-content-wrap" style="{{computedStyle}}" >
             <view class="index-item-content">
               <view class="index-hd">

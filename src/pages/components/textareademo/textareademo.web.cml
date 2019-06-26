@@ -1,7 +1,7 @@
 <template>
 <c-page title="textarea">
     <view class="page-demo">
-        <c-scroller height="{{-1}}">
+        <c-scroller>
             <view class="input-wrap">
                 <text class="title-text" >focus聚焦 web端不支持</text>
                 <c-textarea cstyle="width: 400cpx" placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>

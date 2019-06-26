@@ -1,6 +1,6 @@
 <template>
 <c-page title="layout演示">
-  <c-scroller height="{{-1}}">
+  <c-scroller>
     <c-header title="{{headerTitle}}" desc="{{headerDesc}}"></c-header>
     <view class="title"><text >以下是demo</text></view>
     <!-- 1 -->
