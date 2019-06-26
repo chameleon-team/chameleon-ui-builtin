@@ -1,105 +1,30 @@
 <template>
-  <scrollable
-    :cstyle="cstyle"
-    :bottomOffset="bottomOffset"
-    :scrollDirection="scrollDirection"
-    :bounce="bounce"
-    :height="heightPx"
-    :width="widthPx"
-    template="scroller"
-    scrollTop="{{scrollTopPx}}"
-    scrollLeft="{{scrollLeftPx}}"
-
-    @onscroll= "scrollEvent"
-    @scrolltobottom = "scrolltobottomEvent"
-  >
+  <view class="wrap">
     <slot></slot>
-  </scrollable>
+  </view>
 </template>
+
 <script>
-  import cml from 'chameleon-api'
-  class Scroller implements ScrollerInterface {
-    props = {
-      bottomOffset: {
-        // 距底部/右边多远时（单位cpx），触发 scrollbottom 事件
-        type: Number,
-        default: 0
-      },
-      bounce: {
-        type: Boolean,
-        default: false
-      },
-      cstyle: {
-        type: String,
-        default: ''
-      },
-      scrollDirection: {
-        // 可选为 horizontal 或者 vertical，默认值为 vertical 。定义滚动的方向。
-        type: String,
-        default: 'vertical'
-      },
-      height: {
-        type: Number,
-        default: 0
-      },
-      width: {
-        type: Number,
-        default: 0
-      },
-      scrollTop: {
-        type: Number,
-        default: 0
-      },
-      scrollLeft: {
-        type: Number,
-        default: 0
-      }
-    }
-    computed = {
-      heightPx () {
-        if (this.height >= 0) {
-          return cml.cpx2px(this.height);
-        }
-        return -1;
-      },
-      widthPx () {
-        if (this.width >= 0) {
-          return cml.cpx2px(this.width);
-        }
-        return -1;
-      },
-      scrollTopPx () {
-        return cml.cpx2px(this.scrollTop);
-      },
-      scrollLeftPx () {
-        return cml.cpx2px(this.scrollLeft);
-      }
-    }
-    methods = {
-      scrollEvent (e) {
-        this.$cmlEmit('onscroll', e)
-        this.$cmlEmit('customscroll', e)
-      },
-      scrolltobottomEvent (e) {
-        this.$cmlEmit('scrolltobottom', e)
-      }
-    }
+
+class Scroller implements ScrollerInterface {
+  beforeCreate() {
+    let body = document.body
+    let oldBodyStyl = body.getAttribute('style')
+    let styl = oldBodyStyl + ';-webkit-overflow-scrolling : touch;'
+    body.setAttribute('style', styl)
   }
+}
 
-  export default new Scroller();
-
+export default new Scroller();
 </script>
 
-<style scoped>
+<style>
 </style>
 
 <script cml-type="json">
 {
-  "web": {
-    "component": true,
-    "usingComponents": {
-      "scrollable": "../../assets/vue/scrollable"
-    }
+  "base": {
+    "usingComponents": {}
   }
 }
 </script>

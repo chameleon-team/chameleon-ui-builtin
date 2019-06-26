@@ -2,12 +2,8 @@
 <c-page title="scroller">
     <view class="container">
     <c-scroller
-        scroll-direction="{{scrollDirection}}"
-        bottom-offset="{{bottomOffset}}"
-        height="{{-1}}"
-        c-bind:scrolltobottom="onBottom"
         c-bind:onscroll="onScroll"
-        scroll-top="{{scrollTop}}"
+        height="{{-1}}"
         cstyle="width:750cpx"
     >
         <c-header title="scroller"></c-header>
@@ -138,7 +134,7 @@ export default new Scroller();
         "usingComponents": {
             "c-page": "/components/page/page",
             "c-header": "../../components/header/header",
-            "c-scroller": "/components/scroller/scroller"
+            "c-scroller": "/components/c-scroller/c-scroller"
         },
         "navigationBarTitleText": "scroller",
         "backgroundTextStyle": "dark",

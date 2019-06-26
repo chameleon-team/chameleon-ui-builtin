@@ -106,6 +106,7 @@ class Input {
       this.isfocus = false;
     },
     bindfocusevent(e)  {
+      this.inputValue = '';
       console.log('bindfocusevent value', e.detail.value)
     },
     bindinputevent(e)  {
