@@ -21,7 +21,7 @@
 </template>
 <script>
 import cml from 'chameleon-api'
-class Button   {
+class Audio   {
   data = {
     errorSrc:'http://vd3.bdddstatic.com/mda-ic7mxzt5cvz6f4y5/mda-ic7mxzt5cvz6f4y5.3',
     userStyle: '  ',
@@ -88,7 +88,7 @@ class Button   {
     console.log('example-audio-destroyed')
   }
 }
-export default new Button();
+export default new Audio();
 </script>
 <style scoped>
 
