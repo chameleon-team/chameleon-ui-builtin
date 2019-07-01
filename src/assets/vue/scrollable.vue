@@ -169,16 +169,16 @@ export default {
         activeElement.blur();
       }
     },
-    onScrollHandler() {
+    onScrollHandler(pos) {
       let scroll = this.scroll
       let startX = scroll.startX || 0
       let startY = scroll.startY || 0
       let detail = {
-        deltaX: cml.px2cpx(scroll.x - startX),
-        deltaY: cml.px2cpx(scroll.y - startY),
+        deltaX: cml.px2cpx(pos.x - startX),
+        deltaY: cml.px2cpx(pos.y - startY),
         scrollHeight: cml.px2cpx(scroll.scrollerHeight),
-        scrollLeft: cml.px2cpx(Math.abs(scroll.x)),
-        scrollTop: cml.px2cpx(Math.abs(scroll.y)),
+        scrollLeft: cml.px2cpx(Math.abs(pos.x)),
+        scrollTop: cml.px2cpx(Math.abs(pos.y)),
         scrollWidth: cml.px2cpx(scroll.scrollerWidth)
       }
       this.$emit('onscroll', detail)
