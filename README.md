@@ -36,15 +36,15 @@ cml dev  //开始开发
 
 #### 简单的标签替换
 
-| cml        | web      | weex     | wx         | alipay     | baidu      |
-| ---------- | -------- | -------- | ---------- | ---------- | ---------- |
-| view       | div      | div      | view       | view       | view       |
-| cover-view | div      | div      | cover-view | cover-view | cover-view |
-| text       | span     | text     | text       | text       | text       |
-| image      | img      | image    | image      | iamge      | iamge      |
-| cell       | div      | cell     | view       | view       | View       |
-| block      | template | template | block      | block      | block      |
-|            |          |          |            |            |            |
+| cml         | web      | weex     | wx          | alipay      | baidu       |
+| ----------- | -------- | -------- | ----------- | ----------- | ----------- |
+| view        | div      | div      | view        | view        | view        |
+| cover-view  | div      | div      | cover-view  | cover-view  | cover-view  |
+| text        | span     | text     | text        | text        | text        |
+| image       | img      | image    | image       | iamge       | iamge       |
+| cell        | div      | cell     | view        | view        | View        |
+| block       | template | template | block       | block       | block       |
+| cover-image | img      | image    | cover-image | cover-image | cover-image |
 
 #### 内置组件标签的替换
 
