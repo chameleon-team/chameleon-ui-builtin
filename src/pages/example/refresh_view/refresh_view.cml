@@ -1,5 +1,5 @@
 <template>
-  <c-page title="refresh-view">
+  <c-page title="refresh-view" full="{{true}}">
     <refresh-view enablePullUpLoad="{{true}}"
                   pullingDown="{{pullingDown}}"
                   pullingUp="{{pullingUp}}"
