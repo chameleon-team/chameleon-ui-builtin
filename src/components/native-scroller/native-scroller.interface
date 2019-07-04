@@ -1,0 +1,6 @@
+<script cml-type="interface">
+
+interface NativeScrollerInterface {
+  
+}
+</script>
