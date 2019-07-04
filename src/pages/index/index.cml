@@ -54,7 +54,6 @@
         </c-scroller>
       </view>
     </view>
-
   </c-page>
 </template>
 <script>
@@ -89,6 +88,7 @@ class Demo {
         pages: [
           routeObj["list"],
           routeObj["scroller"],
+          routeObj["refresh-view"],
           routeObj["carousel"]
         ],
         src: require(`../../assets/images/component/kind/view.png`)

@@ -1,5 +1,5 @@
 <template>
-<view class="page">
+<view class="{{full ? 'page-full' : 'page'}}">
   <view  class="navigator-wrap" style="{{barStyle}}">
     <slot name="titlebar">
       <view class="ios-shadow" c-if="{{os === 'ios'}}"></view>
@@ -27,6 +27,10 @@ class CPage implements CPageInterface {
       required: true,
       type:  String,
       default: ''
+    },
+    full: {
+      type: Boolean,
+      default: false
     }
   }
   data = {
@@ -40,7 +44,10 @@ class CPage implements CPageInterface {
       return `top: ${this.deviceTopBarHeight}cpx;`;
     },
     mainStyle() {
-      return `
+      return this.full ? `position: absolute;
+                          top:${this.deviceTopBarHeight + 88}cpx;
+                          bottom: ${this.safeBottom}cpx;
+                          left: 0; right: 0` : `
         margin-top: ${this.deviceTopBarHeight + 88}cpx;
         margin-bottom: ${this.safeBottom}cpx
       `
@@ -95,6 +102,13 @@ export default new CPage();
 </script>
 
 <style scoped>
+.page-full {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 .navigator-wrap {
   position: fixed;
   left: 0;

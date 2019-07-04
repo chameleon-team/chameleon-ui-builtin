@@ -21,6 +21,12 @@
       "mock": "index.php"
     },
     {
+      "name": "refresh-view",
+      "url": "/pages/example/refresh_view/refresh_view",
+      "path": "/pages/example/refresh_view/refresh_view",
+      "mock": "index.php"
+    },
+    {
       "name": "view",
       "url": "/pages/example/view/view",
       "path": "/pages/example/view/view",
@@ -73,7 +79,6 @@
       "url": "/pages/example/richtext/richtext",
       "path": "/pages/example/richtext/richtext"
     },
-    
     {
       "name": "switch",
       "url": "/pages/example/switch/switch",
