@@ -1,6 +1,7 @@
 ## [0.2.11]
 ### Features
 - 新增 `<native-scroller>`、`<refresh-view>` 组件
+
 ### Bug fixes
 - 修复`<scroller>`组件滚动时获取位置不正确问题
 
