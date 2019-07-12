@@ -1,0 +1,37 @@
+<template>
+  <view class="refresh-loading">
+    <image class="refresh-loading-gif" src="{{loadingGif}}" />
+  </view>
+</template>
+
+<script>
+
+class RefreshLoading {
+
+  data = {
+    loadingGif: require('./img/loading.gif')
+  }
+}
+
+export default new RefreshLoading();
+</script>
+<style>
+.refresh-loading {
+  height: 80cpx;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+.refresh-loading-gif {
+  width: 32cpx;
+  height: 32cpx;
+}
+</style>
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+    }
+  }
+}
+</script>

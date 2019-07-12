@@ -1,0 +1,107 @@
+<template>
+  <origin-scroller @loadmore="onPullUpLoad" class="refresh-view" loadmoreoffset="{{pullUpStart}}">
+    <origin-refresh :display="pullingDown ? 'show': 'hide'" @refresh="onPullDownRefresh">
+      <origin-div class="pull-down" :style="pullDownStyle">
+        <slot name="pullDown">
+          <refresh-loading></refresh-loading>
+        </slot>
+      </origin-div>
+    </origin-refresh>
+    <origin-div class="refresh-content">
+      <slot></slot>
+    </origin-div>
+    <origin-loading :display="pullingUp ? 'show' : 'hide'" v-if="enablePullUpLoad" @loading="onPullUpLoad"></origin-loading>
+  </origin-scroller>
+</template>
+
+<script>
+import cml from 'chameleon-api';
+class RefreshView implements RefreshViewInterface {
+  props = {
+    enablePullUpLoad: {
+      type: Boolean,
+      default: false
+    },
+    pullUpLoadComplete: {
+      type: Boolean,
+      default: false
+    },
+    pullingUp: {
+      type: Boolean,
+      default: false
+    },
+    pullUpStop: {
+      type: Number,
+      default: 80
+    },
+    pullUpStart: {
+      type: Number,
+      default: 50
+    },
+    pullDownStart: {
+      type: Number,
+      default: 50
+    },
+    pullDownStop: {
+      type: Number,
+      default: 80
+    },
+    pullingDown: {
+      type: Boolean,
+      default: false
+    }
+  }
+  computed = {
+    pullUpLoadStyle() {
+      return `height: ${this.pullUpStop}cpx`;
+    },
+    pullDownStyle() {
+      return `height: ${this.pullDownStop}cpx`;
+    },
+    pullUpLoadTextStyle() {
+      return `height: ${this.pullUpStop}cpx; line-height: ${this.pullUpStop}cpx;`
+    }
+  }
+  methods = {
+    onPullDownRefresh() {
+      if (this.pullingDown) return;
+      this.$cmlEmit('onPullDownRefresh')
+    },
+    onPullUpLoad() {
+      if (this.pullUpLoadComplete || this.pullingUp) return;
+      this.$cmlEmit('onPullUpLoad')
+    }
+  }
+}
+
+export default new RefreshView();
+</script>
+
+<style >
+.refresh-view {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+}
+.pull-upload {
+  height: 80cpx;
+}
+.pull-upload-text {
+  text-align: center;
+}
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+      "refreshLoading": "../refresh-loading/refresh-loading"
+    }
+  }
+}
+</script>

@@ -1,0 +1,110 @@
+<template>
+<c-page title="button">
+    <c-scroller height="{{-1}}">
+      <c-header title="button"></c-header>
+      <view class="section-title">
+        <text class="sectin-title-text" >audio-stop</text>
+      </view>
+      <c-audio src="{{src3}}"
+        controls="{{true}}"
+        autoplay="{{true}}"
+        loop="{{true}}"
+        c-bind:pause="handlePause"
+        c-bind:play="handlePlay"
+        c-bind:timeupdate="handleTimeupdate"
+        c-bind:ended="handleEnded"
+        c-bind:error="handleError"
+      ></c-audio>
+      <text>{{audioText}}</text>
+    </c-scroller>
+</c-page>
+</template>
+<script>
+import cml from 'chameleon-api'
+class Audio   {
+  data = {
+    errorSrc:'http://vd3.bdddstatic.com/mda-ic7mxzt5cvz6f4y5/mda-ic7mxzt5cvz6f4y5.3',
+    userStyle: '  ',
+    poster:'http://p1.music.126.net/bYTctrjUegSyzDPteIeNOw==/74766790705099.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0',
+    poster1:'',
+    src2: require('../../../assets/mp3/pack.mp3'),//3秒
+    src3:'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
+    audioText:'origin-audiotext'
+  }
+
+  computed = {}
+  watch  = {}
+  methods = {
+    testclick(e) {
+      let type = e.detail.type
+      cml.showToast({
+        message: type + ' button'
+      })
+    },
+    handlePause(...args){
+      console.log('emit-pause',args);
+      this.audioText = 'pause'
+    },
+    handlePlay(...args){
+      console.log('emit-play',args);
+      this.audioText = 'play';
+    },
+    handleTimeupdate(...args){
+      this.audioText = 'timeUpdate'
+      // console.log('timeupdate',args)
+    },
+    handleEnded(...args){
+      this.audioText = 'ended';
+      console.log('emit-ended',args)
+    },
+    handleError(...args){
+      console.log('emit-error',args)
+    }
+    
+  }
+  
+  beforeCreate(res) {
+    ;
+    console.log('example-audio-beforeCraete')
+  }
+  created(res) {
+    ;
+    console.log('example-audio-created')
+  }
+  beforeMount(res) {
+    ;
+    console.log('example-audio-beforeMount')
+  }
+  mounted(res) {
+    ;
+    console.log('example-audio-mounted')
+  }
+  beforeDestroy(res) {
+    ;
+    console.log('example-audio-beforeDestroyed')
+  }
+  destroyed(res) {
+    ;
+    console.log('example-audio-destroyed')
+  }
+}
+export default new Audio();
+</script>
+<style scoped>
+
+</style>
+<script cml-type="json">
+{
+    "base": {
+        "usingComponents": {
+          "c-page": "/components/page/page",
+          "c-header": "../../components/header/header",
+          "c-audio": "/components/audio/audio",
+          "c-scroller": "/components/scroller/scroller"
+        },
+        "navigationBarTitleText": "button",
+        "backgroundTextStyle": "dark",
+        "backgroundColor": "#E2E2E2"
+    }
+}
+</script>

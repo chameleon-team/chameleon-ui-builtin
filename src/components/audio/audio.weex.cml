@@ -1,0 +1,233 @@
+<template>
+  <view class="audio-root" c-if="{{controls}}">
+    <view class="audio-left" c-bind:click="switchPlay">
+      <image class="poster-img" c-if="{{poster}}" src="{{poster}}"></image>
+      <image class="icon" style="width: 30cpx;height:30cpx;" src="{{audioStatus ? pauseImg : playImg}}"></image>
+      <!-- <image class="icon" style="width: 30px;height:30px;" src="{{audioStatus ? pauseImgWhite : playImgWhite}}"></image> -->
+    </view>
+    <view class="audio-right">
+      <view class="audio-text">
+        <text class="audio-text-name">{{name}}</text>
+        <text class="audio-text-author">{{author}}</text>
+      </view>
+      <view class="audio-time">
+        <text class="audio-time-text">
+        {{currentTime}}
+
+        </text>
+      </view>
+    </view>
+  </view>
+</template>
+  
+<script>
+import cml from 'chameleon-api'
+class CAudio implements CAudioInterface {
+  props = {
+    id:{
+      type:String,
+      default:"",
+    },
+    src:{ //audio的要播放的音频资源地址
+      type:String,
+      default:''
+    }, 
+    loop:{ //是否循环播放
+      type:Boolean,
+      default:false,
+    },
+    controls:{ //是否默认显示控件
+      type:Boolean,
+      default:false,
+    },
+    poster:{ //默认控件上的音频封面的图片资源地址，如果 controls 属性值为 false 则设置 poster 无效
+      type:String,
+      default:""
+    },
+    name:{ //默认控件上的音频名字，如果 controls 属性值为 false 则设置 name 无效	
+      type:String,
+      default:'未知音频'
+    },
+    author:{ //默认控件上的作者名字，如果 controls 属性值为 false 则设置 author 无效	
+      type:String,
+      default:'未知作者'
+    },
+    autoplay:{
+      type:Boolean,
+      default:false
+    },
+  }
+
+  data = {
+    playImg: require('../../assets/images/component/audio/play.png'),
+    pauseImg: require('../../assets/images/component/audio/pause.png'),
+    currentTime:'00:00',
+    audioStatus:false, //默认不是暂停状态
+    audioContext:{},
+  }
+
+  watch = {
+  }
+  
+  methods = {
+    initAudio(){
+      this.audioContext = cml.createInnerAudioContext();
+      this.audioStatus = this.autoplay; //如果默认自动播放 true，那么 audioStatus 为 true;
+      this.audioContext.src = this.src; //初始化音频资源地址
+      this.audioContext.autoplay = this.autoplay;//是否自动播放
+      if(this.autoplay){
+        this.$cmlEmit('play');//自动播放的情况下 emit play
+      }
+      this.audioContext.loop = this.loop
+      this.audioContext.onEnded(() => { //loop情况下不会触发ended这个方法
+        this.hanleEnded();
+      });
+      this.audioContext.onTimeUpdate(() => {
+        this.hanleTimeUpdate();
+      });
+      this.audioContext.onError((res) => {
+        let detail = {errMsg:res.errorCode}
+        this.handleError({detail})
+      })
+    },
+    handleError(e){
+      this.$cmlEmit('error',e.detail)
+    },
+    hanleTimeUpdate(){
+      this.$cmlEmit('timeupdate',{
+        currentTime:this.audioContext.currentTime,
+        duration:this.audioContext.duration
+      })
+      this.setCurrentTime()
+    },
+    hanleEnded(){
+      this.audioStatus = false;
+      //如果不是loop的情况下，会触发这个ended方法，需要再次emit pause
+      this.$cmlEmit('pause')
+      this.$cmlEmit('ended');
+    },
+    setCurrentTime(){
+      let val = this.audioContext.currentTime;
+      if(!val){
+        this.currentTime =  `00:00`;
+      }else{
+        let min = parseInt(val / 60 );
+        if(min < 10){
+          min = `0${min}`
+        }
+        let second = parseInt(val % 60);
+        if(second < 10){
+          second = `0${second}`;
+        }
+        this.currentTime = `${min}:${second}`
+      }
+    },
+    handlePlay(){
+      this.audioContext.play();
+      this.audioStatus = !this.audioStatus;
+      this.$cmlEmit('play')
+    },
+    handlePause(){
+      this.audioContext.pause();
+      this.audioStatus = !this.audioStatus;
+      this.$cmlEmit('pause')
+    },
+    switchPlay(){
+      if(this.audioStatus){ //正在播放状态
+        this.handlePause();
+      }else{ //暂停状态
+        this.handlePlay();
+      }
+    }
+  }
+  mounted() {
+    Promise.resolve().then(() => {
+      this.initAudio()
+    })
+  }
+  beforeDestroy(){
+    this.audioContext.destroy();
+  }
+}
+
+export default new CAudio();
+</script>
+
+<style >
+.audio-root{
+  width:720cpx;
+  height:150cpx;
+  margin-left:15cpx;
+  margin-right:15cpx;
+  display:flex;
+  flex-direction:row;
+  border:1cpx solid #d0d4d8;
+}
+.audio-left{
+  /* display:flex;
+  justify-content: center;
+  align-items:center; */
+  position:relative;
+  width:150cpx;
+  background-color:#efeded;
+}
+.poster-img{
+  width:150cpx;
+  height:150cpx;
+  position:absolute;
+  top:0cpx;
+  left:0cpx;
+}
+.icon{
+  width:50cpx;
+  height:50cpx;
+  position:absolute;
+  top:50cpx;
+  left:50cpx;
+}
+
+
+.audio-right{
+  display:flex;
+  flex-direction:row;
+  background-color:#d0d4d81f;
+  width:570cpx;
+}
+.audio-text{
+  width:370cpx;
+  margin-left:20cpx;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.audio-text-name{
+  font-size:36cpx;
+  font-weight:400;
+}
+.audio-text-author{
+  font-size:30cpx;
+  color:rgb(141,137,129)
+}
+.audio-time{
+  width:200cpx;
+  position:relative;
+}
+.audio-time-text{
+  /* position:absolute;
+  top:20cpx;
+  right:50cpx; */
+}
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+    }
+  }
+}
+</script>
+
+
+  
+  

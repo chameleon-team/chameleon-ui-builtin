@@ -1,0 +1,96 @@
+<template>
+  <refreshable :enablePullUpLoad="enablePullUpLoad"
+               :pullingUp="pullingUp"
+               :pullUpStart="pullUpStart2px"
+               :pullUpStop="pullUpStop2px"
+               :pullDownStart="pullDownStart2px"
+               :pullDownStop="pullDownStop2px"
+               :pullingDown="pullingDown"
+               @pullingDown="onPullDownRefresh"
+               @pullingUp="onPullUpLoad">
+    <slot></slot>
+    <slot name="pullDown" slot="pullDown"></slot>
+  </refreshable>
+</template>
+
+<script>
+import ChameleonScoll from 'chameleon-scroll';
+import cml from 'chameleon-api'
+class RefreshView implements RefreshViewInterface {
+  props = {
+    enablePullUpLoad: {
+      type: Boolean,
+      default: false
+    },
+    pullUpLoadComplete: {
+      type: Boolean,
+      default: false
+    },
+    pullingUp: {
+      type: Boolean,
+      default: false
+    },
+    pullUpStop: {
+      type: Number,
+      default: 80
+    },
+    pullUpStart: {
+      type: Number,
+      default: 50
+    },
+    pullDownStart: {
+      type: Number,
+      default: 50
+    },
+    pullDownStop: {
+      type: Number,
+      default: 80
+    },
+    pullingDown: {
+      type: Boolean,
+      default: false
+    }
+  }
+  computed = {
+    pullDownStart2px() {
+      return cml.cpx2px(this.pullDownStart);
+    },
+    pullDownStop2px() {
+      return cml.cpx2px(this.pullDownStop);
+    },
+    pullUpStart2px() {
+      return cml.cpx2px(this.pullUpStart);
+    },
+    pullUpStop2px() {
+      return cml.cpx2px(this.pullUpStop);
+    }
+  }
+  methods = {
+    onPullDownRefresh() {
+      this.$cmlEmit('onPullDownRefresh');
+    },
+    onPullUpLoad() {
+      this.$cmlEmit('onPullUpLoad');
+    }
+  }
+}
+
+export default new RefreshView();
+</script>
+
+<style >
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {
+      "refreshable": "../../assets/vue/refreshable"
+    }
+  }
+}
+</script>
+
+
+

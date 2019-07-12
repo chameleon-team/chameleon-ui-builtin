@@ -1,0 +1,30 @@
+<template>
+  <view class="wrap">
+    <slot></slot>
+  </view>
+</template>
+
+<script>
+
+class NativeScroller implements NativeScrollerInterface {
+  beforeCreate() {
+    let body = document.body
+    let oldBodyStyl = body.getAttribute('style')
+    let styl = oldBodyStyl + ';-webkit-overflow-scrolling : touch;'
+    body.setAttribute('style', styl)
+  }
+}
+
+export default new NativeScroller();
+</script>
+
+<style>
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {}
+  }
+}
+</script>

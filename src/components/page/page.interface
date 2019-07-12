@@ -13,6 +13,7 @@
 //定义事件detail对象的参数
 interface CPageInterface {
   title: String,
+  full: Boolean,
   back(eventDetail: void): void;
 }
 </script>
