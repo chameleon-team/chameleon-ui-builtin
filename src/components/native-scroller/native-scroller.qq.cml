@@ -1,7 +1,7 @@
 <template>
-  <scroller height="{{-1}}">
+  <view class="wrap">
     <slot></slot>
-  </scroller>
+  </view>
 </template>
 
 <script>
