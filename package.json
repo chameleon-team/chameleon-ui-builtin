@@ -12,8 +12,8 @@
   "email": "ChameleonCore@didiglobal.com",
   "dependencies": {
     "chameleon-api": "^0.5.0",
-    "chameleon-runtime": "^0.2.1-alpha.3",
+    "chameleon-runtime": "0.2.2",
     "chameleon-scroll": "0.0.3",
-    "chameleon-store": "0.0.3"
+    "chameleon-store": "0.1.0"
   }
 }
