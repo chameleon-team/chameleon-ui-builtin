@@ -1,3 +1,7 @@
+## [0.4.0]
+### Features
+- 支持QQ小程序
+
 ## [0.2.11]
 ### Features
 - 新增 `<native-scroller>`、`<refresh-view>` 组件
