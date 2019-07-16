@@ -1,25 +1,12 @@
 <template>
-  <view>
-    <text>weex端自定义组件</text>
-    <text>props:{{name}}</text>
-  </view>
+  <scroller height="{{-1}}">
+    <slot></slot>
+  </scroller>
 </template>
 
 <script>
 
 class NativeScroller implements NativeScrollerInterface {
-  props = {
-    name: {
-      type: String,
-      default: '默认值'
-    }
-  }
-
-  mounted() {
-    this.$cmlEmit('onshow',{
-      value: this.name
-    })
-  }
 }
 
 export default new NativeScroller();
