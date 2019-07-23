@@ -1,0 +1,144 @@
+<template>
+  <view class="audio-root">
+    <origin-audio
+    id="{{id}}"
+    src="{{src}}"
+    controls="{{controls}}"
+    loop="{{loop}}"
+    poster="{{poster}}"
+    name="{{name}}"
+    author="{{author}}"
+    bindplay="handlePlay"
+    bindpause="handlePause"
+    bindended="hanleEnded"
+    bindtimeupdate="hanleTimeUpdate"
+    binderror="handleError"
+  ></origin-audio>
+  </view>
+
+</template>
+
+<script>
+//wx和其他端不一套模板是因为loop的情况下不一致；
+class CAudio implements CAudioInterface {
+  props = {
+    id:{
+      type:String,
+      default:"",
+    },
+    src:{ //audio的要播放的音频资源地址
+      type:String,
+      default:''
+    }, 
+    loop:{ //是否循环播放
+      type:Boolean,
+      default:false,
+    },
+    controls:{ //是否默认显示控件
+      type:Boolean,
+      default:false,
+    },
+    poster:{ //默认控件上的音频封面的图片资源地址，如果 controls 属性值为 false 则设置 poster 无效
+      type:String,
+      default:""
+    },
+    name:{ //默认控件上的音频名字，如果 controls 属性值为 false 则设置 name 无效	
+      type:String,
+      default:'未知音频'
+    },
+    author:{ //默认控件上的作者名字，如果 controls 属性值为 false 则设置 author 无效	
+      type:String,
+      default:'未知作者'
+    },
+    autoplay:{
+      type:Boolean,
+      default:false
+    },
+  }
+
+  data = {
+    currentTime:'00:00',
+    isAutoplay:false, //默认不是暂停状态
+    audioContext:{},
+    isEnded:false,//用于标记是否播放完毕，在播放完毕之后，用于重新播放
+  }
+
+  computed = {
+  }
+
+  watch = {
+  }
+  
+  methods = {
+    initAudio(){
+      this.audioContext = wx.createAudioContext(this.id,this);
+      this.isAutoplay = this.autoplay; //如果默认自动播放 true，那么 isAutoplay 为 true;
+      if(this.isAutoplay){
+        this.audioContext.play();
+      }
+    },
+    //loop的情况下 ended方法不会触发；
+    hanleEnded(){
+      if(this.loop){ //loop为false的时候，会触发这个方法，此时需要将this.isAutoplay置为false
+        this.isAutoplay = false;
+      }
+      this.$cmlEmit('ended');
+    },
+    hanleTimeUpdate(e){
+      this.$cmlEmit('timeupdate',e.detail)
+    },
+    handleError(e){
+      let errorMap = {
+        MEDIA_ERR_ABORTED:1001,
+        MEDIA_ERR_NETWORK:1002,
+        MEDIA_ERR_DECODE:1003,
+        MEDIA_ERR_SRC_NOT_SUPPORTED:1004,
+      }
+      let errMsg = -1;
+      if(e.detail && e.detail.errMsg){
+        errMsg = errorMap[e.detail.errMsg];
+      }
+      let detail = {errMsg}
+      this.$cmlEmit('error',detail)
+    },
+    setCurrentTime(){},
+    handlePlay(){
+      this.isAutoplay = !this.isAutoplay;
+      this.$cmlEmit('play')
+    },
+    handlePause(){
+      this.isAutoplay = !this.isAutoplay;
+      this.$cmlEmit('pause')
+    }
+  }
+  mounted() {
+    this.initAudio()
+  }
+  beforeDestroy(){
+  }
+  destroyed(){
+  }
+}
+
+export default new CAudio();
+</script>
+
+<style >
+.audio-root{
+  display: flex;
+  align-items: center;
+  height:150cpx;
+  
+}
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {}
+  }
+}
+</script>
+
+
+
