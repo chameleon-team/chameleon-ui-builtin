@@ -11,6 +11,10 @@ class CPage implements CPageInterface {
       required: true,
       type:  String,
       default: ''
+    },
+    full: {
+      type: Boolean,
+      default: false 
     }
   }
   watch = {

@@ -16,4 +16,4 @@ interface CheckboxInterface {
   changeevent(eventDetail: EventDetail): void;
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay" src="./checkbox.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq" src="./checkbox.cml"></script>

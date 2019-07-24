@@ -4,4 +4,4 @@ interface ContainerInterface {
   direction: String
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay" src="./container.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq" src="./container.cml"></script>
