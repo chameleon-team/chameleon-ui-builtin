@@ -7,4 +7,4 @@ interface ColInterface {
   margin: Number
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay" src="./col.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq" src="./col.cml"></script>

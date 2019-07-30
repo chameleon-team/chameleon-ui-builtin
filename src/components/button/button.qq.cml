@@ -9,7 +9,6 @@
     lang="{{lang}}"
     c-bind:getuserinfo="getuserinfo"
     c-bind:opensetting="opensetting"
-    c-bind:launchapp="launchapp"
     c-bind:error="error"
     >
     <text c-if="{{text}}" class="{{textClasses}}" style="{{mrTextStyle}}">{{text}}</text>
