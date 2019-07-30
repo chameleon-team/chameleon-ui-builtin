@@ -1,3 +1,7 @@
+## [0.4.1-alpha.0]
+### Features
+修复input, add 部分qq组件, 修复语法检查
+
 ## [0.4.0]
 ### Features
 - 支持QQ小程序

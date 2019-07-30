@@ -4,4 +4,4 @@ interface AsideInterface {
   asideStyle: String,
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay" src="./aside.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq" src="./aside.cml"></script>

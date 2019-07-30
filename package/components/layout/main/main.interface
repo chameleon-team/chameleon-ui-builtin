@@ -4,4 +4,4 @@ interface MainInterface {
   mainStyle: String
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay" src="./main.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq" src="./main.cml"></script>
