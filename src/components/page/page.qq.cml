@@ -25,6 +25,9 @@ class CPage implements CPageInterface {
   methods = {
     setTitle(v) {
       cml.setTitle(v);
+    },
+    back() {
+      this.$cmlEmit('back')
     }
   }
   created() {
