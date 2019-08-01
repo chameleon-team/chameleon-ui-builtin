@@ -86,12 +86,33 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
     }
     computed ={
       computedStyle() {
-        let style = this.cStyle || this.cstyle
-        
-        if(style[style.length-1] !== ';') {
-          style +=';'
+        let _inputWrapStyleObj = {
+          'font-size': '33cpx',
+          'height': '80cpx',
+          'width':'400cpx',
+          'line-height': '80cpx',
+          'padding-left': '20cpx',
+          'padding-right': '20cpx',
+          'color': '#000',
+          'border': '1cpx solid #999',
+          'border-radius': '8cpx',
+          'text-align': 'left',
+          'background-color': 'red',
         }
-        style += `placeholder-color: ${this.placerHolderColor};`
+        let _style = this.cStyle || this.cstyle  
+        let _styleObj = {}
+        if(_style[_style.length-1] !== ';') {
+          _style +=';'
+        }
+        _style += `placeholder-color: ${this.placerHolderColor};`
+        _style.split(';').map(item =>{
+          if(item){
+            let itemArray= item.split(":")
+            _styleObj[itemArray[0]] = itemArray[1]
+          }
+        })
+        let styleObj = Object.assign({},_inputWrapStyleObj,_styleObj)
+        let style = Object.keys(styleObj).map(k => `${k}:${styleObj[k]}`).join(';')
         return style
       },
       isInputNumber () {
@@ -174,18 +195,6 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
 </script>
 
 <style scoped>
-.input-wrap {
-  font-size: 33cpx;
-  height: 80cpx;
-  line-height: 80cpx;
-  padding-left: 20cpx;
-  padding-right: 20cpx;
-  color: #000;
-  border: 1cpx solid #999;
-  border-radius: 8cpx;
-  text-align: left;
-  background-color: #fff;
-}
 </style>
 
 <script cml-type="json">
