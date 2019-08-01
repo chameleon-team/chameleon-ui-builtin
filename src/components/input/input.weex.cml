@@ -96,7 +96,7 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
           'border': '1cpx solid #999',
           'border-radius': '8cpx',
           'text-align': 'left',
-          'background-color': 'red',
+          'background-color': '#fff',
         }
         let _style = this.cStyle || this.cstyle  
         let _styleObj = {}
