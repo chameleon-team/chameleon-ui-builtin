@@ -89,7 +89,6 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
         let _inputWrapStyleObj = {
           'font-size': '33cpx',
           'height': '80cpx',
-          'width':'400cpx',
           'line-height': '80cpx',
           'padding-left': '20cpx',
           'padding-right': '20cpx',
