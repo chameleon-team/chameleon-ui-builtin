@@ -1,3 +1,7 @@
+## [0.4.1-alpha.1]
+### Features
+- 修复input组件在weex端闪烁问题
+
 ## [0.4.1-alpha.0]
 ### Features
 - 修复input, add 部分qq组件, 修复语法检查
