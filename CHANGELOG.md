@@ -1,3 +1,7 @@
+## [0.4.1]
+### Features
+- publish 0.4.1
+
 ## [0.4.1-alpha.1]
 ### Features
 - 修复input组件在weex端闪烁问题
