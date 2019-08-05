@@ -54,7 +54,7 @@ class RefreshView implements RefreshViewInterface {
   watch = {
     pullingDown(v) {
       if (!v) {
-        wx.stopPullDownRefresh();
+        qq.stopPullDownRefresh();
       }
     }
   }

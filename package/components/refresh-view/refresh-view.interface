@@ -29,7 +29,7 @@ interface RefreshViewInterface {
   pullDownStart: Number;       // 下拉刷新开始位置
   pullDownStop: Number;        // 下拉刷新停留位置
   pullingDown: Boolean;    // 下拉刷新中
-  onscroll(eventDetail: scrollEventDetail): void;
+  // onscroll(eventDetail: scrollEventDetail): void;
   onPullDownRefresh(eventDetail: void): void;
   onPullUpLoad(eventDetail: void): void;
 }

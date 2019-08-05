@@ -6,7 +6,7 @@
 
 <script>
 
-class RefreshLoading {
+class RefreshLoading implements RefreshLoadingInterface{
 
   data = {
     loadingGif: require('./img/loading.gif')
