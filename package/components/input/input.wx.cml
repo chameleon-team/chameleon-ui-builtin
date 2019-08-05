@@ -98,7 +98,9 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       focus: function(newVal, oldVal) {
       },
       value: function(newVal, oldVal) {
-        this.inputValue = newVal;
+        this.setData({
+          inputValue: newVal
+        })
       }
     }
     mounted() {

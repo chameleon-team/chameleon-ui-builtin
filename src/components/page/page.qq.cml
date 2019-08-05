@@ -11,6 +11,10 @@ class CPage implements CPageInterface {
       required: true,
       type:  String,
       default: ''
+    },
+    full: {
+      type: Boolean,
+      default: false 
     }
   }
   watch = {
@@ -21,6 +25,9 @@ class CPage implements CPageInterface {
   methods = {
     setTitle(v) {
       cml.setTitle(v);
+    },
+    back() {
+      this.$cmlEmit('back')
     }
   }
   created() {

@@ -137,6 +137,21 @@ import { transCls } from './util'
       },
       touchend(e) {
         this.hover = false
+      },
+      getuserinfo(){
+        this.$cmlEmit('getuserinfo')
+      },
+      contact(){
+        this.$cmlEmit('contact')
+      },
+      getphonenumber(){
+        this.$cmlEmit('getphonenumber')
+      },
+      error(){
+        this.$cmlEmit('error')
+      },
+      opensetting(){
+        this.$cmlEmit('opensetting')
       }
     }
     
