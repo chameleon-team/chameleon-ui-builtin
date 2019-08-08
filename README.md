@@ -1,4 +1,4 @@
-# chameleon-ui-builtin
+# chameleon-ui-builtin [![version](https://img.shields.io/npm/v/chameleon-tool.svg?style=flat)](https://www.npmjs.com/package/chameleon-ui-builtin)
 本仓库为 `cml` 框架的内置组件库，提供跨端基础内置组件
 
 详细见[cml内置组件文档](https://cmljs.org/doc/component/base/base.html)
