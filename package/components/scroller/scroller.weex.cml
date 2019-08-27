@@ -38,6 +38,10 @@
         type: Boolean,
         default: false
       },
+      deceleration:{
+        type: Number,
+        default: 0.0015
+      },
       //-1表示占用剩余高度或者宽度
       height: {
         type: Number,

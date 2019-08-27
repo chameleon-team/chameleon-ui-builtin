@@ -26,6 +26,10 @@ export default {
       type: Boolean,
       default: false
     },
+    deceleration:{
+      type: Number,
+      default: 0.0015
+    },
     cstyle: {
       type: String,
       default: ''
@@ -66,6 +70,7 @@ export default {
         probeType: 3,
         // 上拉下拉是否回弹
         bounce: this.bounce,
+        deceleration: this.deceleration,
         click: true,
         tap: true,
         preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
