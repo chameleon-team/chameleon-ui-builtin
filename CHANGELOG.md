@@ -1,3 +1,7 @@
+## [1.0.0]
+### Features
+- 1.0.0正式版
+
 ## [0.4.2-alpha.0]
 ### Features
 - scroller 在web端可定制滑动动画的减速度
