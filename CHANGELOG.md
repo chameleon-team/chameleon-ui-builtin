@@ -1,6 +1,9 @@
 ## [1.0.0]
 ### Features
-- 1.0.0正式版
+- 1.0.1
+## [1.0.1]
+### Features
+- 修复refresh-view
 
 ## [0.4.2-alpha.0]
 ### Features
