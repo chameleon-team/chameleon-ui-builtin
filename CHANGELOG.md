@@ -1,9 +1,14 @@
-## [1.0.0]
+## [1.0.2]
 ### Features
-- 1.0.1
+- 修复refresh-view weex端
+
 ## [1.0.1]
 ### Features
 - 修复refresh-view
+
+## [1.0.0]
+### Features
+- 1.0.0
 
 ## [0.4.2-alpha.0]
 ### Features
