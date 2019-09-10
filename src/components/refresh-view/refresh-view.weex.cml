@@ -1,5 +1,10 @@
 <template>
-  <origin-scroller @loadmore="onPullUpLoad" class="refresh-view" loadmoreoffset="{{pullUpStart}}">
+  <c-scroller 
+      height="{{-1}}"
+      c-bind:scrolltobottom="onPullUpLoad"
+      class="refresh-view" 
+      bottom-offset="{{pullUpStart}}"
+  >
     <origin-refresh :display="pullingDown ? 'show': 'hide'" @refresh="onPullDownRefresh">
       <origin-div class="pull-down" :style="pullDownStyle">
         <slot name="pullDown">
@@ -11,7 +16,7 @@
       <slot></slot>
     </origin-div>
     <origin-loading :display="pullingUp ? 'show' : 'hide'" v-if="enablePullUpLoad" @loading="onPullUpLoad"></origin-loading>
-  </origin-scroller>
+  </c-scroller>
 </template>
 
 <script>
@@ -79,11 +84,6 @@ export default new RefreshView();
 
 <style >
 .refresh-view {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   display: flex;
   flex-direction: column;
 }
@@ -100,7 +100,8 @@ export default new RefreshView();
 {
   "base": {
     "usingComponents": {
-      "refreshLoading": "../refresh-loading/refresh-loading"
+      "refreshLoading": "../refresh-loading/refresh-loading",
+      "c-scroller":"../scroller/scroller"
     }
   }
 }
