@@ -25,6 +25,18 @@ class CCarousel implements CCarouselInterface {
       type: String,
       default: '#000000'
     },
+    dotStyle:{
+      type:String,
+      default:''
+    },
+    dotActiveStyle:{
+      type:String,
+      default:''
+    },
+    dotsToBottom:{
+      type:Number,
+      default:10
+    },
     circular: {
       type: Boolean,
       default: false
