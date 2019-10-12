@@ -1,3 +1,8 @@
+
+## [1.0.4-alpha.0]
+### Features
+- carousel组件在web、weex端可配置指示点样式
+
 ## [1.0.3]
 ### Features
 - 修复refresh-view weex端
