@@ -87,7 +87,7 @@ export default {
       if (!val) return
       this.sizeInitAndChange()
     },
-    width () {
+    width (val) {
       if (!val) return
       this.sizeInitAndChange()
     },
