@@ -40,6 +40,10 @@ class CCarousel implements CCarouselInterface {
     circular: {
       type: Boolean,
       default: false
+    },
+    threshold:{
+      type:Number,
+      default:10
     }
   }
   methods = {

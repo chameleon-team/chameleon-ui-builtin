@@ -110,6 +110,10 @@ class Carousel implements CCarouselInterface {
     dotsToBottom:{
       type:Number,
       default:10
+    },
+    threshold:{
+      type:Number,
+      default:100
     }
   }
   name =  'slider'
@@ -557,11 +561,11 @@ class Carousel implements CCarouselInterface {
         return false
       } else if (this.options.direction !== 'vertical') {
         // 为了平滑滑动，修改y轴限制
-        if ((deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
+        if ((deltaX > this.threshold) && (Math.abs(deltaY) < thresholdDistance)) {
           // swipe right
           this.pre()
           return false
-        } else if ((-deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
+        } else if ((-deltaX > this.threshold) && (Math.abs(deltaY) < thresholdDistance)) {
           // swipe left
           this.next()
           return false
@@ -576,11 +580,11 @@ class Carousel implements CCarouselInterface {
         }
         // 垂直判定
       } else {
-        if ((deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
+        if ((deltaY > this.threshold) && (Math.abs(deltaX) < thresholdDistance)) {
           // swipe right
           this.pre()
           return false
-        } else if ((-deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
+        } else if ((-deltaY > this.threshold) && (Math.abs(deltaX) < thresholdDistance)) {
           // swipe left
           this.next()
           return false
