@@ -942,12 +942,12 @@ export default new Carousel();
   bottom: 0;
 }
 .slider-touch {
-  height: 100%;
+  // height: 100%;
 }
 .slider-wrapper {
   box-sizing: content-box;
   display: flex;
-  height: 100%;
+  // height: 100%;
   position: relative;
   transition-property: transform;
   width: 100%;

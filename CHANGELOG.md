@@ -1,4 +1,8 @@
 
+## [1.0.4-alpha.1]
+### Features
+- 修复carousel组件在web端塌陷问题
+
 ## [1.0.4-alpha.0]
 ### Features
 - carousel组件在web、weex端可配置指示点样式
