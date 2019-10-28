@@ -1,3 +1,6 @@
+## [1.0.4-alpha.3]
+### Features
+- 增加carousel组件在web端滑动灵敏度参数
 
 ## [1.0.4-alpha.1]
 ### Features

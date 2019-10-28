@@ -73,6 +73,10 @@ import cml from 'chameleon-api'
       dotsToBottom:{
         type:Number,
         default:10
+      },
+      threshold:{
+        type:Number,
+        default:100
       }
     }
     computed = {
