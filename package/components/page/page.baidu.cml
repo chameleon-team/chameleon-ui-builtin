@@ -1,5 +1,5 @@
 <template>
-  <view class="{{full ? 'page-full' : 'page'}}">
+  <view class="{{full ? 'page-full' : 'page'}}" style="{{cstyle}}">
     <slot></slot>
   </view>
 </template>
@@ -8,6 +8,11 @@ import cml from 'chameleon-api';
 class CPage implements CPageInterface {
   props = {
     title: {
+      required: true,
+      type:  String,
+      default: ''
+    },
+	cstyle: {
       required: true,
       type:  String,
       default: ''
