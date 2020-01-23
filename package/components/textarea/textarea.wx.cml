@@ -67,6 +67,10 @@ event: cinput cblur cfocus cconfirm
         type: String,
         default: '#666'
       },
+	  placeholderStyle:{
+		type: String,
+        default: ''
+	  },
       rows: {
         type: Number,
         default: 2
@@ -76,7 +80,7 @@ event: cinput cblur cfocus cconfirm
     }
     computed ={
       wxPlaceHolderStyle() {
-        return `color: ${this.placerHolderColor}`
+        return `color: ${this.placerHolderColor};${this.placeholderStyle}`
       },
       computedStyle() {
         // props 必须经过计算属性，否则没有经过 cpx 转换

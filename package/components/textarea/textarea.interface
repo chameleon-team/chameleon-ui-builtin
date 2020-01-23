@@ -13,6 +13,7 @@ interface TextareaInterface {
   focus: Boolean,
   maxlength: Number,
   returnKeyType: String,
+  placeholderStyle:String,
   placerHolderColor: String,
   rows: Number,
   inputevent(eventDetail: inputEventDetail): void;
