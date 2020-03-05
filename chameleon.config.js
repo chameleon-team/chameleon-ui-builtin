@@ -21,7 +21,6 @@ cml.config.merge({
     wxEntryPage: '',
     webPath: 'https://api.chameleon.com/h5/commentinfo'
   },
-  babelPath:[path.resolve(__dirname,'node_modules/')],
   wx: {
     dev: {
     },
