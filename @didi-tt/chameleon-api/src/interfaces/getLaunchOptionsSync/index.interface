@@ -1,0 +1,92 @@
+<script cml-type="interface">
+interface launchOptionsInterface {
+  getLaunchOptionsSync(): CMLObject
+}
+</script>
+
+<script cml-type="web">
+import { getQueryParamsFromUrl } from '../../lib/utils';
+
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return {
+      query: getQueryParamsFromUrl(location.href)
+    };
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="weex">
+import cmlBridge from '../../lib/sdk/cmlBridge';
+
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return {
+      query: cmlBridge.getQueryObjSync()
+    };
+  }
+}
+
+export default new Method();
+
+</script>
+
+
+<script cml-type="wx">
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return wx.getLaunchOptionsSync();
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="tt">
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return tt.getLaunchOptionsSync();
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="qq">
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return qq.getLaunchOptionsSync();
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="baidu">
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return {};
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="alipay">
+class Method implements launchOptionsInterface {
+  getLaunchOptionsSync() {
+    return {
+      msg: "不可直接获取，需从App生命周期的onLaunch钩子中获取。文档：https://docs.alipay.com/mini/framework/app"
+    };
+  }
+}
+
+export default new Method();
+
+</script>

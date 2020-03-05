@@ -1,0 +1,388 @@
+<script cml-type="interface">
+type responseType = {
+  status: Number,
+  data: String,
+  headers: String
+}
+
+type requestParams = {
+  url: String,
+  body: String,
+  contentType: String,
+  headers: CMLObject,
+  setting: CMLObject,
+  method: String,
+  cb(res: responseType): void
+}
+
+
+interface UtilsInterface {
+  request(params: requestParams): void;
+}
+
+</script>
+
+<script cml-type="web">
+  import 'fetch-detector';
+  import 'fetch-ie8';
+  import { parseHeader } from './common.js';
+
+
+  // web端接口实现
+  class Method implements UtilsInterface {
+    request(params) {
+      let {
+        url, body, headers, method, cb, setting, contentType
+      } = params;
+
+      let fetchOptions = {
+        credentials: setting.credentials || 'include',
+        method,
+        headers: headers
+      };
+      if (method.toUpperCase() !== 'GET') {
+        fetchOptions.body = body;
+      }
+
+      if (setting.jsonp) {
+        jsonp({url, data: body}).then(res => {
+          cb(res);
+        });
+        return;
+      }
+
+      fetch(url, fetchOptions).then(res => {
+        res.text().then(data => {
+          cb({
+            status: res.status,
+            data,
+            headers: parseHeader(res.headers && res.headers.map || {})
+          });
+        });
+      }, err => {
+        cb({
+          status: -1,
+          data: 'request failed',
+          headers: '{}'
+        });
+      }).catch(e => {
+        cb({
+          status: -1,
+          data: 'request failed',
+          headers: '{}'
+        });
+      });
+    }
+  }
+
+  function jsonp(options) {
+    return new Promise((resolve, reject) => {
+      let name = options.jsonp || 'callback';
+      let callback = '_cml_' + Math.random().toString(36).substr(2);
+      let body = null;
+      let handler;
+      let script;
+      let contentType = options.contentType || 'json';
+
+      handler = ({type}) => {
+        let status = 0;
+        if (type === 'load') {
+          status = 200;
+        } else if (type === 'error') {
+          status = 500;
+        }
+
+        if (status && window[callback]) {
+          delete window[callback];
+          document.body.removeChild(script);
+        }
+
+        resolve({
+          status,
+          data: body,
+          headers: ''
+        });
+      };
+
+      window[callback] = result => {
+        body = (contentType === 'json') ? result : JSON.stringify(result);
+      };
+      let separater = options.url.indexOf('?') > -1 ? '&' : '?'
+      script = document.createElement('script');
+      script.src = options.url + `${separater}${name}=${callback}&` + options.data || '';
+      script.type = 'text/javascript';
+      script.async = true;
+      script.onload = handler;
+      script.onerror = handler;
+
+      document.body.appendChild(script);
+    });
+  }
+  export default new Method();
+</script>
+
+<script cml-type="weex">
+import cmlBridge from '../../lib/sdk/cmlBridge';
+import { inSDK } from '../../lib/sdk/env';
+
+class Method implements UtilsInterface {
+  request(params) {
+    if(inSDK()) {
+      cmlBridge.request(params);
+    }else {
+      const stream = weex.requireModule('stream');
+      let {
+        url, body, headers, method, cb, contentType
+      } = params;
+      let fetchOptions = {
+        url,
+        method,
+        headers: headers,
+        type: 'text'
+      }
+
+      if (method.toUpperCase() !== 'GET') {
+        fetchOptions.body = body;
+      }
+
+      stream.fetch(fetchOptions, function (res) {
+        const { status, data, headers } = res;
+        cb({
+          status,
+          data,
+          headers
+        });
+      });
+
+    }
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="wx">
+  import { parseHeader } from './common.js';
+  import { queryParse } from '../../lib/utils';
+
+  class Method implements UtilsInterface {
+    request(params) {
+      let {
+        url, body, headers, method, cb, contentType
+      } = params;
+      if (contentType == 'form') {
+        body = queryParse(body)
+      } else if (contentType == 'json') {
+        try {
+          body = JSON.parse(body)
+        } catch (e) {
+        }
+      }
+      wx.request({
+        url,
+        data:body,
+        dataType: 'text',
+        method,
+        header: headers,
+        success: function(res) {
+          cb({
+            status: res.statusCode,
+            data: res.data, 
+            headers: parseHeader(res.header)
+          });
+        },
+        fail: function(e) {
+          cb({
+            status: -1,
+            data: 'request failed',
+            headers: '{}'
+          });
+        }
+      });
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="tt">
+  import { parseHeader } from './common.js';
+  import { queryParse } from '../../lib/utils';
+
+  class Method implements UtilsInterface {
+    request(params) {
+      let {
+        url, body, headers, method, cb, contentType
+      } = params;
+      if (contentType == 'form') {
+        body = queryParse(body)
+      } else if (contentType == 'json') {
+        try {
+          body = JSON.parse(body)
+        } catch (e) {
+        }
+      }
+      tt.request({
+        url,
+        data:body,
+        dataType: 'text',
+        method,
+        header: headers,
+        success: function(res) {
+          cb({
+            status: res.statusCode,
+            data: res.data, 
+            headers: parseHeader(res.header)
+          });
+        },
+        fail: function(e) {
+          cb({
+            status: -1,
+            data: 'request failed',
+            headers: '{}'
+          });
+        }
+      });
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="qq">
+  import { parseHeader } from './common.js';
+  import { queryParse } from '../../lib/utils';
+
+  class Method implements UtilsInterface {
+    request(params) {
+      let {
+        url, body, headers, method, cb, contentType
+      } = params;
+      if (contentType == 'form') {
+        body = queryParse(body)
+      } else if (contentType == 'json') {
+        try {
+          body = JSON.parse(body)
+        } catch (e) {
+        }
+      }
+      qq.request({
+        url,
+        data:body,
+        dataType: 'text',
+        method,
+        header: headers,
+        success: function(res) {
+          cb({
+            status: res.statusCode,
+            data: res.data, 
+            headers: parseHeader(res.header)
+          });
+        },
+        fail: function(e) {
+          cb({
+            status: -1,
+            data: 'request failed',
+            headers: '{}'
+          });
+        }
+      });
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="baidu">
+  import { parseHeader } from './common.js';
+  import { queryParse } from '../../lib/utils';
+
+  class Method implements UtilsInterface {
+    request(params) {
+      let {
+        url, body, headers, method, cb, contentType
+      } = params;
+      if (contentType == 'form') {
+        body = queryParse(body)
+      } else if (contentType == 'json') {
+        try {
+          body = JSON.parse(body)
+        } catch (e) {
+        }
+      }
+      swan.request({
+        url,
+        data:body,
+        dataType: 'text',
+        method,
+        header: headers,
+        success: function(res) {
+          cb({
+            status: res.statusCode,
+            data: res.data,
+            headers: parseHeader(res.header)
+          });
+        },
+        fail: function(e) {
+          cb({
+            status: -1,
+            data: 'request failed',
+            headers: '{}'
+          });
+        }
+      });
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="alipay">
+
+  import { parseHeader } from './common.js';
+  import { getQueryParamsFromUrl, queryParse } from '../../lib/utils.js';
+
+  class Method implements UtilsInterface {
+    request(params) {
+      let {
+        url, body, headers, method, cb, contentType
+      } = params;
+      if (contentType == 'form') {
+        body = queryParse(body)
+      } else if (contentType == 'json') {
+        try {
+          body = JSON.parse(body)
+        } catch (e) {
+        }
+      }
+      let allData = {
+        url,
+        method,
+        data: body,
+        dataType: 'text',
+        headers,
+        success: function(res) {
+          cb({
+            status: res.status,
+            data: res.data,
+            headers: parseHeader(res.headers)
+          });
+        },
+        fail: function(e) {
+          cb({
+            status: -1,
+            data: 'request failed',
+            headers: '{}'
+          });
+        }
+      }
+      if (my.request) {
+        my.request(allData);
+      } else {
+        my.httpRequest(allData);
+      }
+    }
+  }
+
+  export default new Method();
+</script>

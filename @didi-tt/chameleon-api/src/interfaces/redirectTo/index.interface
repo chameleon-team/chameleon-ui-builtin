@@ -1,0 +1,142 @@
+<script cml-type="interface">
+type options = {
+  path: String,
+  query: CMLObject,
+  url: String
+}
+
+interface UtilsInterface {
+  redirectTo(opt: options): void;
+}
+
+</script>
+
+<script cml-type="web">
+
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      let {path, query} = opt;
+
+      let runtime = require("chameleon-runtime").default;
+      let {router, routerConfig} = runtime.getInfo();
+
+      if (path && router) {
+        let flag = false;
+
+        let routes = routerConfig.routes;
+        for (let i = 0; i < routes.length;i++) {
+          let route = routes[i];
+          if (path === route.path) {
+            flag = true;
+            router.replace({
+              path: route.url,
+              query
+            })
+            break;
+          }
+        }
+        if (!flag) {
+          router.replace({
+            path: router.options.routes[0].path,
+            query
+          });
+        }
+      } else {
+        router.replace({
+          path: router.options.routes[0].path,
+          query
+        });
+      }
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="weex">
+
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      var runtime = require("chameleon-runtime").default;
+
+      let { router } = runtime.getInfo();
+      let { path, query } = opt;
+
+      router.replace({
+        path,
+        query
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="wx">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path)
+      wx.redirectTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="tt">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path)
+      tt.redirectTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="qq">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path)
+      qq.redirectTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="baidu">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path)
+      swan.redirectTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+
+<script cml-type="alipay">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    redirectTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path)
+      my.redirectTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>

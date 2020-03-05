@@ -1,0 +1,83 @@
+<script cml-type="interface">
+interface UtilsInterface {
+  navigateBack(backPageNum: Number): void;
+}
+
+</script>
+
+<script cml-type="web">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      let runtime = require("chameleon-runtime").default;
+      let {router, routerConfig} = runtime.getInfo();
+      router.go(backPageNum);
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="weex">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      var runtime = require("chameleon-runtime").default;
+      let { router } = runtime.getInfo();
+      router.go(backPageNum);
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="wx">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      wx.navigateBack({
+        delta: Math.abs(backPageNum)
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="tt">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      tt.navigateBack({
+        delta: Math.abs(backPageNum)
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="qq">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      qq.navigateBack({
+        delta: Math.abs(backPageNum)
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="baidu">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      swan.navigateBack({
+        delta: Math.abs(backPageNum)
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="alipay">
+  class Method implements UtilsInterface {
+    navigateBack(backPageNum) {
+      my.navigateBack({
+        delta: Math.abs(backPageNum)
+      });
+    }
+  }
+  export default new Method();
+</script>

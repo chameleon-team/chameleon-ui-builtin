@@ -1,0 +1,83 @@
+<script cml-type="interface">
+interface getWidthInterface {
+  getWidth(): Number
+}
+</script>
+
+<script cml-type="web">
+import { getViewportSize } from './common.js';
+let { viewportWidth } = getViewportSize();
+
+class Method implements getWidthInterface {
+  getWidth() {
+    return viewportWidth;
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="weex">
+class Method implements getWidthInterface {
+  getWidth() {
+    return 750
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="wx">
+const { windowWidth } = wx.getSystemInfoSync();
+class Method implements getWidthInterface {
+  getWidth() {
+    return windowWidth;
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="tt">
+const { windowWidth } = tt.getSystemInfoSync();
+class Method implements getWidthInterface {
+  getWidth() {
+    return windowWidth;
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="qq">
+const { windowWidth } = qq.getSystemInfoSync();
+class Method implements getWidthInterface {
+  getWidth() {
+    return windowWidth;
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="baidu">
+const { windowWidth } = swan.getSystemInfoSync();
+class Method implements getWidthInterface {
+  getWidth() {
+    return windowWidth;
+  }
+}
+
+export default new Method();
+</script>
+
+
+<script cml-type="alipay">
+  const { windowWidth } = my.getSystemInfoSync();
+  class Method implements getWidthInterface {
+    getWidth() {
+      return windowWidth;
+    }
+  }
+  export default new Method();
+</script>

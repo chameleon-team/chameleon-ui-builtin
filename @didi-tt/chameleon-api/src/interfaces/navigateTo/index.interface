@@ -1,0 +1,165 @@
+<script cml-type="interface">
+type options = {
+  path: String,
+  query: CMLObject,
+  url: String
+}
+
+interface UtilsInterface {
+  navigateTo(opt: options): void;
+}
+
+</script>
+
+<script cml-type="web">
+
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      let {path, query} = opt;
+
+      var runtime = require("chameleon-runtime").default;
+      let {router, routerConfig} = runtime.getInfo();
+
+      if (path && router) {
+        let flag = false;
+
+        let routes = routerConfig.routes;
+        for (let i = 0; i < routes.length;i++) {
+          let route = routes[i];
+          if (path === route.path) {
+            flag = true;
+            router.push({
+              path: route.url,
+              query
+            })
+            break;
+          }
+        }
+        if (!flag) {
+          router.push({
+            path: router.options.routes[0].path,
+            query
+          });
+        }
+      } else {
+        router.push({
+          path: router.options.routes[0].path,
+          query
+        });
+      }
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="weex">
+
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      var runtime = require("chameleon-runtime").default;
+      let { router, routerConfig } = runtime.getInfo();
+
+      let { path, query } = opt;
+
+      if (path && router) {
+        let flag = false;
+
+        let routes = routerConfig.routes;
+        for (let i = 0; i < routes.length; i++) {
+          let route = routes[i];
+          if (path === route.path) {
+            flag = true;
+            router.push({
+              path: route.url,
+              query
+            })
+            break;
+          }
+        }
+        if (!flag) {
+          router.push({
+            path: router.options.routes[0].path,
+            query
+          });
+        }
+      } else {
+        router.push({
+          path: router.options.routes[0].path,
+          query
+        });
+      }
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="wx">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path);
+      wx.navigateTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="tt">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path);
+      tt.navigateTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="qq">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path);
+      qq.navigateTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+<script cml-type="baidu">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path);
+      swan.navigateTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>
+
+
+<script cml-type="alipay">
+import { buildQueryStringUrl } from '../../lib/utils.js';
+  class Method implements UtilsInterface {
+    navigateTo(opt) {
+      let {path, query} = opt;
+      path = buildQueryStringUrl(query, path);
+      my.navigateTo({
+        url: path
+      });
+    }
+  }
+  export default new Method();
+</script>

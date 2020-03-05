@@ -1,0 +1,121 @@
+<script cml-type="interface">
+  interface UserInfoInterface {
+    scrollTo(opt: CMLObject): void
+  }
+</script>
+
+<script cml-type="web">
+import cpx2px from '../cpx2px/index.js';
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      setTimeout(() => {
+        pageScrollTo(cpx2px(opt.scrollTop), opt.duration)
+      });
+    }
+  }
+
+  export default new Method();
+
+  function pageScrollTo(scrollTop, duration) {
+    let scroller = document.querySelector('.cml-root');
+    let currentTop = scroller.scrollTop;
+    // 获取单次滚动距离
+    let singleDist = parseInt((scrollTop - currentTop) / (duration / 17))
+
+    let requestId;
+    //采用requestAnimationFrame，平滑动画
+    function step() {
+      currentTop += singleDist;
+      if (currentTop <= scrollTop) {
+        scroller.scrollTop = currentTop
+        requestId = window.requestAnimationFrame(step);
+      } else {
+        window.cancelAnimationFrame(requestId);
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
+
+</script>
+
+<script cml-type="weex">
+const dom = weex.requireModule('dom');
+
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      let domRef = opt.weexRef.length ? opt.weexRef[0] : opt.weexRef
+      dom.scrollToElement(domRef, {});
+    }
+  }
+
+  export default new Method();
+</script>
+
+
+<script cml-type="wx">
+  import cpx2px from '../cpx2px/index.js';
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      wx.pageScrollTo({
+        scrollTop: cpx2px(opt.scrollTop),
+        duration: opt.duration
+      })
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="tt">
+  import cpx2px from '../cpx2px/index.js';
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      tt.pageScrollTo({
+        scrollTop: cpx2px(opt.scrollTop),
+        duration: opt.duration
+      })
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="qq">
+  import cpx2px from '../cpx2px/index.js';
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      qq.pageScrollTo({
+        scrollTop: cpx2px(opt.scrollTop),
+        duration: opt.duration,
+      })
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="baidu">
+  import cpx2px from '../cpx2px/index.js';
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      swan.pageScrollTo({
+        scrollTop: cpx2px(opt.scrollTop),
+        duration: opt.duration,
+      })
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="alipay">
+  import cpx2px from '../cpx2px/index.js';
+  class Method implements UserInfoInterface {
+    scrollTo(opt) {
+      my.pageScrollTo({
+        scrollTop: cpx2px(opt.scrollTop), 
+      })
+    }
+  }
+  export default new Method();
+</script>

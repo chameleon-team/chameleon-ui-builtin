@@ -1,0 +1,83 @@
+<script cml-type="interface">
+  interface InSDKInterface {
+    inSDK(): boolean
+  }
+</script>
+
+<script cml-type="web">
+import { inSDK } from '../../lib/sdk/env.js';
+
+  class Method implements InSDKInterface {
+    inSDK() {
+      return inSDK();
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="weex">
+import { inSDK } from '../../lib/sdk/env.js';
+
+  class Method implements InSDKInterface {
+    inSDK() {
+      return inSDK();
+    }
+  }
+
+  export default new Method();
+</script>
+
+
+<script cml-type="wx">
+  class Method implements InSDKInterface {
+    inSDK() {
+      return false
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="tt">
+  class Method implements InSDKInterface {
+    inSDK() {
+      return false
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="qq">
+  class Method implements InSDKInterface {
+    inSDK() {
+      return false
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="baidu">
+  class Method implements InSDKInterface {
+    inSDK() {
+      return false
+    }
+  }
+
+  export default new Method();
+</script>
+
+<script cml-type="alipay">
+  class Method implements InSDKInterface {
+    inSDK() {
+      return false
+    }
+  }
+
+  export default new Method();
+</script>
+
+
+

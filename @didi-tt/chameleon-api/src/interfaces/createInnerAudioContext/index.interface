@@ -1,0 +1,274 @@
+<script cml-type="interface">
+type callback = (res: CMLObject) => void;
+interface AudioInterfaceInterface {
+  createInnerAudioContext(): CMLObject;
+}
+
+</script>
+
+<script cml-type="web">
+import cml from "chameleon-api"
+import EventEmitter from 'events'
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    //onStop需要模拟代理，在web端没有
+    //stop方法没有  destroy
+    let audioContext = document.createElement('audio');
+    let events = new EventEmitter();
+    let onAudioEventMap = {
+      onCanplay:'oncanplay',
+      onEnded:'onended',
+      onError:'onerror',
+      onPause:'onpause',
+      onPlay:'onplay',
+      onSeeked:'onseeked',
+      onSeeking:'onseeking',
+      onTimeUpdate:'ontimeupdate',
+      onWaiting:'onwating',
+    }
+    let offAudioEventMap = {
+      offCanplay:'oncanplay',
+      offEnded:'onended',
+      offError:'onerror',
+      offPause:'onpause',
+      offPlay:'onplay',
+      offSeeked:'onseeked',
+      offSeeking:'onseeking',
+      offTimeUpdate:'ontimeupdate',
+      offWaiting:'onwaiting',
+    }
+    audioContext.seek = function(num){
+      this.currentTime = num;
+    }
+    //web端onStop  offStop 以及stop方法需要模拟,小程序端的stop方法会触发pause
+    audioContext.stop = function(){
+      this.audioContext.pause();
+      this.seek(0);
+      events.emit('onStop');
+    }
+    audioContext.destroy = function(){
+      audioContext.src = '';
+    }
+    audioContext['onStop'] = function(callback){
+      events.addListener(item,callback);
+    }
+    audioContext['offStop'] = function(callback){
+      events.removeAllListeners('offStop');
+    }
+    Object.keys(onAudioEventMap).forEach((key) => {
+      audioContext[key] = function(callback){
+        audioContext[onAudioEventMap[key]] = function(){
+          if(key === 'onError'){ //web端error事件需要传递一个错误码参数
+            let errorMap = {1:1001,2:1002,3:1003,4:1004};
+            let errCode = errorMap[this.error.code] || -1;
+            let res = {errCode};
+            callback(res)
+          }else{
+            callback();
+          }
+        }
+      }
+    });
+    Object.keys(offAudioEventMap).forEach((key) => {
+      audioContext[key] = function(callback){
+        audioContext[offAudioEventMap[key]] = null;
+      }
+    });
+    return audioContext;
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="weex">
+import cmlBridge from '../../lib/sdk/cmlBridge';
+import * as weexAudio from './weex-audio.js';
+import cml from "chameleon-api";
+//设计思路，在createCb里面绑定事件，用于play pause setSrc，然后再执行这些方法的时候去触发对应的事件；
+//play的时候设置定时器获取播放进度；pause  stop destroy 的时候需要清除定时器
+import EventEmitter from 'events'
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    let audioContext = {};
+    let timer = null;
+    let events = new EventEmitter();
+    //获取音频播放的当前时间
+    let startInterval = function(){
+      timer = setInterval(() => { //摧毁的时候需要关掉轮询
+        console.log('interval')
+        audioInstance.then((res) => {
+          weexAudio.getWeexAudioCurrentPos({id:res.data.id},function(currentPosRes){
+            audioContext.currentTime = currentPosRes.data && currentPosRes.data.msec/1000;
+            audioContext.duration = res.data && res.data.duration/1000
+            events.emit('onTimeUpdate');
+          })
+        })
+      }, 500);
+    }
+    let audioInstance = Promise.resolve().then(() => {
+      let looping = audioContext.loop ? '1' : '0';
+      // let volume = audioContext.volume == 1 ? 1.0 : parseFloat(audioContext.volume);
+      let volume = 1.0;
+      if(audioContext.volume == 0){
+        volume = 0;
+      }else { //未定义volumn 则默认值为1.0;
+        volume = parseFloat(audioContext.volume || 1.0)
+      }
+      return weexAudio.createWeexAudio({url:audioContext.src,looping,volume}).then((res) => {
+        audioContext.id = res.data.id;
+        console.log('create-audio',res)
+        if(audioContext.autoplay === true){ //如果是自动播放，那么在创建成功之后直接播放
+          audioContext.play();
+        }
+        return res;
+        
+      });
+    }).catch((res) => {
+      //创建失败
+      events.emit('onError');
+      console.log(res.msg)
+    });
+    //以下方法都放在audioInstance.then的回调中，保证是在创建音频成功的情况下执行；
+    //播放功能
+    audioContext.play = function(){
+      audioInstance.then((res) => {
+        weexAudio.playWeexAudio({id:res.data.id},() => {
+        })
+      })
+    }
+    //暂停功能
+    audioContext.pause = function(){
+      audioInstance.then((res) => {
+        weexAudio.pauseWeexAudio({id:res.data.id},() => {
+        })
+      });
+    }
+    //seek功能
+    audioContext.seek = function(value){
+      //这里函数执行就触发 onSeeking 事件；
+      events.emit('onSeeking');
+      audioInstance.then((res) => {
+        weexAudio.seekToWeexAudio({id:res.data.id,msec:1000 * value},() => {
+          events.emit('onSeeked');//跳转完成触发 onSeeked
+        })
+      });
+    }
+    //暂停功能，下次播放将重新播放；
+    audioContext.stop = function(){
+      audioInstance.then((res) => {
+        audioContext.pause();
+        audioContext.seek(0);
+        events.emit('onStop');
+      })
+    }
+    //摧毁音频
+    audioContext.destroy = function(){
+      clearInterval(timer);
+      audioInstance.then((res) => {
+        weexAudio.destroyAudio({id:res.data.id},() => {})
+      })
+    }
+    //监听音频状态变化
+    audioInstance.then((res) => {
+      //let {errno,msg,data} = res;//data:{id:1}
+      weexAudio.audioStatusChange(function(statusRes){
+        //{"id":0,"status":1} 准备:1 ,播放：2，暂停：3，结束：4
+        if(res.data.id == statusRes.id){ //首先判断是同一个音频器
+          if(statusRes.status == 1){
+            events.emit('onCanPlay');//准备，触发onCanPlay回调
+          };
+          if(statusRes.status == 2){
+            events.emit('onPlay');
+            audioContext.paused = false;
+            startInterval();
+          }
+          if(statusRes.status == 3){
+            events.emit('onPause');
+            audioContext.paused = true;
+            clearInterval(timer);
+          }
+          if(statusRes.status == 4){//loop情况下不会触发
+            events.emit('onEnded');
+            console.log('onEnded-status4')
+            clearInterval(timer);
+          }
+        }
+      })
+    })
+    
+    
+    let onAudioEvents = ['onCanPlay','onPlay','onPause','onEnded','onError','onTimeUpdate','onSeeking','onSeeked','onStop'];
+    onAudioEvents.forEach((item) => {
+      audioContext[item] = function(callback){
+        events.addListener(item,callback);//同步注册方法
+      }
+    });
+    let offAudioEvents = ['offCanPlay','offPlay','offPause','offEnded','offError','offTimeUpdate','offSeeking','offSeeked','offStop'];
+    offAudioEvents.forEach((item) => {
+      audioContext[item] = function(callback){
+        events.removeAllListeners(item);//同步注册方法
+      }
+    });
+    
+    return audioContext;
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="wx">
+
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    return wx.createInnerAudioContext();
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="tt">
+
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    return tt.createInnerAudioContext();
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="qq">
+
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    return qq.createInnerAudioContext();
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="alipay">
+
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    return my.createInnerAudioContext();
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="baidu">
+
+class Method implements AudioInterfaceInterface {
+  createInnerAudioContext() {
+    return swan.createInnerAudioContext();
+  }
+}
+
+export default new Method();
+</script>

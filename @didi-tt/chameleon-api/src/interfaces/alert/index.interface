@@ -1,0 +1,182 @@
+<script cml-type="interface">
+type alertOpt = {
+  message: String,
+  confirmTitle: String
+}
+
+type successCallBack = (result: String) => void;
+type failCallBack = (result: String) => void;
+
+interface uiInterface {
+  alert(opt: alertOpt, successCallBack: successCallBack, failCallBack: failCallBack): void,
+}
+</script>
+
+<script cml-type="web">
+import { buildConfirm } from './popupFactory';
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    let instance = buildConfirm('alert', {
+      content: opt.message,
+      confirmText: opt.confirmTitle
+    }, successCallBack);
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="weex">
+import cmlBridge from '../../lib/sdk/cmlBridge';
+import { inSDK } from '../../lib/sdk/env';
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    if(inSDK()) {
+      cmlBridge.alert(opt, res => {
+        if(res.errno == 0) {
+          successCallBack(opt.confirmTitle);
+        }else {
+          failCallBack(opt.confirmTitle);
+        }
+      })
+    }else {
+      const modal = weex.requireModule('modal');
+      let { message, confirmTitle } = opt;
+      modal.alert(
+        {
+          message,
+          okTitle: confirmTitle
+        },
+        successCallBack
+      );
+    }
+  }
+}
+
+export default new Method();
+
+</script>
+
+
+<script cml-type="wx">
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    let { message, confirmTitle} = opt;
+    wx.showModal({
+      showCancel: false,
+      title: '',
+      content: message,
+      confirmText: confirmTitle,
+      success() {
+        successCallBack(confirmTitle);
+      },
+      fail() {
+        failCallBack(confirmTitle);
+      }
+    });
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="tt">
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    let { message, confirmTitle} = opt;
+    tt.showModal({
+      showCancel: false,
+      title: '',
+      content: message,
+      confirmText: confirmTitle,
+      success() {
+        successCallBack(confirmTitle);
+      },
+      fail() {
+        failCallBack(confirmTitle);
+      }
+    });
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="qq">
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    let { message, confirmTitle} = opt;
+    qq.showModal({
+      showCancel: false,
+      title: '',
+      content: message,
+      confirmText: confirmTitle,
+      success() {
+        successCallBack(confirmTitle);
+      },
+      fail() {
+        failCallBack(confirmTitle);
+      }
+    });
+  }
+}
+
+export default new Method();
+
+</script>
+
+<script cml-type="baidu">
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    let { message, confirmTitle} = opt;
+    swan.showModal({
+      showCancel: false,
+      title: '',
+      content: message,
+      confirmText: confirmTitle,
+      success() {
+        successCallBack(confirmTitle);
+      },
+      fail() {
+        failCallBack(confirmTitle);
+      }
+    });
+  }
+}
+
+export default new Method();
+
+</script>
+
+
+<script cml-type="alipay">
+
+class Method implements uiInterface {
+  alert(opt, successCallBack, failCallBack) {
+    let { message, confirmTitle} = opt;
+    my.alert({
+      title: '',
+      content: message,
+      buttonText: confirmTitle,
+      success: () => {
+        successCallBack(confirmTitle);
+      },
+      fail() {
+        failCallBack(confirmTitle);
+      }
+    });
+  }
+}
+
+export default new Method();
+
+</script>
+

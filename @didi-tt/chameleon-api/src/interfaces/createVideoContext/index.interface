@@ -1,0 +1,68 @@
+<script cml-type="interface">
+interface UtilsInterface {
+  createVideoContext(id: String, instance: CMLObject): CMLObject;
+}
+</script>
+
+<script cml-type="web">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return {};
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="wx">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return wx.createVideoContext('cmlVideo', instance.selectComponent('#' + id));
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="tt">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return tt.createVideoContext('cmlVideo', instance.selectComponent('#' + id));
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="qq">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return qq.createVideoContext('cmlVideo', instance.selectComponent('#' + id));
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="weex">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return {};
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="alipay">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return {};
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="baidu">
+class Method implements UtilsInterface {
+  createVideoContext(id, instance) {
+    return {};
+  }
+}
+export default new Method();
+</script>
