@@ -1,5 +1,5 @@
 <template>
-  <origin-input
+  <input
     class="input-wrap"
     style="{{computedStyle}}"
 
@@ -14,7 +14,7 @@
     c-bind:focus="focusEvent"
     c-bind:confirm="confirmEvent"
 
-    focus="{{focus}}"
+    focus="{{false}}"
     confirm-type="{{returnKeyType}}"
     placeholder-style="{{wxPlaceHolderStyle}}"
   />

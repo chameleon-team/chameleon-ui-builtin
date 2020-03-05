@@ -94,8 +94,8 @@ class CAudio implements CAudioInterface {
     },
     hanleTimeUpdate(){
       this.$cmlEmit('timeupdate',{
-        currentTime:this.audioContext.currentTime,
-        duration:this.audioContext.duration
+        currentTime:parseFloat(this.audioContext.currentTime),
+        duration:parseFloat(this.audioContext.duration)
       })
       this.setCurrentTime()
     },
