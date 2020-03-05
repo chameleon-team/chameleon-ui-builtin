@@ -8,4 +8,4 @@ interface RowInterface {
   margin: Number
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay,qq" src="./row.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq,tt" src="./row.cml"></script>

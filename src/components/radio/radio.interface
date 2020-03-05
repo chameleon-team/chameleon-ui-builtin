@@ -15,4 +15,4 @@ interface RadioInterface {
   changeevent(eventDetail: EventDetail): void;
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay,qq" src="./radio.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq,tt" src="./radio.cml"></script>

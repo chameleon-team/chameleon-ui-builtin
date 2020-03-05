@@ -1,0 +1,93 @@
+<template>
+  <view>
+    <slot></slot>
+  </view>
+</template>
+
+<script>
+
+class RefreshView implements RefreshViewInterface {
+  props = {
+    enablePullUpLoad: {
+      type: Boolean,
+      default: false
+    },
+    pullUpLoadComplete: {
+      type: Boolean,
+      default: false
+    },
+    pullingUp: {
+      type: Boolean,
+      default: false
+    },
+    pullUpStop: {
+      type: Number,
+      default: 80
+    },
+    pullUpStart: {
+      type: Number,
+      default: 50
+    },
+    pullDownStart: {
+      type: Number,
+      default: 50
+    },
+    pullDownStop: {
+      type: Number,
+      default: 80
+    },
+    pullingDown: {
+      type: Boolean,
+      default: false
+    }
+  }
+
+  methods = {
+    onPullDownRefresh() {
+      this.$cmlEmit('onPullDownRefresh')
+    },
+    onPullUpLoad() {
+      this.$cmlEmit('onPullUpLoad')
+    }
+  }
+
+  watch = {
+    pullingDown(v) {
+      if (!v) {
+        tt.stopPullDownRefresh();
+      }
+    }
+  }
+
+  created() {
+    let currentPages = getCurrentPages();
+    let currentPath = currentPages.pop().route;
+
+    this.$cmlEventBus.on(`${currentPath}_onPullDownRefresh`, () => {
+      if (this.pullingDown) return;
+      this.onPullDownRefresh();
+    });
+
+    if (this.enablePullUpLoad) {
+      this.$cmlEventBus.on(`${currentPath}_onReachBottom`, () => {
+        if (this.pullUpLoadComplete || this.pullingUp) return;
+        this.onPullUpLoad();
+      })
+    }
+  }
+}
+
+export default new RefreshView();
+</script>
+
+<style >
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "usingComponents": {}
+  }
+}
+</script>
