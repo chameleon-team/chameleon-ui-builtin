@@ -42,9 +42,10 @@ import richHandle from './richHandle.js';
     }
     methods = {
       clickText(ind){
-        if(this.richList[ind].click){
-          this.richList[ind].callback()
-        }   
+        //暂时不不支持传递函数
+        // if(this.richList[ind].click){
+        //   this.richList[ind].callback()
+        // }   
       }
     }
   }

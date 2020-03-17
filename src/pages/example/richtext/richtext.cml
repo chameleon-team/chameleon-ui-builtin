@@ -30,7 +30,7 @@
           "text_decoration": "line-through",
           "click": true,
           "callback": () => {
-            console.log('cml')
+            this.methods.clickHandle()
           }
         }
       ]
@@ -44,6 +44,9 @@
   }
 
   methods = {
+    clickHandle(){
+      console.log('click')
+    }
   }
 
   beforeCreate() {

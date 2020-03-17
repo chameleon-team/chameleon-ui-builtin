@@ -62,6 +62,13 @@ class RefreshView implements RefreshViewInterface {
   created() {
     let currentPages = getCurrentPages();
     let currentPath = currentPages.pop().route;
+    let listenerMap = this.$cmlEventBus._listenerMap;
+
+    Object.keys(listenerMap).forEach(key =>{
+      if (key === `${currentPath}_onPullDownRefresh` || key === `${currentPath}_onReachBottom`) {
+        delete listenerMap[key]
+      }
+    })
 
     this.$cmlEventBus.on(`${currentPath}_onPullDownRefresh`, () => {
       if (this.pullingDown) return;
