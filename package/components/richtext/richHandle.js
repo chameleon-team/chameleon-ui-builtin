@@ -37,6 +37,12 @@ export default function richHandle(richData) {
     let ri = {
       font_size: conf && conf.font_size,
       color: conf && conf.color,
+      font_family: conf && conf.font_family,
+      font_weight: conf && conf.font_weight,
+      font_style: conf && conf.font_style,
+      text_decoration: conf && conf.text_decoration,
+      click: conf && conf.click,
+      callback: conf && conf.callback,
       text: ''
     }
     for (; i < end; i++) {

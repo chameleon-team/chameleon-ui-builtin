@@ -4,6 +4,7 @@
     :bottomOffset="bottomOffset"
     :scrollDirection="scrollDirection"
     :bounce="bounce"
+    :deceleration="deceleration"
     :height="heightPx"
     :width="widthPx"
     template="scroller"
@@ -28,6 +29,10 @@
       bounce: {
         type: Boolean,
         default: false
+      },
+      deceleration:{
+        type: Number,
+        default: 0.0015
       },
       cstyle: {
         type: String,

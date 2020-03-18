@@ -26,6 +26,10 @@ export default {
       type: Boolean,
       default: false
     },
+    deceleration:{
+      type: Number,
+      default: 0.0015
+    },
     cstyle: {
       type: String,
       default: ''
@@ -66,6 +70,7 @@ export default {
         probeType: 3,
         // 上拉下拉是否回弹
         bounce: this.bounce,
+        deceleration: this.deceleration,
         click: true,
         tap: true,
         preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|VIDEO|AUDIO)$/}
@@ -82,7 +87,7 @@ export default {
       if (!val) return
       this.sizeInitAndChange()
     },
-    width () {
+    width (val) {
       if (!val) return
       this.sizeInitAndChange()
     },
@@ -159,6 +164,8 @@ export default {
         e.stopPropagation();
         // 阻止浏览器默认滚动，否则安卓有问题
         e.preventDefault();
+        // 处理多个input时,input间无法切换问题
+        e.target.focus();
       }
     },
     // 用于input blur

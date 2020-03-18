@@ -61,14 +61,30 @@ import cml from 'chameleon-api'
       indicatorActiveColor: {
         type: String,
         default: '#000000'
+      },
+      dotStyle:{
+        type:String,
+        default:''
+      },
+      dotActiveStyle:{
+        type:String,
+        default:''
+      },
+      dotsToBottom:{
+        type:Number,
+        default:10
+      },
+      threshold:{
+        type:Number,
+        default:100
       }
     }
     computed = {
       indicatorStyle() {
-        return `background: ${this.indicatorColor}`;
+        return `${this.dotStyle};background: ${this.indicatorColor}`;
       },
       indicatorActiveStyle() {
-        return `background: ${this.indicatorActiveColor}`;
+        return `${this.dotActiveStyle};background: ${this.indicatorActiveColor}`;
       }
     }
     mounted() {
@@ -93,7 +109,7 @@ import cml from 'chameleon-api'
           // this.containerStyle = `height: ${mostHeight}px`;
 
           if (res.width > 0 && res.height > 0) {
-            this.directorStyle = `position: absolute; width:${res.width}px; top: ${res.height - 50}px; display: flex; flex-direction: row; justify-content: center; align-items: center;`;
+            this.directorStyle = `position: absolute; width:${res.width}px; bottom:${this.dotsToBottom}px; display: flex; flex-direction: row; justify-content: center; align-items: center;`;
           } 
         })
       }, 50)

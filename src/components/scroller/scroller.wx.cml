@@ -38,6 +38,10 @@
         type: Boolean,
         default: true
       },
+      deceleration:{
+        type: Number,
+        default: 0.0015
+      },
       height: {
         type: Number,
         default: 0

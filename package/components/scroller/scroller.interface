@@ -29,6 +29,7 @@ interface ScrollerInterface {
   bottomOffset: Number,
   scrollDirection: String,
   bounce: Boolean,
+  deceleration: Number,
   height: Number,
   width: Number,
   scrollTop: Number,

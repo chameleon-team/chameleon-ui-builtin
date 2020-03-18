@@ -87,7 +87,7 @@
     }
     watch = {
       focus: function(newVal, oldVal) {
-        // this.changeFocus(newVal);
+        this.changeFocus(newVal);
       },
       value: function(newVal, oldVal) {
         this.inputValue = newVal;
