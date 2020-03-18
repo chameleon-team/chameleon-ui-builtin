@@ -1,6 +1,34 @@
+## [1.0.5]
+### Features
+- 修复richText
+- 修复weex端textarea失焦问题
+- 修复refresh-view重复监听问题
+- 修复支付宝端input【type="password"】
+- 修复scorller内嵌多input输入问题
+
+## [1.0.4-alpha.3]
+### Features
+- 增加carousel组件在web端滑动灵敏度参数
+
+## [1.0.4-alpha.1]
+### Features
+- 修复carousel组件在web端塌陷问题
+
+## [1.0.4-alpha.0]
+### Features
+- carousel组件在web、weex端可配置指示点样式
+
+## [1.0.3]
+### Features
+- 修复refresh-view weex端
+
+## [1.0.1]
+### Features
+- 修复refresh-view
+
 ## [1.0.0]
 ### Features
-- 1.0.0正式版
+- 1.0.0
 
 ## [0.4.2-alpha.0]
 ### Features

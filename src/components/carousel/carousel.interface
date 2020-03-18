@@ -10,6 +10,10 @@ interface CCarouselInterface {
   indicatorDots: Boolean,
   indicatorColor: String,
   indicatorActiveColor: String,
+  dotStyle: String,
+  dotActiveStyle:String,
+  dotsToBottom:Number,
+  threshold:Number,
   change(eventDetail: EventDetail): void;
 }
 </script>

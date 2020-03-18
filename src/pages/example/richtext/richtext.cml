@@ -17,12 +17,21 @@
         {"color": "#666666",
         "font_size": 28,
         "start": 0,
-        "end": 3},
+        "end": 3
+        },
         {
           "color": "#fc9153",
           "font_size": 28,
           "start": 4,
-          "end": 6
+          "end": 6,
+          "font_family": "",
+          "font_weight": "bolder",
+          "font_style": "oblique",
+          "text_decoration": "line-through",
+          "click": true,
+          "callback": () => {
+            this.methods.clickHandle()
+          }
         }
       ]
     }
@@ -35,6 +44,9 @@
   }
 
   methods = {
+    clickHandle(){
+      console.log('click')
+    }
   }
 
   beforeCreate() {

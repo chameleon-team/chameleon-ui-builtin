@@ -1,5 +1,5 @@
 <template>
-  <c-page title="refresh-view" full="{{true}}">
+  <c-page title="refresh-view">
     <refresh-view enablePullUpLoad="{{true}}"
                   pullingDown="{{pullingDown}}"
                   pullingUp="{{pullingUp}}"
@@ -64,10 +64,6 @@ export default new Refresh_view();
 </script>
 
 <style>
-.container {
-  flex: 1;
-  width: 750cpx;
-}
 .text-item {
   width: 710cpx;
   text-align: center;

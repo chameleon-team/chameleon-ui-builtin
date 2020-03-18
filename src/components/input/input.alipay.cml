@@ -8,7 +8,7 @@
     placeholder="{{placeholder}}"
     disabled="{{disabled}}"
     maxlength="{{maxlength}}"
-
+    password="{{isPassword}}"
     c-bind:input="inputEvent"
     c-bind:blur="blurEvent"
     c-bind:focus="focusEvent"
@@ -92,6 +92,9 @@ import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
       computedStyle() {
         // props 必须经过计算属性，否则没有经过 cpx 转换
         return this.cStyle || this.cstyle
+      },
+      isPassword(){
+        return this.type === 'password'
       }
     }
     watch = {

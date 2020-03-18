@@ -87,7 +87,7 @@ export default {
       if (!val) return
       this.sizeInitAndChange()
     },
-    width () {
+    width (val) {
       if (!val) return
       this.sizeInitAndChange()
     },
@@ -164,6 +164,8 @@ export default {
         e.stopPropagation();
         // 阻止浏览器默认滚动，否则安卓有问题
         e.preventDefault();
+        // 处理多个input时,input间无法切换问题
+        e.target.focus();
       }
     },
     // 用于input blur

@@ -17,7 +17,7 @@
           <slot></slot>
         </view>
       </view>
-      <view c-if="{{indicatorDots}}" class="slider-pagination slider-pagination-bullets">
+      <view c-if="{{indicatorDots}}" class="slider-pagination slider-pagination-bullets" style="{{dotsToBottomStyle}}">
         <view c-for="{{pagenums||s_data.sliderLength}}" c-for-item="n" c-key="index">
           <view c-if="{{!options.renderPagination}}"
                 c-bind:click='slide(n-1)' 
@@ -98,6 +98,22 @@ class Carousel implements CCarouselInterface {
     circular: {
       type: Boolean,
       default: false
+    },
+    dotActiveStyle:{
+      type:String,
+      default:''
+    },
+    dotStyle:{
+      type:String,
+      default:''
+    },
+    dotsToBottom:{
+      type:Number,
+      default:10
+    },
+    threshold:{
+      type:Number,
+      default:100
     }
   }
   name =  'slider'
@@ -180,11 +196,14 @@ class Carousel implements CCarouselInterface {
     }
   }
   computed = {
+    dotsToBottomStyle() {
+      return `bottom: ${this.dotsToBottom}cpx`;
+    },
     indicatorStyle() {
-      return `background: ${this.indicatorColor}`;
+      return `${this.dotStyle};background: ${this.indicatorColor}`;
     },
     indicatorActiveStyle() {
-      return `background: ${this.indicatorActiveColor}`;
+      return `${this.dotActiveStyle};background: ${this.indicatorActiveColor}`;
     },
     currentIndex() {
       return this.data.currentPage % (this.pagenum || this.s_data.sliderLength)
@@ -542,11 +561,11 @@ class Carousel implements CCarouselInterface {
         return false
       } else if (this.options.direction !== 'vertical') {
         // 为了平滑滑动，修改y轴限制
-        if ((deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
+        if ((deltaX > this.threshold) && (Math.abs(deltaY) < thresholdDistance)) {
           // swipe right
           this.pre()
           return false
-        } else if ((-deltaX > thresholdDistance) && (Math.abs(deltaY) < thresholdDistance)) {
+        } else if ((-deltaX > this.threshold) && (Math.abs(deltaY) < thresholdDistance)) {
           // swipe left
           this.next()
           return false
@@ -561,11 +580,11 @@ class Carousel implements CCarouselInterface {
         }
         // 垂直判定
       } else {
-        if ((deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
+        if ((deltaY > this.threshold) && (Math.abs(deltaX) < thresholdDistance)) {
           // swipe right
           this.pre()
           return false
-        } else if ((-deltaY > thresholdDistance) && (Math.abs(deltaX) < thresholdDistance)) {
+        } else if ((-deltaY > this.threshold) && (Math.abs(deltaX) < thresholdDistance)) {
           // swipe left
           this.next()
           return false
@@ -907,14 +926,15 @@ export default new Carousel();
 <style>
 .slider-container {
   margin: 0 auto;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   z-index: 1;
-}
-.slider-container {
   width: 100%;
   position: relative;
   white-space: nowrap;
+}
+.slider-container {
+  
 }
 .slider-center-center {
   margin: auto;
@@ -926,12 +946,12 @@ export default new Carousel();
   bottom: 0;
 }
 .slider-touch {
-  height: 100%;
+  // height: 100%;
 }
 .slider-wrapper {
   box-sizing: content-box;
   display: flex;
-  height: 100%;
+  // height: 100%;
   position: relative;
   transition-property: transform;
   width: 100%;

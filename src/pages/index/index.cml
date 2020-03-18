@@ -76,7 +76,7 @@ class Demo {
         open: false,
         pages: [
           routeObj["text"],
-          // routeObj["richtext"],
+          routeObj["richtext"],
           routeObj["view"]
         ],
         src: require(`../../assets/images/component/kind/content.png`)
