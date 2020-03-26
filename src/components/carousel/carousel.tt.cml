@@ -1,0 +1,70 @@
+<script>
+class CCarousel implements CCarouselInterface {
+  props = {
+    autoplay: {
+      type: Boolean,
+      default: false
+    },
+    interval: {
+      type: Number,
+      default: 5000
+    },
+    current: {
+      type: Number,
+      default: 0
+    },
+    indicatorDots: {
+      type: Boolean,
+      default: false
+    },
+    indicatorColor: {
+      type: String,
+      default: '#cccccc'
+    },
+    indicatorActiveColor: {
+      type: String,
+      default: '#000000'
+    },
+    dotStyle:{
+      type:String,
+      default:''
+    },
+    dotActiveStyle:{
+      type:String,
+      default:''
+    },
+    dotsToBottom:{
+      type:Number,
+      default:10
+    },
+    circular: {
+      type: Boolean,
+      default: false
+    },
+    threshold:{
+      type:Number,
+      default:100
+    }
+  }
+  methods = {
+    onChange(){
+      this.$cmlEmit('change')
+    }
+  }
+}
+
+export default new CCarousel();
+
+</script>
+
+<style scoped>
+
+</style>
+
+<script cml-type="json">
+{
+  "base": {
+    "component": true
+  }
+}
+</script>

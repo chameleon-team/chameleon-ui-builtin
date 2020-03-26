@@ -3,6 +3,7 @@
 const publicPath = 'https://beatles-chameleon.github.io/chameleon-ui-builtin/dist';
 //设置api请求前缀
 const apiPrefix = 'https://api.chameleon.com';
+const path = require('path');
 
 cml.config.merge({
   cmlNpm: [
@@ -12,9 +13,7 @@ cml.config.merge({
   templateType: 'html',
   cmlComponents: [
   ],
-  // platforms: ["web","wx","alipay","baidu"],
-  platforms: ["web","weex","baidu","wx","alipay"],
-  // platforms: ["web","weex"],
+  platforms: ["web","weex","baidu","wx","alipay","tt"],
   buildInfo: {
     wxAppId: '123456',
     wxEntryPage: '',

@@ -4,4 +4,4 @@ interface FootInterface {
   footStyle: String
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay,qq" src="./foot.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq,tt" src="./foot.cml"></script>
