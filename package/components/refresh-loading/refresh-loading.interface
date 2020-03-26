@@ -4,4 +4,4 @@
 interface RefreshLoadingInterface {
 }
 </script>
-<script cml-type="web,weex,baidu,wx,alipay,qq" src="./refresh-loading.cml"></script>
+<script cml-type="web,weex,baidu,wx,alipay,qq,tt" src="./refresh-loading.cml"></script>
