@@ -1,3 +1,7 @@
+## [1.0.6]
+### Features
+- 支持头条
+
 ## [1.0.5]
 ### Features
 - 修复richText
