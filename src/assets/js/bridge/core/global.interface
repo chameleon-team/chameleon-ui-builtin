@@ -1,0 +1,94 @@
+<script cml-type="interface">
+type Instance = {
+  listenCallbacks: CMLObject,
+  callbackId: Number
+}
+interface BridgeGlobal {
+  getInstance(): Instance;
+}
+</script>
+
+<script cml-type="web">
+import { dispatchProtocol } from './common';
+
+class Method implements BridgeGlobal {
+  getInstance() {
+    if (!window.cmlBridge.bridgeGlobal) {
+      init();
+    }
+    return window.cmlBridge.bridgeGlobal
+  }
+}
+
+function init() {
+  window.cmlBridge.bridgeGlobal = {
+    listenCallbacks: {},
+    callbackId: 0
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="weex">
+import { dispatchProtocol } from './common';
+
+class Method implements BridgeGlobal {
+  getInstance() {
+    if (!weex.config.cmlBridge || weex.config.cmlBridge && !weex.config.cmlBridge.bridgeGlobal) {
+      init();
+    }
+    return weex.config.cmlBridge.bridgeGlobal
+  }
+}
+
+function init() {
+  if (weex.config.cmlBridge) {
+    weex.config.cmlBridge.bridgeGlobal = {
+      listenCallbacks: {},
+      callbackId: 0
+    }
+  } else {
+    weex.config.cmlBridge = {
+      bridgeGlobal: {
+        listenCallbacks: {},
+        callbackId: 0
+      }
+    }
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="wx">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="qq">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="baidu">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="alipay">
+class Method implements BridgeGlobal {
+  getInstance() {
+  }
+}
+export default new Method();
+</script>

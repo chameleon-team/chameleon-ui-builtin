@@ -1,0 +1,90 @@
+<script cml-type="interface">
+type Func = (res: CMLObject) => Void
+interface QueryInterface {
+  getQueryObjSync(): CMLObject;
+}
+</script>
+
+<script cml-type="web">
+import {
+  queryParse
+} from '../../utils';
+
+class Method implements QueryInterface {
+  getQueryObjSync() {
+    return queryParse(location.href);
+  }
+}
+
+export default new Method();
+</script>
+
+<script cml-type="weex">
+import { callNative } from '../../core/index.js'
+import {
+  queryParse
+} from '../../utils';
+
+class Method implements QueryInterface {
+  getQueryObjSync() {
+    let queryObj = {};
+    let search = '';
+  
+    // cml端sdk环境
+    if (weex.config.query && weex.config.query.cml_url) {
+      let launchUrl = weex.config.query.cml_url;
+      queryObj.cml_sdk = weex.config.query.cml_sdk;
+      search = launchUrl.split('?')[1] || '';
+    } else {
+      let bundleUrl = weex.config.bundleUrl || '';
+      if (bundleUrl && ~bundleUrl.indexOf('?')) {
+      search = bundleUrl.split('?')[1] || '';
+      }
+    }
+    
+    queryObj = { 
+      ...queryObj,
+      ...queryParse(search)
+    };
+
+    Object.keys(queryObj).forEach((key) => {
+      queryObj[key] = decodeURIComponent(queryObj[key]);
+    });
+
+    return queryObj;
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="wx">
+class Method implements QueryInterface {
+  getQueryObjSync() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="qq">
+class Method implements QueryInterface {
+  getQueryObjSync() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="baidu">
+class Method implements QueryInterface {
+  getQueryObjSync() {
+  }
+}
+export default new Method();
+</script>
+
+<script cml-type="alipay">
+class Method implements QueryInterface {
+  getQueryObjSync() {
+  }
+}
+export default new Method();
+</script>

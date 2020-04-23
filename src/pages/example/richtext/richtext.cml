@@ -2,17 +2,18 @@
 <c-page title="richtext">
   <view class="container">
     <c-header title="richtext"></c-header>
-    <c-richtext rich-data="{{richData}}" style="width: 200cpx; height: 100cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 400cpx; height: 300cpx;"></c-richtext>
   </view>
 </c-page>
 
 </template>
 <script>
+  import bridge from '../../../assets/js/bridge/index.js';
   class Richtext   {
 
   data = {
     richData: {
-      message: '这是一段富文本',
+      message: '这是一段富文本，点击我可以弹出内容。用这个可以测试富文本展示和跳转逻辑',
       rich_message: [
         {"color": "#666666",
         "font_size": 28,
@@ -22,12 +23,11 @@
         {
           "color": "#fc9153",
           "font_size": 28,
-          "start": 4,
-          "end": 6,
+          "start": 8,
+          "end": 21,
           "font_family": "",
           "font_weight": "bolder",
           "font_style": "oblique",
-          "text_decoration": "line-through",
           "click": true,
           "callback": () => {
             this.methods.clickHandle()
@@ -45,7 +45,9 @@
 
   methods = {
     clickHandle(){
-      console.log('click')
+      bridge.alert({
+        message: '点击生效了哦'
+      })
     }
   }
 
