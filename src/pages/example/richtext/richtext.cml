@@ -5,6 +5,8 @@
     <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
     <text>这是一段普通文本</text>
     <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
   </view>
 </c-page>
 
