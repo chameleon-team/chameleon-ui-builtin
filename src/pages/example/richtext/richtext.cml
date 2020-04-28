@@ -35,7 +35,24 @@
           "font_style": "oblique",
           "click": true,
           "callback": () => {
-            this.methods.clickHandle()
+            bridge.alert({
+              message: '点击生效了哦'
+            })
+          }
+          },
+          {
+          "color": "#fc9153",
+          "font_size": 28,
+          "start": 22,
+          "end": 23,
+          "font_family": "",
+          "font_weight": "bolder",
+          "font_style": "oblique",
+          "click": true,
+          "callback": () => {
+            bridge.alert({
+              message: '点击生效了哦'
+            })
           }
         }
       ]
@@ -59,7 +76,9 @@
           "url": "https://www.baidu.com/",
           "click": true,
           "callback": () => {
-            this.methods.clickHandle()
+            bridge.alert({
+              message: '点击生效了哦'
+            })
           }
         }
       ]
