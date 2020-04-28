@@ -11,12 +11,12 @@ class Richtext implements RichtextInterface {
     }
   }
   data = {
-    styles: 'width: 400cpx;'
+    styles: ''
   }
   methods = {
     layoutRichText(params) {
       const { _originEvent: {height} } = params;
-      this.styles = `width: 400cpx;height: ${height}cpx`;
+      this.styles = `height: ${height}cpx`;
       cml.showToast({
         message: this.styles,
         duration: 5000

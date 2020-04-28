@@ -2,11 +2,11 @@
 <c-page title="richtext">
   <view class="container">
     <c-header title="richtext"></c-header>
-    <c-richtext rich-data="{{richData}}"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
     <text>这是一段普通文本</text>
-    <c-richtext rich-data="{{richData}}"></c-richtext>
-    <c-richtext rich-data="{{richData}}"></c-richtext>
-    <c-richtext rich-data="{{richData2}}"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData2}}" style="width: 500cpx;"></c-richtext>
   </view>
 </c-page>
 
@@ -105,7 +105,7 @@ export default new Richtext();
 <style scoped>
 .container {
   width: 750cpx;
-  height: 500cpx;
+  /* height: 500cpx; */
   /* display: flex;
   flex-direction: column;
   align-items: center;
