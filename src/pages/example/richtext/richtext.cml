@@ -2,17 +2,18 @@
 <c-page title="richtext">
   <view class="container">
     <c-header title="richtext"></c-header>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}"></c-richtext>
     <text>这是一段普通文本</text>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}"></c-richtext>
+    <c-richtext rich-data="{{richData}}"></c-richtext>
+    <c-richtext rich-data="{{richData2}}"></c-richtext>
   </view>
 </c-page>
 
 </template>
 <script>
   import bridge from '../../../assets/js/bridge/index.js';
+  import cml from 'chameleon-api'
   class Richtext   {
 
   data = {
@@ -38,10 +39,35 @@
           }
         }
       ]
+    },
+    richData2: {
+      message: '这是一段富文本，点击我可以弹出内容。用这个可以测试富文本展示和跳转逻辑,这个配置了url参数',
+      rich_message: [
+        {"color": "#666666",
+        "font_size": 28,
+        "start": 0,
+        "end": 3
+        },
+        {
+          "color": "#fc9153",
+          "font_size": 28,
+          "start": 8,
+          "end": 21,
+          "font_family": "",
+          "font_weight": "bolder",
+          "font_style": "oblique",
+          "url": "https://www.baidu.com/",
+          "click": true,
+          "callback": () => {
+            this.methods.clickHandle()
+          }
+        }
+      ]
     }
   }
 
   computed = {
+
   }
 
   watch  = {
@@ -78,11 +104,13 @@ export default new Richtext();
 </script>
 <style scoped>
 .container {
-  display: flex;
+  width: 750cpx;
+  height: 500cpx;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-  background: #f8f8f8;
+  flex: 1; */
+  background: red;
 }
 </style>
 <script cml-type="json">

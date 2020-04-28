@@ -1,13 +1,29 @@
 <template>
-  <richtext rich-message="{{richData}}"></richtext>
+  <richtext rich-message="{{richData}}" style="{{styles}}" c-bind:layoutRichText="layoutRichText"></richtext>
 </template>
 <script>
 
+import cml from 'chameleon-api'
 class Richtext implements RichtextInterface {
   props = {
     richData: {
       type: Object
     }
+  }
+  data = {
+    styles: 'width: 400cpx;'
+  }
+  methods = {
+    layoutRichText(params) {
+      const { _originEvent: {height} } = params;
+      this.styles = `width: 400cpx;height: ${height}cpx`;
+      cml.showToast({
+        message: this.styles,
+        duration: 5000
+      })
+      
+      
+    },
   }
   }
 
