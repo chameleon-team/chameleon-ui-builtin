@@ -2,8 +2,8 @@
 <c-page title="richtext">
   <view class="container">
     <c-header title="richtext"></c-header>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;" c-bind:click="test"></c-richtext>
-    <text>这是一段普通文本</text>
+    <c-richtext rich-data="{{richData}}" style="width: 200px;" c-bind:click="test"></c-richtext>
+    <text style="width:100wx;height:100wx;">这是一段普通文本</text>
     <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
     <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
     <c-richtext rich-data="{{richData2}}" style="width: 500cpx;"></c-richtext>
