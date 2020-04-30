@@ -2,11 +2,7 @@
 <c-page title="richtext">
   <view class="container">
     <c-header title="richtext"></c-header>
-    <c-richtext rich-data="{{richData}}" style="width: 200px;" c-bind:click="test"></c-richtext>
-    <text style="width:100wx;height:100wx;">这是一段普通文本</text>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
-    <c-richtext rich-data="{{richData}}" style="width: 400cpx;"></c-richtext>
-    <c-richtext rich-data="{{richData2}}" style="width: 500cpx;"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 700px;"></c-richtext>
   </view>
 </c-page>
 
@@ -18,53 +14,43 @@
 
   data = {
     richData: {
-      message: '这是一段富文本s，点击我可以弹出内容。用这个可以测试富文本展示和跳转逻辑',
+      message: '123456789123456789 richData1',
       rich_message: [
         {"color": "#666666",
-        "font_size": 28,
+        "font_size": 80,
         "start": 0,
         "end": 3,
         "click": true,
         "callback": () => {
             bridge.alert({
-              message: '点击生效了哦'
+              message: '这是第0个'
             })
           }
         },
+        // {"color": "#999999",
+        // "font_size": 80,
+        // "start": 4,
+        // "end": 10,
+        // },
         {
           "color": "#fc9153",
-          "font_size": 28,
-          "start": 8,
-          "end": 21,
+          "font_size": 80,
+          "start": 11,
+          "end": 15,
           "font_family": "",
           "font_weight": "bolder",
           "font_style": "oblique",
           "click": true,
           "callback": () => {
             bridge.alert({
-              message: '点击生效了哦'
-            })
-          }
-          },
-          {
-          "color": "#fc9153",
-          "font_size": 28,
-          "start": 22,
-          "end": 23,
-          "font_family": "",
-          "font_weight": "bolder",
-          "font_style": "oblique",
-          "click": true,
-          "callback": () => {
-            bridge.alert({
-              message: '点击生效了哦'
+              message: '这是第1个'
             })
           }
         }
       ]
     },
     richData2: {
-      message: '这是一段富文本，点击我可以弹出内容。用这个可以测试富文本展示和跳转逻辑,这个配置了url参数',
+      message: '123456789 richData2',
       rich_message: [
         {"color": "#666666",
         "font_size": 28,
@@ -74,8 +60,8 @@
         {
           "color": "#fc9153",
           "font_size": 28,
-          "start": 8,
-          "end": 21,
+          "start": 5,
+          "end": 6,
           "font_family": "",
           "font_weight": "bolder",
           "font_style": "oblique",
