@@ -48,32 +48,6 @@
           }
         }
       ]
-    },
-    richData2: {
-      message: '123456789 richData2',
-      rich_message: [
-        {"color": "#666666",
-        "font_size": 28,
-        "start": 0,
-        "end": 3
-        },
-        {
-          "color": "#fc9153",
-          "font_size": 28,
-          "start": 5,
-          "end": 6,
-          "font_family": "",
-          "font_weight": "bolder",
-          "font_style": "oblique",
-          "url": "https://www.baidu.com/",
-          "click": true,
-          "callback": () => {
-            bridge.alert({
-              message: '点击生效了哦'
-            })
-          }
-        }
-      ]
     }
   }
 
@@ -85,16 +59,7 @@
   }
 
   methods = {
-    test(e) {
-      bridge.alert({
-        message: JSON.stringify(e)
-      })
-    },
-    clickHandle(){
-      bridge.alert({
-        message: '点击生效了哦'
-      })
-    }
+
   }
 
   beforeCreate() {

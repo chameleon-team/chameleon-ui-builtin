@@ -17,27 +17,13 @@ class Richtext implements RichtextInterface {
     layoutRichText(params) {
       const { _originEvent: {height} } = params;
       this.styles = `height: ${height}wx`;
-      cml.showToast({
-        message: this.styles,
-        duration: 5000
-      })
     },
     handleClick(params) {
       const { _originEvent: {index} } = params;
       const item = this.richData.rich_message[index]
-      // cml.alert({
-      //   message: JSON.stringify(index) 
-      // })
       if(item && item['callback']) {
         item['callback']();
       }
-      // cml.showToast({
-      //   message: JSON.stringify(index),
-      //   duration: 5000
-      // })
-      // cml.alert({
-      //   message: JSON.stringify(e)
-      // })
     },
   }
   }
