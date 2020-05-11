@@ -3,7 +3,6 @@
 </template>
 <script>
 　
-import cml from 'chameleon-api'
 class Richtext implements RichtextInterface {
   props = {
     richData: {
