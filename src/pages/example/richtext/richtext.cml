@@ -2,49 +2,35 @@
 <c-page title="richtext">
   <view class="container">
     <c-header title="richtext"></c-header>
-    <c-richtext rich-data="{{richData}}" style="width: 700px;"></c-richtext>
+    <c-richtext rich-data="{{richData}}" style="width: 200cpx; height: 100cpx;"></c-richtext>
   </view>
 </c-page>
 
 </template>
 <script>
-  import bridge from '../../../assets/js/bridge/index.js';
-  import cml from 'chameleon-api'
   class Richtext   {
 
   data = {
     richData: {
-      message: '123456789123456789 richData1',
+      message: '这是一段富文本',
       rich_message: [
         {"color": "#666666",
-        "font_size": 80,
+        "font_size": 28,
         "start": 0,
-        "end": 3,
-        "click": true,
-        "callback": () => {
-            bridge.alert({
-              message: '这是第0个'
-            })
-          }
+        "end": 3
         },
-        // {"color": "#999999",
-        // "font_size": 80,
-        // "start": 4,
-        // "end": 10,
-        // },
         {
           "color": "#fc9153",
-          "font_size": 80,
-          "start": 11,
-          "end": 15,
+          "font_size": 28,
+          "start": 4,
+          "end": 6,
           "font_family": "",
           "font_weight": "bolder",
           "font_style": "oblique",
+          "text_decoration": "line-through",
           "click": true,
           "callback": () => {
-            bridge.alert({
-              message: '这是第1个'
-            })
+            this.methods.clickHandle()
           }
         }
       ]
@@ -52,14 +38,15 @@
   }
 
   computed = {
-
   }
 
   watch  = {
   }
 
   methods = {
-
+    clickHandle(){
+      console.log('click')
+    }
   }
 
   beforeCreate() {
@@ -85,13 +72,11 @@ export default new Richtext();
 </script>
 <style scoped>
 .container {
-  width: 750cpx;
-  /* height: 500cpx; */
-  /* display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1; */
-  background: red;
+  flex: 1;
+  background: #f8f8f8;
 }
 </style>
 <script cml-type="json">
