@@ -1,3 +1,7 @@
+## [1.0.7-alpah.0]
+### Features
+- 升级weex端richText组件
+
 ## [1.0.6]
 ### Features
 - 支持头条
