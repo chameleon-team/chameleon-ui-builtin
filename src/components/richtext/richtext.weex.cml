@@ -1,13 +1,29 @@
 <template>
-  <richtext rich-message="{{richData}}"></richtext>
+  <richtext rich-message="{{richData}}" style="{{styles}}" c-bind:richTextClick="handleClick" c-bind:layoutRichText="layoutRichText"></richtext>
 </template>
 <script>
-
+　
 class Richtext implements RichtextInterface {
   props = {
     richData: {
       type: Object
     }
+  }
+  data = {
+    styles: ''
+  }
+  methods = {
+    layoutRichText(params) {
+      const { _originEvent: {height} } = params;
+      this.styles = `height: ${height}wx`;
+    },
+    handleClick(params) {
+      const { _originEvent: {index} } = params;
+      const item = this.richData.rich_message[index]
+      if(item && item['callback']) {
+        item['callback']();
+      }
+    },
   }
   }
 
