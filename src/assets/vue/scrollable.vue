@@ -284,7 +284,7 @@ export default {
       this.scroll = new CScroll(wrapper, this.scrollOptions)
 
       if (this.scrollDirection === 'vertical' && this.scrollTop) {
-        if (this.animated === true) {
+        if (this.scrollWithAnimation === true) {
           this.scroll.scrollTo(0, -this.scrollTop, 1000)
         } else {
           this.scroll.scrollTo(0, -this.scrollTop, 0)
@@ -292,7 +292,7 @@ export default {
       }
 
       if (this.scrollDirection === 'horizontal' && this.scrollLeft) {
-        if (this.animated === true) {
+        if (this.scrollWithAnimation === true) {
           this.scroll.scrollTo(-this.scrollLeft, 0, 1000)
         } else {
           this.scroll.scrollTo(-this.scrollLeft, 0, 0)
