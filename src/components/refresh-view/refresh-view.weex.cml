@@ -1,8 +1,8 @@
 <template>
-  <c-scroller 
+  <c-scroller
       height="{{-1}}"
       c-bind:scrolltobottom="onPullUpLoad"
-      class="refresh-view" 
+      class="refresh-view"
       bottom-offset="{{pullUpStart}}"
   >
     <origin-refresh :display="pullingDown ? 'show': 'hide'" @refresh="onPullDownRefresh">
@@ -54,6 +54,14 @@ class RefreshView implements RefreshViewInterface {
     pullingDown: {
       type: Boolean,
       default: false
+    },
+    full:{
+      type:Boolean,
+      default: true
+    },
+    height:{
+      type:Number,
+      default: -1
     }
   }
   computed = {
