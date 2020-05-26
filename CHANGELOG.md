@@ -1,3 +1,7 @@
+## [1.0.7-alpah.1]
+### Features
+- 升级refresh-view组件，支持web端非全屏
+
 ## [1.0.7-alpah.0]
 ### Features
 - 升级weex端richText组件

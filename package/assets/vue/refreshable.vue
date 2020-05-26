@@ -1,16 +1,14 @@
 
 <template>
-  <div :class="`refresh-view${full ?  '-full' : ''}`" ref="refresh">
-
+  <div :class="`refresh-view${full ?  '-full' : ''}`" :style="refreshViewStyle" ref="refresh">
     <div :class="`refresh-content${full ?  '-full' : ''}`">
-        <slot></slot>
+      <slot></slot>
     </div>
-
     <div :class="`pull-down${full ?  '-full' : ''}`" :style="pullDownStyle" v-show="pullingDown">
-        <slot name="pullDown">
-          <loading></loading>
-        </slot>
-      </div>
+      <slot name="pullDown">
+        <loading></loading>
+      </slot>
+    </div>
   </div>
 </template>
 <script>
@@ -57,7 +55,10 @@ export default {
     full:{
       type:Boolean,
       default: true
-    }
+    },height:{
+        type:Number,
+          default:-1
+      }
   },
   data() {
     return {
@@ -70,7 +71,10 @@ export default {
     },
     pullDownStyle() {
       return `height: ${this.pullDownStop}px`;
-    }
+    },
+      refreshViewStyle(){
+        return !this.full ? `height:${this.height}px;` : '';
+      }
   },
   components: { loading },
   methods: {
@@ -150,8 +154,12 @@ export default {
 
 <style scoped>
 .refresh-view {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 .refresh-view-full {
   position: fixed;
@@ -160,13 +168,15 @@ export default {
   top: 0;
   bottom: 0;
 }
-
 .pull-down {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background-color: red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .pull-down-full {
   display: flex;
@@ -177,7 +187,6 @@ export default {
   right: 0;
   align-items: center;
   justify-content: center;
-  background-color: red;
 }
 .pull-upload-text {
   display: flex;
@@ -186,21 +195,16 @@ export default {
   align-items: center;
   height: 100%;
 }
-
 .refresh-content-full {
   min-height: 100%;
   padding-bottom: 1px;
-
   display: flex;
   flex-direction: column;
 }
 
 .refresh-content {
+  min-height: 100%;
   padding-bottom: 1px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
+
 </style>

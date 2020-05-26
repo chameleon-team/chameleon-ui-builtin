@@ -58,6 +58,10 @@ class RefreshView implements RefreshViewInterface {
     full:{
       type:Boolean,
       default: true
+    },
+    height:{
+      type:Number,
+      default: -1
     }
   }
   computed = {
