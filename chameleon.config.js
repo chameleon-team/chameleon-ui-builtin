@@ -49,6 +49,9 @@ cml.config.merge({
       publicPath: `${publicPath}/wx/`,
       apiPrefix
     }
+  },
+  optimize: {
+    watchNodeModules: true // 默认不对 node_modules中的文件进行 watch,提升编译性能
   }
 })
 

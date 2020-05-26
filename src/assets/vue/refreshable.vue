@@ -1,17 +1,17 @@
 
 <template>
-  <div class="refresh-view" ref="refresh">
-    <div class="refresh-content">
-      <slot></slot>
-    </div>
-    <div class="pull-down" :style="pullDownStyle" v-show="pullingDown">
-      <slot name="pullDown">
-        <loading></loading>
-      </slot>
-    </div>
+  <div :class="`refresh-view${full ?  '-full' : ''}`" :style="refreshViewStyle" ref="refresh">
+      <div :class="`refresh-content${full ?  '-full' : ''}`">
+          <slot></slot>
+      </div>
+
+      <div :class="`pull-down${full ?  '-full' : ''}`" :style="pullDownStyle" v-show="pullingDown">
+          <slot name="pullDown">
+              <loading></loading>
+          </slot>
+      </div>
   </div>
 </template>
-
 <script>
 import CScroll from 'chameleon-scroll';
 import cml from 'chameleon-api';
@@ -52,7 +52,14 @@ export default {
     pullingDown: {
       type: Boolean,
       default: false
-    }
+    },
+    full:{
+      type:Boolean,
+      default: true
+    },height:{
+        type:Number,
+          default:-1
+      }
   },
   data() {
     return {
@@ -65,7 +72,10 @@ export default {
     },
     pullDownStyle() {
       return `height: ${this.pullDownStop}px`;
-    }
+    },
+      refreshViewStyle(){
+        return !this.full ? `height:${this.height}px;` : '';
+      }
   },
   components: { loading },
   methods: {
@@ -89,7 +99,7 @@ export default {
     },
     initEvent() {
       if (!this.scroll) return;
-      
+
       let events = ['pullingDown', 'pullingUp'];
       events.forEach(event => {
         this.scroll.on(event, this[event + 'Handle']);
@@ -145,21 +155,40 @@ export default {
 
 <style scoped>
 .refresh-view {
+  position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+.refresh-view-full {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
-.refresh-content {
-  min-height: 100%;
-  padding-bottom: 1px;
-}
+
 .pull-down {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.pull-down-full {
+  display: flex;
+  flex-direction: row;
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   right: 0;
+  align-items: center;
+  justify-content: center;
 }
 .pull-upload-text {
   display: flex;
@@ -168,8 +197,18 @@ export default {
   align-items: center;
   height: 100%;
 }
-.refresh-content {
+
+.refresh-content-full {
+  min-height: 100%;
+  padding-bottom: 1px;
+
   display: flex;
   flex-direction: column;
 }
+
+.refresh-content {
+    min-height: 100%;
+  padding-bottom: 1px;
+}
+
 </style>

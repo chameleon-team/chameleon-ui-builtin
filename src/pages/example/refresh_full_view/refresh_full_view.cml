@@ -1,14 +1,12 @@
 <template>
   <c-page title="refresh-view">
-      <c-header title="refresh-view"></c-header>
       <refresh-view enablePullUpLoad="{{true}}"
                   pullingDown="{{pullingDown}}"
                   pullingUp="{{pullingUp}}"
-                    full="{{false}}"
-                    height="{{1100}}"
                   c-bind:onPullDownRefresh="pullDownRefreshHandle"
                   c-bind:onPullUpLoad="pullUploadHandle">
         <view class="content">
+            <c-header title="refresh-view"></c-header>
             <view>
                 <text c-for="{{texts}}" class="text-item">{{item}}</text>
             </view>
@@ -25,7 +23,7 @@ class Refresh_view   {
   data = {
     imgGif: require('../../../components/refresh-loading/img/loading.gif'),
       texts: [0,1,2,3,4,5,6],
-      pullingDown: false,
+    pullingDown: false,
     pullingUp: false,
     loadingText: '上拉加载'
   }
@@ -43,7 +41,7 @@ class Refresh_view   {
         this.texts = [];
         let length = this.texts.length;
         for (let i = length; i < length + 5; i ++) {
-              this.texts.unshift(i);
+          this.texts.unshift(i);
         }
         this.pullingDown = false;
       }, 2000);
@@ -55,7 +53,7 @@ class Refresh_view   {
         this.loadingText = '加载完成'
         let length = this.texts.length;
         for (let i = length; i < length + 5; i ++) {
-              this.texts.push(i);
+          this.texts.push(i);
         }
         this.loadingText = '上拉加载'
         this.pullingUp = false;
