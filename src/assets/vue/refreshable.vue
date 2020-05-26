@@ -1,15 +1,14 @@
 
 <template>
   <div :class="`refresh-view${full ?  '-full' : ''}`" :style="refreshViewStyle" ref="refresh">
-      <div :class="`refresh-content${full ?  '-full' : ''}`">
-          <slot></slot>
-      </div>
-
-      <div :class="`pull-down${full ?  '-full' : ''}`" :style="pullDownStyle" v-show="pullingDown">
-          <slot name="pullDown">
-              <loading></loading>
-          </slot>
-      </div>
+    <div :class="`refresh-content${full ?  '-full' : ''}`">
+      <slot></slot>
+    </div>
+    <div :class="`pull-down${full ?  '-full' : ''}`" :style="pullDownStyle" v-show="pullingDown">
+      <slot name="pullDown">
+        <loading></loading>
+      </slot>
+    </div>
   </div>
 </template>
 <script>
@@ -156,11 +155,11 @@ export default {
 <style scoped>
 .refresh-view {
   position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
 }
 .refresh-view-full {
   position: fixed;
@@ -169,16 +168,15 @@ export default {
   top: 0;
   bottom: 0;
 }
-
 .pull-down {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 .pull-down-full {
   display: flex;
@@ -197,17 +195,15 @@ export default {
   align-items: center;
   height: 100%;
 }
-
 .refresh-content-full {
   min-height: 100%;
   padding-bottom: 1px;
-
   display: flex;
   flex-direction: column;
 }
 
 .refresh-content {
-    min-height: 100%;
+  min-height: 100%;
   padding-bottom: 1px;
 }
 

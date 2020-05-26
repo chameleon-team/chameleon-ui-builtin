@@ -29,8 +29,8 @@ interface RefreshViewInterface {
   pullDownStart: Number;       // 下拉刷新开始位置
   pullDownStop: Number;        // 下拉刷新停留位置
   pullingDown: Boolean;    // 下拉刷新中
-    full: Boolean;         //是否需要全屏
-    height: Number;        //非全屏时设置高度
+  full: Boolean;         //是否需要全屏
+  height: Number;        //非全屏时设置高度
   // onscroll(eventDetail: scrollEventDetail): void;
   onPullDownRefresh(eventDetail: void): void;
   onPullUpLoad(eventDetail: void): void;
