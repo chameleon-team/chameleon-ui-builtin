@@ -6,6 +6,7 @@
                :pullDownStart="pullDownStart2px"
                :pullDownStop="pullDownStop2px"
                :pullingDown="pullingDown"
+               :full="full"
                @pullingDown="onPullDownRefresh"
                @pullingUp="onPullUpLoad">
     <slot></slot>
@@ -49,6 +50,10 @@ class RefreshView implements RefreshViewInterface {
     pullingDown: {
       type: Boolean,
       default: false
+    },
+    full:{
+      type:Boolean,
+      default: true
     }
   }
   computed = {

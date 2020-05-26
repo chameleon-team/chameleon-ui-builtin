@@ -40,6 +40,10 @@ class RefreshView implements RefreshViewInterface {
     pullingDown: {
       type: Boolean,
       default: false
+    },
+    full:{
+      type:Boolean,
+      default: true
     }
   }
 

@@ -89,6 +89,7 @@ class Demo {
           routeObj["list"],
           routeObj["scroller"],
           routeObj["refresh-view"],
+          routeObj["refresh-full-view"],
           routeObj["carousel"]
         ],
         src: require(`../../assets/images/component/kind/view.png`)

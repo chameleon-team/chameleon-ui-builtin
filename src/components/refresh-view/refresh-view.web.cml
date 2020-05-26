@@ -6,6 +6,8 @@
                :pullDownStart="pullDownStart2px"
                :pullDownStop="pullDownStop2px"
                :pullingDown="pullingDown"
+               :full="full"
+               :height="refreshViewHeight2px"
                @pullingDown="onPullDownRefresh"
                @pullingUp="onPullUpLoad">
     <slot></slot>
@@ -49,6 +51,14 @@ class RefreshView implements RefreshViewInterface {
     pullingDown: {
       type: Boolean,
       default: false
+    },
+    full:{
+      type:Boolean,
+      default: true
+    },
+    height:{
+      type:Number,
+      default: -1
     }
   }
   computed = {
@@ -63,6 +73,9 @@ class RefreshView implements RefreshViewInterface {
     },
     pullUpStop2px() {
       return cml.cpx2px(this.pullUpStop);
+    },
+    refreshViewHeight2px(){
+      return cml.cpx2px(this.height);
     }
   }
   methods = {

@@ -27,6 +27,12 @@
       "mock": "index.php"
     },
     {
+      "name": "refresh-full-view",
+      "url": "/pages/example/refresh_full_view/refresh_full_view",
+      "path": "/pages/example/refresh_full_view/refresh_full_view",
+      "mock": "index.php"
+    },
+    {
       "name": "view",
       "url": "/pages/example/view/view",
       "path": "/pages/example/view/view",
