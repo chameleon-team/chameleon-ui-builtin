@@ -1,3 +1,7 @@
+## [1.0.7-alpah.4]
+### Features
+- 升级scroller组件,可以选择是否滚动动画
+
 ## [1.0.7-alpah.1]
 ### Features
 - 升级refresh-view组件，支持web端非全屏
