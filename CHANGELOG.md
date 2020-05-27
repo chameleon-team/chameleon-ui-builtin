@@ -1,4 +1,4 @@
-## [1.0.7-alpah.4]
+## [1.0.7-alpah.5]
 ### Features
 - 升级scroller组件,可以选择是否滚动动画
 
