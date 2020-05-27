@@ -2,7 +2,7 @@
   <origin-scroll-view
     scroll-x="{{ scrollDirection === 'horizontal' }}"
     scroll-y="{{ scrollDirection === 'vertical' }}"
-    scroll-with-animation="{{true}}"
+    scroll-with-animation="{{scrollWithAnimation}}"
     lower-threshold="{{bottomOffset+'rpx'}}"
     enable-back-to-top="{{true}}"
     bindscrolltolower="onBottom"
@@ -57,6 +57,10 @@
       scrollLeft: {
         type: Number,
         default: 0
+      },
+      scrollWithAnimation: {
+        type: Boolean,
+        default: true
       }
     }
     data = {

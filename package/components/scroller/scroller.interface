@@ -34,6 +34,7 @@ interface ScrollerInterface {
   width: Number,
   scrollTop: Number,
   scrollLeft: Number,
+  scrollWithAnimation: Boolean,
   onscroll(eventDetail: scrollEventDetail): void;
   customscroll(eventDetail: scrollEventDetail): void;
   scrolltobottom(eventDetail: scrolltobottomEventDetail): void;

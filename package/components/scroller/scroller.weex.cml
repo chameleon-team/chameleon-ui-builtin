@@ -58,6 +58,10 @@
       scrollLeft: {
         type: Number,
         default: 0
+      },
+      scrollWithAnimation: {
+        type: Boolean,
+        default: false
       }
     }
     data = {
@@ -99,7 +103,7 @@
       scrollTo (offset) {
         let el = this.$refs['c-scroller'] && this.$refs['c-scroller'].children[0]
         if (el) {
-          dom.scrollToElement(el, { offset: offset })
+          dom.scrollToElement(el, { offset: offset, animated: this.scrollWithAnimation })
         }
       },
       onScroll(e) {

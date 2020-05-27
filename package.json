@@ -4,7 +4,8 @@
   "description": "chameleon内置组件库",
   "scripts": {
     "build": "sh ./bin/build.sh",
-    "publish": "npm run build && cd package && npm publish",
+    "alpha": "npm run build && cd package && npm version prerelease --preid=alpha && npm publish",
+    "publish": "npm run build && cd package && npm version patch && npm publish",
     "deploy": "sh deploy.sh weex && sh deploy.sh web"
   },
   "author": "Chameleon-Team",
