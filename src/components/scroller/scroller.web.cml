@@ -10,6 +10,7 @@
     template="scroller"
     scrollTop="{{scrollTopPx}}"
     scrollLeft="{{scrollLeftPx}}"
+    :scroll-with-animation="scrollWithAnimation"
 
     @onscroll= "scrollEvent"
     @scrolltobottom = "scrolltobottomEvent"
@@ -58,6 +59,10 @@
       scrollLeft: {
         type: Number,
         default: 0
+      },
+      scrollWithAnimation: {
+        type: Boolean,
+        default: false
       }
     }
     computed = {

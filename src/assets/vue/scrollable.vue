@@ -59,6 +59,10 @@ export default {
     scrollLeft: {
       type: Number,
       default: 0
+    },
+    scrollWithAnimation: {
+      type: Boolean,
+      default: false
     }
   },
   data: function () {
@@ -93,11 +97,19 @@ export default {
     },
     scrollTop(val) {
       if (!this.scroll) return
-      this.scroll.scrollTo(0, -val, 1000)
+      if (this.scrollWithAnimation === true) {
+        this.scroll.scrollTo(0, -val, 1000)
+      } else {
+        this.scroll.scrollTo(0, -val, 0)
+      }
     },
     scrollLeft(val) {
       if (!this.scroll) return
-      this.scroll.scrollTo(-val, 0, 1000)
+      if (this.scrollWithAnimation === true) {
+        this.scroll.scrollTo(-val, 0, 1000)
+      } else {
+        this.scroll.scrollTo(-val, 0, 0)
+      }
     },
     toElement (val) {
       this.collectSlotRefs(this.$slots.default)
@@ -272,11 +284,19 @@ export default {
       this.scroll = new CScroll(wrapper, this.scrollOptions)
 
       if (this.scrollDirection === 'vertical' && this.scrollTop) {
-        this.scroll.scrollTo(0, -this.scrollTop, 1000)
+        if (this.scrollWithAnimation === true) {
+          this.scroll.scrollTo(0, -this.scrollTop, 1000)
+        } else {
+          this.scroll.scrollTo(0, -this.scrollTop, 0)
+        } 
       }
 
       if (this.scrollDirection === 'horizontal' && this.scrollLeft) {
-        this.scroll.scrollTo(-this.scrollLeft, 0, 1000)
+        if (this.scrollWithAnimation === true) {
+          this.scroll.scrollTo(-this.scrollLeft, 0, 1000)
+        } else {
+          this.scroll.scrollTo(-this.scrollLeft, 0, 0)
+        } 
       }
 
       // 监听事件
