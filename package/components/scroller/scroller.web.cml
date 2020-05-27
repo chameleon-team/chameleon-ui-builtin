@@ -11,7 +11,6 @@
     scrollTop="{{scrollTopPx}}"
     scrollLeft="{{scrollLeftPx}}"
     :scroll-with-animation="scrollWithAnimation"
-
     @onscroll= "scrollEvent"
     @scrolltobottom = "scrolltobottomEvent"
   >
@@ -62,7 +61,7 @@
       },
       scrollWithAnimation: {
         type: Boolean,
-        default: false
+        default: true
       }
     }
     computed = {
