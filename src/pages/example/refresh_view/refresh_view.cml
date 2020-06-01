@@ -2,6 +2,7 @@
   <c-page title="refresh-view">
     <c-header title="refresh-view"></c-header>
     <refresh-view enablePullUpLoad="{{true}}"
+                  enablePullDown="{{true}}"
                 pullingDown="{{pullingDown}}"
                 pullingUp="{{pullingUp}}"
                 full="{{false}}"
