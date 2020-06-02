@@ -89,6 +89,8 @@ export default {
           threshold: this.pullDownStart,
           stop: this.pullDownStop
         }
+      } else {
+        options.pullDownRefresh = false;
       }
       if (this.enablePullUpLoad) {
         options.pullUpLoad = {
@@ -100,7 +102,6 @@ export default {
       if (!this.$refs.refresh) return;
 
       this.initOptions();
-      options.probeType = 3;
       this.scroll = new CScroll(this.$refs.refresh, options);
       this.initEvent();
     },
@@ -114,11 +115,6 @@ export default {
 
       this.scroll.on('beforeScrollStart', () => {
         this.scroll.refresh()
-      })
-
-      this.scroll.on('scroll', (detail) => {
-        let data = {deltaX: detail.x, deltaY: detail.y}
-        this.$emit('onScroll', data);
       })
     },
     pullingDownHandle() {
