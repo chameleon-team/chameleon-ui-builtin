@@ -1,46 +1,88 @@
 <template>
-  <c-page title="carousel">
-    <c-header title="carousel"></c-header>
-    <carousel class="container" indicator-dots="{{true}}"  current="{{0}}" circular="{{true}}" autoplay="{{true}}" interval="{{2000}}">
-      <carousel-item>
-        <view  class="carousel-item" style="background-color: #EBDEAA"></view>
-      </carousel-item>
-      <carousel-item>
-        <view class="carousel-item" style="background-color: #E3EDCD"></view>
-      </carousel-item>
-      <carousel-item>
-        <view class="carousel-item" style="background-color: #EAEAEF"></view>
-      </carousel-item>
-    </carousel>
-  </c-page>
+<c-page title="carousel">
+  <c-header title="carousel"></c-header>
+  <carousel class="container" indicator-dots="{{true}}" current="{{0}}" circular="{{true}}" autoplay="{{true}}" interval="{{2000}}">
+    <carousel-item>
+      <view class="carousel-item" style="background-color: #EBDEAA"></view>
+    </carousel-item>
+    <carousel-item>
+      <view class="carousel-item" style="background-color: #E3EDCD"></view>
+    </carousel-item>
+    <carousel-item>
+      <view class="carousel-item" style="background-color: #EAEAEF"></view>
+    </carousel-item>
+  </carousel>
+
+  <c-header title="carousel-item内部按钮控制切换"></c-header>
+  <carousel class="container" indicator-dots="{{true}}" current="{{position}}" circular="{{false}}" autoplay="{{false}}" interval="{{2000}}" c-bind:change="change">
+    <carousel-item>
+      <view class="carousel-item" style="background-color: #EBDEAA">
+        <view class="btn" c-bind:tap="go()">
+          <text>跳转</text></view>
+      </view>
+    </carousel-item>
+    <carousel-item>
+      <view class="carousel-item" style="background-color: #E3EDCD"></view>
+    </carousel-item>
+    <carousel-item>
+      <view class="carousel-item" style="background-color: #EAEAEF"></view>
+    </carousel-item>
+  </carousel>
+</c-page>
 </template>
 <script>
-  class Carousel {}
+class Carousel {
 
-  export default new Carousel();
+  data = {
+    position: 0
+  }
 
+  methods = {
+    go() {
+      this.position = 2;
+    },
+    change(e){
+      console.log("change", e);
+      this.position = e.detail.current;
+    }
+  }
+}
+
+export default new Carousel();
 </script>
 
 <style scoped>
 .container {
   height: 300cpx;
 }
+
 .carousel-item {
   height: 300cpx;
   width: 750cpx;
+  align-items: center;
+  justify-content: center
+}
+
+.btn {
+  width: 120cpx;
+  color: white;
+  background-color: red;
+  border-radius: 10cpx;
+  align-items: center;
+  justify-content: center;
 }
 </style>
 
 <script cml-type="json">
 {
-  "base": {
-    "usingComponents": {
-      "c-page": "/components/page/page",
-      "c-header": "../../components/header/header",
-      "carousel": "/components/carousel/carousel",
-      "carousel-item": "/components/carousel-item/carousel-item"
-    }
-  }
+		"base": {
+				"usingComponents": {
+						"c-page": "/components/page/page",
+						"c-header": "../../components/header/header",
+						"carousel": "/components/carousel/carousel",
+						"carousel-item": "/components/carousel-item/carousel-item"
+				}
+		}
 }
 </script>
 
