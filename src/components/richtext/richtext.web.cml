@@ -1,78 +1,98 @@
 <template>
-  <view class="rich-text">
-    <text c-for="{{richList}}" style="{{item.style}}" c-bind:tap="clickText(index)">{{item.text}}</text>
-  </view>
+<view class="{{richTextClass}}">
+  <text c-for="{{richList}}" style="{{item.style}}" c-bind:tap="clickText(index, item)">{{item.text}}</text>
+</view>
 </template>
 <script>
 import richHandle from './richHandle.js';
- class Richtext implements RichtextInterface {
-    props = {
-      richData: {
-        type: Object
-      }
+class Richtext implements RichtextInterface {
+  props = {
+    richData: {
+      type: Object
+    },
+    inline: {
+      type: Boolean,
+      default: false
     }
-    data = {
-      richList: null
-    }
-    methods = {
-      richHandle() {
-        let richList = richHandle(this.richData);
-        richList = richList.map(item => {
-          let tempStyle = '';
-          if (item.color) {
-            tempStyle += `color:${item.color};`
-          } 
-          if (item.font_size) {
-            tempStyle += `font-size:${item.font_size}cpx;`
-          }
-          if (item.font_family){
-            tempStyle += `font-family:${item.font_family};`
-          }
-          if (item.font_weight){
-            tempStyle += `font-weight:${item.font_weight};`
-          }
-          if (item.font_style){
-            tempStyle += `font-style:${item.font_style};`
-          }
-          if (item.text_decoration){
-            tempStyle += `text-decoration:${item.text_decoration};`
-          }
-          item.style = tempStyle
-          return item;
-        })
-        this.richList = richList;
-      },
-      clickText(ind){
-        if(this.richList[ind].click){
-          this.richList[ind].callback()
-        }   
-      }
-    }
-    created() {
-      this.richHandle();
-      setTimeout(() => {
-      console.log(this.richList)
-        
-      }, 100);
+  }
+  data = {
+    richList: null
+  }
+
+  computed = {
+    richTextClass() {
+      return this.inline ? 'rich-text-inline' : 'rich-text';
     }
   }
 
-  export default new Richtext();
+  methods = {
+    richHandle() {
+      let richList = richHandle(this.richData);
+      richList = richList.map(item => {
+        let tempStyle = this.inline ? 'display:inline;' : '';
+        if (item.color) {
+          tempStyle += `color:${item.color};`
+        }
+        if (item.font_size) {
+          tempStyle += `font-size:${item.font_size}cpx;`
+        }
+        if (item.font_family) {
+          tempStyle += `font-family:${item.font_family};`
+        }
+        if (item.font_weight) {
+          tempStyle += `font-weight:${item.font_weight};`
+        }
+        if (item.font_style) {
+          tempStyle += `font-style:${item.font_style};`
+        }
+        if (item.text_decoration) {
+          tempStyle += `text-decoration:${item.text_decoration};`
+        }
+        item.style = tempStyle
+        return item;
+      })
+      this.richList = richList;
+    },
+    clickText(ind, item) {
+      if (this.richList[ind].click) {
+        // this.richList[ind].callback()
+        this.$cmlEmit("textclick", {
+          index: ind,
+          item: item
+        })
+      }
+    }
+  }
+  created() {
+    this.richHandle();
+    setTimeout(() => {
+      console.log(this.richList)
 
+    }, 100);
+  }
+}
+
+export default new Richtext();
 </script>
 
 <style scoped>
-.rich-text { 
+.rich-text {
   display: flex;
   flex-direction: row;
+}
+
+.rich-text-inline {
+  display: inline;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 </style>
 
 <script cml-type="json">
 {
-  "web": {
-    "component": true
-  }
+		"web": {
+				"component": true
+		}
 }
 </script>
 

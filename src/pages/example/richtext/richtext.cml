@@ -3,21 +3,26 @@
   <view class="container">
     <c-header title="richtext"></c-header>
     <c-richtext rich-data="{{richData}}" style="width: 200cpx; height: 100cpx;"></c-richtext>
+    <c-header title="richtext inline"></c-header>
+    <c-richtext rich-data="{{richLongData}}" inline="{{true}}"></c-richtext>
+    <c-header title="示例"></c-header>
+    <view class="example-container">
+      <c-richtext rich-data="{{example}}" inline="{{true}}"></c-richtext>
+    </view>
   </view>
 </c-page>
-
 </template>
 <script>
-  class Richtext   {
+class Richtext {
 
   data = {
     richData: {
       message: '这是一段富文本',
-      rich_message: [
-        {"color": "#666666",
-        "font_size": 28,
-        "start": 0,
-        "end": 3
+      rich_message: [{
+          "color": "#666666",
+          "font_size": 28,
+          "start": 0,
+          "end": 3
         },
         {
           "color": "#fc9153",
@@ -34,38 +39,77 @@
           }
         }
       ]
+    },
+    richLongData: {
+      message: '这是一段很长的富文本;这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本',
+      rich_message: [{
+          "color": "#666666",
+          "font_size": 28,
+          "start": 0,
+          "end": 3
+        },
+        {
+          "color": "#DC143C",
+          "font_size": 28,
+          "start": 4,
+          "end": 60,
+          "font_family": "",
+          "font_weight": "bolder",
+          "font_style": "oblique",
+          "text_decoration": "line-through",
+          "click": true,
+          "callback": () => {
+            this.methods.clickHandle()
+          }
+        }
+      ]
+    },
+    example: {
+      message: '秒杀这是一段很长的富文本;这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本这是一段很长的富文本',
+      rich_message: [{
+          "color": "#DC143C",
+          "font_size": 24,
+          "start": 0,
+          "end": 2,
+        },
+        {
+          "color": "#666666",
+          "font_size": 28,
+          "start": 2,
+          "end": 60,
+          "font_family": "",
+          "font_weight": "bolder",
+          "font_style": "oblique",
+          "click": true,
+          "callback": () => {
+            this.methods.clickHandle()
+          }
+        }
+      ]
     }
   }
 
-  computed = {
-  }
+  computed = {}
 
-  watch  = {
-  }
+  watch = {}
 
   methods = {
-    clickHandle(){
+    clickHandle() {
       console.log('click')
     }
   }
 
-  beforeCreate() {
-  }
+  beforeCreate() {}
 
-  created() {
-  }
+  created() {}
 
-  beforeMount() {
-  }
+  beforeMount() {}
 
-  mounted() {
-  }
+  mounted() {}
 
-  beforeDestroy() {
-  }
+  beforeDestroy() {}
 
-  destroyed() {
-  }
+  destroyed() {}
 }
 
 export default new Richtext();
@@ -78,18 +122,22 @@ export default new Richtext();
   flex: 1;
   background: #f8f8f8;
 }
+
+.example-container{
+  margin:20cpx;
+}
 </style>
 <script cml-type="json">
 {
-    "base": {
-        "usingComponents": {
-            "c-page": "/components/page/page",
-            "c-header": "../../components/header/header",
-            "c-richtext": "/components/richtext/richtext"
-        },
-        "navigationBarTitleText": "richtext",
-        "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2"
-    }
+		"base": {
+				"usingComponents": {
+						"c-page": "/components/page/page",
+						"c-header": "../../components/header/header",
+						"c-richtext": "/components/richtext/richtext"
+				},
+				"navigationBarTitleText": "richtext",
+				"backgroundTextStyle": "dark",
+				"backgroundColor": "#E2E2E2"
+		}
 }
 </script>

@@ -1,42 +1,61 @@
 <template>
-  <richtext rich-message="{{richData}}" style="{{styles}}" c-bind:richTextClick="handleClick" c-bind:layoutRichText="layoutRichText"></richtext>
+<richtext style="{{getHeight}}" rich-message="{{richData}}" @richTextClick="richTextClick" @layoutRichText="layoutRichText"></richtext>
 </template>
 <script>
-　
+import cml from 'chameleon-api';
+
 class Richtext implements RichtextInterface {
   props = {
     richData: {
       type: Object
+    },
+    inline: {
+      type: Boolean,
+      default: false
     }
   }
+
   data = {
-    styles: ''
+    height: 0
   }
+
+  computed = {
+    getHeight(){
+      return `min-height:${this.height}cpx;`;
+    }
+  }
+
   methods = {
-    layoutRichText(params) {
-      const { _originEvent: {height} } = params;
-      this.styles = `height: ${height}wx`;
-    },
-    handleClick(params) {
-      const { _originEvent: {index} } = params;
-      const item = this.richData.rich_message[index]
-      if(item && item['callback']) {
-        item['callback']();
+    richTextClick(value){
+      let index = value._originEvent.index;
+      let item = this.richData.rich_message[index];
+      if (item.click) {
+        this.$cmlEmit("textclick", {
+          index: index,
+          item: item
+        })
       }
     },
+    layoutRichText(value){
+      let height = value._originEvent.height;
+      let cmlHeight = height * 2;
+      console.log("cmlHeight = "+cmlHeight);
+      this.height = cmlHeight;
+    }
   }
-  }
+}
 
 export default new Richtext();
 </script>
 
 <style scoped>
+
 </style>
 
 <script cml-type="json">
 {
-  "weex": {
-    "component": true
-  }
+		"weex": {
+				"component": true
+		}
 }
 </script>
