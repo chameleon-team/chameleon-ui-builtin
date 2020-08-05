@@ -28,6 +28,9 @@ class Richtext implements RichtextInterface {
   methods = {
     richTextClick(value){
       let index = value._originEvent.index;
+      if (index < 0) {
+        return ;
+      }
       let item = this.richData.rich_message[index];
       if (item.click) {
         this.$cmlEmit("textclick", {
