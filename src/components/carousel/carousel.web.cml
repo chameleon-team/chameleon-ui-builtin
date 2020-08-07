@@ -3,6 +3,7 @@
       <view 
         class="slider-touch"
         style="{{styleStr}}"
+        c-bind:tap="tapAction"
         c-bind:touchmove="swipeMove"
         c-bind:touchstart="swipeStart"
         c-bind:mousedown="swipeStart"
@@ -118,6 +119,7 @@ class Carousel implements CCarouselInterface {
   }
   name =  'slider'
   data = {
+    isTap:false,
     pages: [],
     options: {
       preventDocumentMove: true
@@ -409,6 +411,10 @@ class Carousel implements CCarouselInterface {
     window.removeEventListener('resize', this.resize)
   }
   methods = {
+    tapAction(e){
+      console.log("tapAction", e);
+      this.isTap = true;
+    },
     visibilitychange () {
       let that = this
       if (document.hidden) {
@@ -428,6 +434,7 @@ class Carousel implements CCarouselInterface {
       this.slide(this.data.currentPage, 'animationnone')
     },
     swipeStart (e) {
+      console.log("swipeStart", e, this.isTap);
       let that = this
       this.s_data.e = e
       if (this.s_data.freeze) {
@@ -476,6 +483,8 @@ class Carousel implements CCarouselInterface {
       }
     },
     swipeMove (e) {
+      this.isTap = false;
+      console.log("swipeMove", e, this.isTap);
       this.s_data.e = e
       if (this.s_data.tracking) {
         let effect = this.s_data.effect
@@ -535,6 +544,10 @@ class Carousel implements CCarouselInterface {
       }
     },
     swipeEnd (e) {
+      console.log("swipeEnd", e, this.isTap);
+      if (this.isTap) {
+        return;
+      }
       document.removeEventListener('touchend', this.swipeEnd);
       this.s_data.e = e
       this.s_data.tracking = false
