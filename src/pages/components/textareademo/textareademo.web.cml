@@ -4,7 +4,7 @@
         <c-scroller height="{{-1}}">
             <view class="input-wrap">
                 <text class="title-text" >focus聚焦 web端不支持</text>
-                <c-textarea cstyle="width: 400cpx" placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>
+                <c-textarea value="我是初始值value" cstyle="width: 400cpx" placeholder="focus聚焦 web端不支持" focus="{{isfocus}}"  c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-textarea>
             </view>
             <view class="input-wrap">
                 <text class="title-text">数据绑定,value:{{inputValue}}</text>
@@ -33,7 +33,7 @@
             <view class="end-item">
                 <text class="title-text">自定义样式</text>
                 <c-textarea placeholder="自定义样式" c-style="color: #00ff00; border: 1px solid #00f;" ></c-textarea>
-            </view>  
+            </view>
         </c-scroller>
     </view>
 </c-page>
@@ -53,7 +53,7 @@
 
   methods = {
     inputEvent(e) {
-      this.inputValue = e.detail.value;      
+      this.inputValue = e.detail.value;
     },
     testEvent(e) {
       this.eventName = e.type
