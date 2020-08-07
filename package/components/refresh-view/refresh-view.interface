@@ -21,6 +21,7 @@ type scrollEventDetail = {
 }
 
 interface RefreshViewInterface {
+    enablePullDown: Boolean, // 是否使用下拉刷新
   enablePullUpLoad: Boolean;   // 是否使用上拉加载
   pullUpLoadComplete: Boolean;
   pullingUp: Boolean;         // 上拉加载中

@@ -1,5 +1,6 @@
 <template>
   <refreshable :enablePullUpLoad="enablePullUpLoad"
+               :enablePullDown="enablePullDown"
                :pullingUp="pullingUp"
                :pullUpStart="pullUpStart2px"
                :pullUpStop="pullUpStop2px"
@@ -59,6 +60,10 @@ class RefreshView implements RefreshViewInterface {
     height:{
       type:Number,
       default: -1
+    },
+    enablePullDown: {
+      type: Boolean,
+      default: true
     }
   }
   computed = {

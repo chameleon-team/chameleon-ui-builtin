@@ -1,57 +1,66 @@
 <template>
-  <view class="rich-text">
-    <text c-for="{{richList}}" style="{{item.style}}" c-key="{{index}}" c-bind:tap="clickText(index)">{{item.text}}</text>
-  </view>
+<view class="{{richTextClass}}">
+  <text c-for="{{richList}}" style="{{item.style}}" c-key="{{index}}" c-bind:tap="clickText(index, item)">{{item.text}}</text>
+</view>
 </template>
 <script>
 import richHandle from './richHandle.js';
- class Richtext implements RichtextInterface {
-    props = {
-      richData: {
-        type: Object
-      }
+class Richtext implements RichtextInterface {
+  props = {
+    richData: {
+      type: Object
+    },
+    inline: {
+      type: Boolean,
+      default: false
     }
-    computed ={
-      richList() {
-        let richList = richHandle(this.richData);
-        richList = richList.map((item,index) => {
-          let tempStyle = '';
-          if (item.color) {
-            tempStyle += `color:${item.color};`
-          } 
-          if (item.font_size) {
-            tempStyle += `font-size:${item.font_size}cpx;`
-          }
-          if (item.font_family){
-            tempStyle += `font-family:${item.font_family};`
-          }
-          if (item.font_weight){
-            tempStyle += `font-weight:${item.font_weight};`
-          }
-          if (item.font_style){
-            tempStyle += `font-style:${item.font_style};`
-          }
-          if (item.text_decoration){
-            tempStyle += `text-decoration:${item.text_decoration};`
-          }
-          item.style = tempStyle
-          return item;
+  }
+  computed = {
+    richTextClass() {
+      return this.inline ? 'rich-text-inline' : 'rich-text';
+    },
+    richList() {
+      let richList = richHandle(this.richData);
+      richList = richList.map((item, index) => {
+        let tempStyle = this.inline ? 'display:inline;' : '';
+        if (item.color) {
+          tempStyle += `color:${item.color};`
+        }
+        if (item.font_size) {
+          tempStyle += `font-size:${item.font_size}cpx;`
+        }
+        if (item.font_family) {
+          tempStyle += `font-family:${item.font_family};`
+        }
+        if (item.font_weight) {
+          tempStyle += `font-weight:${item.font_weight};`
+        }
+        if (item.font_style) {
+          tempStyle += `font-style:${item.font_style};`
+        }
+        if (item.text_decoration) {
+          tempStyle += `text-decoration:${item.text_decoration};`
+        }
+        item.style = tempStyle
+        return item;
+      })
+      return richList;
+    }
+  }
+  methods = {
+    clickText(ind, item) {
+      if (this.richList[ind].click) {
+        // this.richList[ind].callback()
+        this.$cmlEmit("textclick", {
+          index: ind,
+          item: item
         })
-        return richList;
-      }
-    }
-    methods = {
-      clickText(ind){
-        //暂时不不支持传递函数
-        // if(this.richList[ind].click){
-        //   this.richList[ind].callback()
-        // }   
       }
     }
   }
+}
 
-  export default new Richtext();
-
+export default new Richtext();
 </script>
 
 <style scoped>
@@ -59,12 +68,16 @@ import richHandle from './richHandle.js';
   display: flex;
   flex-direction: row;
 }
+
+.rich-text-inline {
+  display: inline;
+}
 </style>
 
 <script cml-type="json">
 {
-  "base": {
-    "component": true
-  }
+		"base": {
+				"component": true
+		}
 }
 </script>

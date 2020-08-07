@@ -1,6 +1,6 @@
 <template>
-      <div 
-        class="scroll-container" 
+      <div
+        class="scroll-container"
         ref="c-scroller"
         :style="wrapperStyle">
           <div class="inner-scroll" ref="inner" @touchstart="touchstartHandler" @touchend="touchendHandler" :style="innerStyle">

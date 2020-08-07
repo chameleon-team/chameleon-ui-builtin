@@ -16,7 +16,7 @@
             ref="c-input"
             :style="styleObj"
         />
-        <html:textarea 
+        <html:textarea
             v-else
             :value="value"
             :placeholder="placeholder"
@@ -90,11 +90,11 @@ export default {
     },
     template: {
         type: String,
-        default: 'input' 
+        default: 'input'
     },
     rows: {
         type: Number,
-        default: 2 
+        default: 2
     },
     //type=number 最大值
     maxValue: {
@@ -111,8 +111,13 @@ export default {
     focus: function(newVal, oldVal) {
       this.changeFocus(newVal);
     },
-    value: function (val) {
-      this.$refs[this.refsName].value = val
+    value: {
+        handler:function (val, oldVal) {
+            this.$nextTick(()=>{
+                this.$refs[this.refsName].value = val
+            })
+        },
+        immediate: true
     }
   },
   computed: {
@@ -170,7 +175,7 @@ export default {
             this.$refs[this.refsName].focus();
         } else {
             this.$refs[this.refsName].blur();
-        }       
+        }
     },
     handleDetail(e) {
       let value = e.target.value

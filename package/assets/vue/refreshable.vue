@@ -20,6 +20,10 @@ let options = {
 }
 export default {
   props: {
+    enablePullDown: {
+      type: Boolean,
+      default: true
+    },
     enablePullUpLoad: {
       type: Boolean,
       default: false
@@ -55,7 +59,8 @@ export default {
     full:{
       type:Boolean,
       default: true
-    },height:{
+    },
+    height:{
         type:Number,
           default:-1
       }
@@ -79,9 +84,13 @@ export default {
   components: { loading },
   methods: {
     initOptions() {
-      options.pullDownRefresh = {
-        threshold: this.pullDownStart,
-        stop: this.pullDownStop
+      if (this.enablePullDown) {
+        options.pullDownRefresh = {
+          threshold: this.pullDownStart,
+          stop: this.pullDownStop
+        }
+      } else {
+        options.pullDownRefresh = false;
       }
       if (this.enablePullUpLoad) {
         options.pullUpLoad = {

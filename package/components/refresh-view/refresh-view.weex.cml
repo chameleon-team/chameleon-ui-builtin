@@ -62,6 +62,10 @@ class RefreshView implements RefreshViewInterface {
     height:{
       type:Number,
       default: -1
+    },
+    enablePullDown: {
+      type: Boolean,
+      default: true
     }
   }
   computed = {
