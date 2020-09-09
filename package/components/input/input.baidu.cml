@@ -1,189 +1,197 @@
 <template>
-  <input
-    class="input-wrap"
-    style="{{computedStyle}}"
-
-    value="{{inputValue}}"
-    type="{{type}}"
-    placeholder="{{placeholder}}"
-    disabled="{{disabled}}"
-    maxlength="{{maxlength}}"
-
-    c-bind:input="inputEvent"
-    c-bind:blur="blurEvent"
-    c-bind:focus="focusEvent"
-    c-bind:confirm="confirmEvent"
-    password="{{isPassword}}"
-    focus="{{focus}}"
-    confirm-type="{{returnKeyType}}"
-    placeholder-style="{{wxPlaceHolderStyle}}"
-  />
+<input style="{{computedStyle}}" value="{{inputValue}}" type="{{type}}" placeholder="{{placeholder}}" disabled="{{disabled}}" maxlength="{{maxlength}}" c-bind:input="inputEvent" c-bind:blur="blurEvent" c-bind:focus="focusEvent" c-bind:confirm="confirmEvent" password="{{isPassword}}" focus="{{focus}}" confirm-type="{{returnKeyType}}" placeholder-style="{{wxPlaceHolderStyle}}" />
 </template>
 <script>
-import {getValBetweenMaxAndMin} from '../../assets/js/utils/utils';
+import {
+  getValBetweenMaxAndMin
+} from '../../assets/js/utils/utils';
 
- class Input implements InputInterface {
-    props = {
-      cStyle: {
-        type: String,
-        default: ''
-      },
-      cstyle: {
-        type: String,
-        default: ''
-      },
-      value: {
-        type: String,
-        default: ''
-      },
-      //input的类型
-      type: {
-        type: String,
-        default: 'text'  //枚举值 text number password
-      },
-      //input的placerholder
-      placeholder: {
-        type: String,
-        default: ''
-      },
-      //是否禁用input输入
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      //控制input是否聚焦
-      focus: {
-        type: Boolean,
-        default: false
-      },
-      //最大长度
-      maxlength: {
-        type: Number,
-        default: 140
-      },
-      //右下角返回键类型
-      returnKeyType: { //枚举值 done search next go
-        type: String,
-        default: 'done'
-      },
-      placerHolderColor: {
-        type: String,
-        default: '#bebebe'
-      },
-      maxValue: { //type=number 最大值
-        type: Number,
-        default: 9007199254740991
-      },
-      minValue: { //type=number 最小值
-        type: Number,
-        default: -9007199254740991
-      }
-    }
-    data = {
-      inputValue: ""
-    }
-    computed ={
-      wxPlaceHolderStyle() {
-        return `color: ${this.placerHolderColor};`
-      },
-      isInputNumber () {
-        return this.type === 'number';
-      },
-      computedStyle() {
-        // props 必须经过计算属性，否则没有经过 cpx 转换
-        return this.cStyle || this.cstyle
-      },
-      isPassword(){
-        return this.type === 'password'
-      }
-    }
-    watch = {
-      focus: function(newVal, oldVal) {
-      },
-      value: function(newVal, oldVal) {
-        this.inputValue = newVal;
-      }
-    }
-    mounted() {
-      this.inputValue = this.value;
-    }
-    methods = {
-      inputEvent(e) {
-        this.handleDetail(e)
-
-        this.$cmlEmit('input',{
-          value: this.inputValue
-        })
-        this.$cmlEmit('inputevent',{
-          value: this.inputValue
-        })
-      },
-      blurEvent(e) {
-        this.handleDetail(e)
-
-        this.$cmlEmit('blurevent',{
-          value: this.inputValue
-        });
-        this.$cmlEmit('blur',{
-          value: this.inputValue
-        });
-      },
-      focusEvent(e) {
-        this.handleDetail(e)
-        
-        this.$cmlEmit('focusevent', {
-          value: this.inputValue
-        });
-        this.$cmlEmit('focus', {
-          value: this.inputValue
-        });
-      },
-      confirmEvent(e) {
-        this.handleDetail(e)
-
-        this.$cmlEmit('confirmevent', {
-          value: this.inputValue
-        })
-        this.$cmlEmit('confirm', {
-          value: this.inputValue
-        })
-      },
-      handleDetail(e) {
-        if (!e) {
-          return ''
-        }
-
-        let value = e.detail.value;
-
-        if (this.isInputNumber) {
-          value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
-        }
-        return this.inputValue = value || ''
-      }
+class Input implements InputInterface {
+  props = {
+    cStyle: {
+      type: String,
+      default: ''
+    },
+    cstyle: {
+      type: String,
+      default: ''
+    },
+    value: {
+      type: String,
+      default: ''
+    },
+    //input的类型
+    type: {
+      type: String,
+      default: 'text' //枚举值 text number password
+    },
+    //input的placerholder
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    //是否禁用input输入
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    //控制input是否聚焦
+    focus: {
+      type: Boolean,
+      default: false
+    },
+    //最大长度
+    maxlength: {
+      type: Number,
+      default: 140
+    },
+    //右下角返回键类型
+    returnKeyType: { //枚举值 done search next go
+      type: String,
+      default: 'done'
+    },
+    placerHolderColor: {
+      type: String,
+      default: '#bebebe'
+    },
+    maxValue: { //type=number 最大值
+      type: Number,
+      default: 9007199254740991
+    },
+    minValue: { //type=number 最小值
+      type: Number,
+      default: -9007199254740991
     }
   }
-  export default new Input();
+  data = {
+    inputValue: ""
+  }
+  computed = {
+    wxPlaceHolderStyle() {
+      let placeHodelSty = `color: ${this.placerHolderColor};`;
+      let _style = this.cStyle || this.cstyle
+      let _styleObj = {}
+      if (_style[_style.length - 1] !== ';') {
+        _style += ';'
+      }
+      placeHodelSty = _style.split(';').map(item => {
+        if (item.indexOf("font-size") != -1) {
+          return `${placeHodelSty}${item};`;
+        }
+      });
+      return placeHodelSty;
+    },
+    isInputNumber() {
+      return this.type === 'number' || this.type === 'digit';
+    },
+    computedStyle() {
+      let _inputWrapStyleObj = {
+        'width': '100cpx',
+        'font-size': '33cpx',
+        'height': '80cpx',
+        'line-height': '80cpx',
+        'padding-left': '20cpx',
+        'padding-right': '20cpx',
+        'color': '#000',
+        'border': '1cpx solid #999',
+        'border-radius': '8cpx',
+        'text-align': 'left',
+        'background-color': '#fff',
+      }
+      let _style = this.cStyle || this.cstyle
+      let _styleObj = {}
+      if (_style[_style.length - 1] !== ';') {
+        _style += ';'
+      }
+      _style.split(';').map(item => {
+        if (item) {
+          let itemArray = item.split(":")
+          _styleObj[itemArray[0]] = itemArray[1]
+        }
+      })
+      let styleObj = Object.assign({}, _inputWrapStyleObj, _styleObj)
+      let style = Object.keys(styleObj).map(k => `${k}:${styleObj[k]}`).join(';')
+      return style
+    },
+    isPassword() {
+      return this.type === 'password'
+    }
+  }
+  watch = {
+    focus: function(newVal, oldVal) {},
+    value: function(newVal, oldVal) {
+      this.inputValue = newVal;
+    }
+  }
+  mounted() {
+    this.inputValue = this.value;
+  }
+  methods = {
+    inputEvent(e) {
+      this.handleDetail(e)
+
+      this.$cmlEmit('input', {
+        value: this.inputValue
+      })
+      this.$cmlEmit('inputevent', {
+        value: this.inputValue
+      })
+    },
+    blurEvent(e) {
+      this.handleDetail(e)
+
+      this.$cmlEmit('blurevent', {
+        value: this.inputValue
+      });
+      this.$cmlEmit('blur', {
+        value: this.inputValue
+      });
+    },
+    focusEvent(e) {
+      this.handleDetail(e)
+
+      this.$cmlEmit('focusevent', {
+        value: this.inputValue
+      });
+      this.$cmlEmit('focus', {
+        value: this.inputValue
+      });
+    },
+    confirmEvent(e) {
+      this.handleDetail(e)
+
+      this.$cmlEmit('confirmevent', {
+        value: this.inputValue
+      })
+      this.$cmlEmit('confirm', {
+        value: this.inputValue
+      })
+    },
+    handleDetail(e) {
+      if (!e) {
+        return ''
+      }
+
+      let value = e.detail.value;
+
+      if (this.isInputNumber) {
+        value = getValBetweenMaxAndMin(value, this.maxValue, this.minValue);
+      }
+      return this.inputValue = value || ''
+    }
+  }
+}
+export default new Input();
 </script>
 
 <style scoped>
-.input-wrap {
-  font-size: 33cpx;
-  height: 80cpx;
-  line-height: 80cpx;
-  padding-left: 20cpx;
-  padding-right: 20cpx;
-  color: #000;
-  border: 1cpx solid #999;
-  border-radius: 8cpx;
-  text-align: left;
-  background-color: #fff;
-}
+
 </style>
 
 <script cml-type="json">
 {
-  "base": {
-    "component": true
-  }
+		"base": {
+				"component": true
+		}
 }
 </script>
