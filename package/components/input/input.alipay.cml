@@ -68,7 +68,18 @@ class Input implements InputInterface {
   }
   computed = {
     wxPlaceHolderStyle() {
-      return `color: ${this.placerHolderColor};`
+      let placeHodelSty = `color: ${this.placerHolderColor};`;
+      let _style = this.cStyle || this.cstyle
+      let _styleObj = {}
+      if (_style[_style.length - 1] !== ';') {
+        _style += ';'
+      }
+      placeHodelSty = _style.split(';').map(item => {
+        if (item.indexOf("font-size") != -1) {
+          return `${placeHodelSty}${item};`;
+        }
+      });
+      return placeHodelSty;
     },
     isInputNumber() {
       return this.type === 'number' || this.type === 'digit';
