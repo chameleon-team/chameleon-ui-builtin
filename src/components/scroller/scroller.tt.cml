@@ -3,7 +3,7 @@
     scroll-x="{{ scrollDirection === 'horizontal' }}"
     scroll-y="{{ scrollDirection === 'vertical' }}"
     scroll-with-animation="{{scrollWithAnimation}}"
-    lower-threshold="{{bottomOffset+'rpx'}}"
+    lower-threshold="{{bottomOffset}}"
     enable-back-to-top="{{true}}"
     bindscrolltolower="onBottom"
     bindscroll="onScroll"
