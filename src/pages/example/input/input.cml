@@ -1,80 +1,85 @@
 <template>
 <c-page title="input">
-    <view class="page-demo">
-        <c-scroller height="{{-1}}">
-            <c-header title="input"></c-header>
-            <text class="title-text" >focus聚焦 web端不支持</text>
-            <view class="input-wrap">
-                <c-input cstyle="width:200cpx;" placeholder="focus聚焦 web端不支持" focus="{{isfocus}}" c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-input>
-            </view>
-            <text class="title-text">数据绑定,value:{{inputValue}}</text>
-            <view class="input-wrap">
-                <c-input placeholder="数据绑定" value="{{inputValue}}" c-bind:input="inputEvent"></c-input>
-            </view>
-            <text class="title-text">监听input事件,当前事件：{{eventName}}</text>
-            <view class="input-wrap">
-                <c-input placeholder="监听input事件"  c-bind:input="testEvent" c-bind:blur="testEvent" c-bind:focus="testEvent" c-bind:confirm="testEvent"></c-input>
-            </view>
-            <text class="title-text">最大长度是5</text>
-            <view class="input-wrap">
-                <c-input placeholder="最大长度是5" maxlength="{{5}}" ></c-input>
-            </view>
-            <text class="title-text">text类型的input</text>
-            <view class="input-wrap">
-                <c-input placeholder="text类型的input" type="text"></c-input>
-            </view>
+  <view class="page-demo">
+    <c-scroller height="{{-1}}">
+      <c-header title="input"></c-header>
+      <text class="title-text">focus聚焦 web端不支持</text>
+      <view class="input-wrap">
+        <c-input cstyle="width:200cpx;" placeholder="focus聚焦 web端不支持" focus="{{isfocus}}" c-bind:blur="bindblurevent" c-bind:focus="bindfocusevent" c-bind:input="bindinputevent" c-bind:confirm="bindconfirmevent"></c-input>
+      </view>
+      <text class="title-text">数据绑定,value:{{inputValue}}</text>
+      <view class="input-wrap">
+        <c-input placeholder="数据绑定" value="{{inputValue}}" c-bind:input="inputEvent"></c-input>
+      </view>
+      <text class="title-text">监听input事件,当前事件：{{eventName}}</text>
+      <view class="input-wrap">
+        <c-input placeholder="监听input事件" c-bind:input="testEvent" c-bind:blur="testEvent" c-bind:focus="testEvent" c-bind:confirm="testEvent"></c-input>
+      </view>
+      <text class="title-text">最大长度是5</text>
+      <view class="input-wrap">
+        <c-input placeholder="最大长度是5" maxlength="{{5}}"></c-input>
+      </view>
+      <text class="title-text">text类型的input</text>
+      <view class="input-wrap">
+        <c-input placeholder="text类型的input" type="text"></c-input>
+      </view>
 
-            <text class="title-text">number类型的input</text>
-            <view class="input-wrap">
-                <c-input placeholder="number类型的input" type="number"></c-input>
-            </view>
+      <text class="title-text">number类型的input</text>
+      <view class="input-wrap">
+        <c-input placeholder="number类型的input" type="number"></c-input>
+      </view>
 
-            <text class="title-text">number类型的input 支持最大值 最小值</text>
-            <view class="input-wrap">
-                <c-input placeholder="最大值200 最小值10" value="{{testMaxMinVal}}" type="number" maxValue="{{200}}" minValue="{{10}}" c-bind:blur="testMaxMinEvent"></c-input>
-            </view>
+      <text class="title-text">number类型的input 支持最大值 最小值</text>
+      <view class="input-wrap">
+        <c-input placeholder="最大值200 最小值10" value="{{testMaxMinVal}}" type="number" maxValue="{{200}}" minValue="{{10}}" c-bind:blur="testMaxMinEvent"></c-input>
+      </view>
 
-            <text class="title-text">password类型的input</text>
-            <view class="input-wrap">
-                <c-input placeholder="password类型的input" type="password"></c-input>
-            </view>
+      <text class="title-text">password类型的input</text>
+      <view class="input-wrap">
+        <c-input placeholder="password类型的input" type="password"></c-input>
+      </view>
 
-            <text class="title-text">禁用input</text>
-            <view class="input-wrap">
-                <c-input placeholder="禁用input" disabled="{{true}}" ></c-input>
-            </view>
+      <text class="title-text">digit类型的input web端不支持</text>
+      <view class="input-wrap">
+        <c-input placeholder="digit类型的input" type="digit"></c-input>
+      </view>
 
-            <text class="title-text">键盘右下键按钮search web端不支持</text>
-            <view class="input-wrap">
-                <c-input placeholder="键盘右下键按钮search web端不支持" return-key-type="search" ></c-input>
-            </view>
-            
-            <text class="title-text">键盘右下键按钮done web端不支持</text>
-            <view class="input-wrap">
-                <c-input placeholder="键盘右下键按钮done web端不支持" return-key-type="done" ></c-input>
-            </view>
+      <text class="title-text">禁用input</text>
+      <view class="input-wrap">
+        <c-input placeholder="禁用input" disabled="{{true}}"></c-input>
+      </view>
 
-            <text class="title-text">键盘右下键按钮next web端不支持</text>
-            <view class="input-wrap">
-                <c-input placeholder="键盘右下键按钮next web端不支持" return-key-type="next" ></c-input>
-            </view>
+      <text class="title-text">键盘右下键按钮search web端不支持</text>
+      <view class="input-wrap">
+        <c-input placeholder="键盘右下键按钮search web端不支持" return-key-type="search"></c-input>
+      </view>
 
-            <text class="title-text">键盘右下键按钮go web端不支持</text>
-            <view class="input-wrap">
-                <c-input placeholder="键盘右下键按钮go web端不支持" return-key-type="go" ></c-input>
-            </view>
+      <text class="title-text">键盘右下键按钮done web端不支持</text>
+      <view class="input-wrap">
+        <c-input placeholder="键盘右下键按钮done web端不支持" return-key-type="done"></c-input>
+      </view>
 
-            <text class="title-text">placeholderColor web端不支持</text>
-            <view class="input-wrap">
-                <c-input placeholder="placeholderColor web端不支持" placer-holder-color="#ff0000;" ></c-input>
-            </view>
+      <text class="title-text">键盘右下键按钮next web端不支持</text>
+      <view class="input-wrap">
+        <c-input placeholder="键盘右下键按钮next web端不支持" return-key-type="next"></c-input>
+      </view>
 
-            <text class="title-text">自定义样式</text>
-            <view class="end-item">
-                <c-input placeholder="自定义样式" c-style="color: #00ff00; border: 1px solid #00f;" ></c-input>
-            </view>
-        </c-scroller>
-    </view>
+      <text class="title-text">键盘右下键按钮go web端不支持</text>
+      <view class="input-wrap">
+        <c-input placeholder="键盘右下键按钮go web端不支持" return-key-type="go"></c-input>
+      </view>
+
+      <text class="title-text">placeholderColor web端不支持</text>
+      <view class="input-wrap">
+        <c-input placeholder="placeholderColor web端不支持" placer-holder-color="#ff0000;"></c-input>
+      </view>
+
+      <text class="title-text">自定义样式</text>
+      <view class="end-item">
+        <c-input placeholder="自定义样式" c-style="color: #00ff00; border: 1px solid #00f;"></c-input>
+      </view>
+    </c-scroller>
+  </view>
 </c-page>
 </template>
 <script>
@@ -92,7 +97,7 @@ class Input {
   }
 
   computed = {}
-  watch  = {}
+  watch = {}
 
   methods = {
     inputEvent(e) {
@@ -101,24 +106,24 @@ class Input {
     testEvent(e) {
       this.eventName = e.type
     },
-    bindblurevent(e)  {
+    bindblurevent(e) {
       console.log('bindblurevent value', e.detail.value)
       this.isfocus = false;
     },
-    bindfocusevent(e)  {
+    bindfocusevent(e) {
       console.log('bindfocusevent value', e.detail.value)
     },
-    bindinputevent(e)  {
+    bindinputevent(e) {
       console.log('bindinputevent value', e.detail.value)
     },
-    bindconfirmevent(e)  {
+    bindconfirmevent(e) {
       console.log('bindconfirmevent value', e.detail.value)
     },
-    testMaxMinEvent (e) {
-        this.testMaxMinVal = '';
-        setTimeout(() => {
-            this.testMaxMinVal = e.detail.value;
-        }, 300)
+    testMaxMinEvent(e) {
+      this.testMaxMinVal = '';
+      setTimeout(() => {
+        this.testMaxMinVal = e.detail.value;
+      }, 300)
     }
   }
 
@@ -140,38 +145,40 @@ class Input {
 export default new Input();
 </script>
 <style scoped>
- .page-demo {
-   background: #f8f8f8;
-   flex: 1;
-   padding: 0 10cpx 30cpx;
- }
- .title-text {
-   color: #999;
-   margin: 30cpx 20cpx 10cpx;
-   display: block;
-   font-size: 32cpx;
- }
- .end-item {
-   margin-bottom: 40cpx;
-   position: relative;
- }
+.page-demo {
+  background: #f8f8f8;
+  flex: 1;
+  padding: 0 10cpx 30cpx;
+}
 
-.input-wrap  {
-   position: relative;
- }
+.title-text {
+  color: #999;
+  margin: 30cpx 20cpx 10cpx;
+  display: block;
+  font-size: 32cpx;
+}
+
+.end-item {
+  margin-bottom: 40cpx;
+  position: relative;
+}
+
+.input-wrap {
+  position: relative;
+}
 </style>
 <script cml-type="json">
 {
-    "base": {
-        "usingComponents": {
-            "c-page": "/components/page/page",
-            "c-header": "../../components/header/header",
-            "c-scroller": "/components/scroller/scroller",
-            "c-input": "/components/input/input"
-        },
-        "navigationBarTitleText": "input",
-        "backgroundTextStyle": "dark",
-        "backgroundColor": "#E2E2E2"
-    }
+		"base": {
+				"usingComponents": {
+						"c-page": "/components/page/page",
+						"c-header": "../../components/header/header",
+						"c-scroller": "/components/scroller/scroller",
+						"c-input": "/components/input/input"
+				},
+				"navigationBarTitleText": "input",
+				"backgroundTextStyle": "dark",
+				"backgroundColor": "#E2E2E2"
+		}
 }
 </script>
