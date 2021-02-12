@@ -1,5 +1,5 @@
 <template>
-  <view class="{{full ? 'page-full' : 'page'}}">
+  <view class="{{full ? 'page-full' : 'page'}}" style="{{computedStyle}}">
     <slot></slot>
   </view>
 </template>
@@ -12,11 +12,23 @@ class CPage implements CPageInterface {
       type:  String,
       default: ''
     },
+	cstyle: {
+      required: true,
+      type:  String,
+      default: ''
+    },
     full: {
       type: Boolean,
       default: false 
     }
   }
+
+  computed ={
+    computedStyle() {
+		return `${this.cstyle}`
+	}
+  }  
+  
   watch = {
     title(v) {
       this.setTitle(v);

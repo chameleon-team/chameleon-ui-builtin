@@ -1,5 +1,5 @@
 <template>
-<view class="{{full ? 'page-full' : 'page'}}">
+<view class="{{full ? 'page-full' : 'page'}}" style="{{computedStyle}}">
   <view  class="navigator-wrap" style="{{barStyle}}">
     <slot name="titlebar">
       <view class="ios-shadow" c-if="{{os === 'ios'}}"></view>
@@ -28,6 +28,11 @@ class CPage implements CPageInterface {
       type:  String,
       default: ''
     },
+	cstyle: {
+      required: true,
+      type:  String,
+      default: ''
+    },
     full: {
       type: Boolean,
       default: false
@@ -51,7 +56,10 @@ class CPage implements CPageInterface {
         margin-top: ${this.deviceTopBarHeight + 88}cpx;
         margin-bottom: ${this.safeBottom}cpx
       `
-    }
+    },
+	computedStyle() {
+		return `${this.cstyle}`
+	}
   }
   methods = {
     getDeviceTopBarHeight(system) {
