@@ -2,7 +2,7 @@
   <origin-scroll-view
     scroll-x="{{ scrollDirection === 'horizontal' }}"
     scroll-y="{{ scrollDirection === 'vertical' }}"
-    scroll-with-animation="{{scrollWithAnimation}}"
+    scroll-with-animation="{{true}}"
     lower-threshold="{{bottomOffset+'rpx'}}"
     enable-back-to-top="{{true}}"
     bindscrolltolower="onBottom"
@@ -12,12 +12,16 @@
     scroll-top="{{scrollTopPx}}"
     scroll-left="{{scrollLeftPx}}"
     ref="c-scroller"
+    refresher-enabled="{{ refresherenabled }}"
+    refresher-background="{{refresherbackground}}"
+    refresher-default-style="{{refresherdefaultstyle}}"
+    refresher-threshold="{{refresherthreshold}}"
   >
       <slot></slot>
   </origin-scroll-view>
 </template>
 <script>
-  import cml from 'chameleon-api'
+  import cml from '@didi/chameleon-api'
   class Scroller implements ScrollerInterface {
     props = {
       cstyle: {
@@ -58,9 +62,21 @@
         type: Number,
         default: 0
       },
-      scrollWithAnimation: {
+      refresherenabled: {
         type: Boolean,
-        default: true
+        default: false
+      },
+      refresherthreshold: {
+        type: Number,
+        default: 45
+      },
+      refresherdefaultstyle: {
+        type: String,
+        default: 'black'
+      },
+      refresherbackground:{
+        type: String,
+        default: '#ffffff'
       }
     }
     data = {
